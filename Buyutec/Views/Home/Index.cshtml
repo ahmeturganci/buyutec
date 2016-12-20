@@ -7,26 +7,30 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>Material Tasarım Giriş ve Kayıt Formu</title>
+    <title>Büyüteç PYS</title>
 
     <!-- Çekirdek CSS -->
-    <link rel="stylesheet" type="text/css" href="https://selimdoyranli.com/cdn/material-form/css/grid12.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="https://selimdoyranli.com/cdn/material-form/css/style.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="https://selimdoyranli.com/cdn/material-form/css/jquery-ui.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="https://selimdoyranli.com/cdn/material-form/css/animate.css" media="all" />
+    <link href="~/Content/grid12.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
     <!-- #Çekirdek CSS Bitiş -->
-    <!-- Dışarıdan Çağırılan Dosyalar Font we Materyal İkonlar -->
+    <!-- Dışarıdan Çağırılan Dosyalar Font ve Materyal İkonlar -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- #Dışarıdan Çağırılan Dosyalar Font we Materyal İkonlar Bitiş -->
+    <!-- #Dışarıdan Çağırılan Dosyalar Font ve Materyal İkonlar Bitiş -->
     <!-- Çekirdek Js -->
-    <script type="text/javascript" src="https://selimdoyranli.com/cdn/material-form/js/jquery.min.js"></script>
-    <script type="text/javascript" src="https://selimdoyranli.com/cdn/material-form/js/custom.js"></script>
-    <script type="text/javascript" src="https://selimdoyranli.com/cdn/material-form/js/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
     <!-- # Çekirdek JS Bitiş -->
+    <style>
+        .karsilama{height:auto;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;-o-background-size:cover;background-position:center;background-image:url(../Images/arkaplan.jpg);color:#fff}
+    </style>
 
 </head>
 <body>
+
     <!-- Kapsayıcı -->
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 login-card">
 
@@ -36,7 +40,7 @@
 
             <!-- Logo -->
             <div class="col-lg-12 logo-kapsul">
-                <img width="100" class="logo" src="https://selimdoyranli.com/cdn/material-form/img/logo.png" alt="" />
+                <img width="100" class="logo" src="~/Images/logo.png" alt="logo" />
             </div>
             <!-- #Logo Bitiş -->
 
@@ -73,7 +77,7 @@
         <form id="kayit-form" class="col-lg-12">
 
             <div class="col-lg-12 logo-kapsul">
-                <img width="100" class="logo" src="https://selimdoyranli.com/cdn/material-form/img/logo.png" alt="" />
+                <img width="100" class="logo" src="~/Images/logo.png" alt="logo" />
             </div>
 
             <div style="clear:both;"></div>
@@ -121,10 +125,11 @@
         <!-- ##Kayıt Form  Sayfası Bitis -->
     </div>
     <!-- #Kapsayıcı Bitiş -->
-    <div class="col-lg-8" style="padding:100px;">
+    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 buyutec">
         <div class="col-lg-12">
             <div class="container">
-                
+               <h1>Büyüteç<br /> Proje Yönetim Sistemi</h1>
+               <p>Büyüteç ile projenizi büyütün...</p>
             </div>
         </div>
     </div>
