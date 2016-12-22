@@ -1,0 +1,901 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BuyutecDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAltSurec">
+          <Key>
+            <PropertyRef Name="altSurecId" />
+          </Key>
+          <Property Name="altSurecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="altSurecAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="baslangicTarihi" Type="datetime" />
+          <Property Name="bitisTarihi" Type="datetime" />
+          <Property Name="bitirmeOrani" Type="int" />
+          <Property Name="durumId" Type="int" />
+          <Property Name="oncelikId" Type="int" />
+          <Property Name="surecId" Type="int" />
+          <Property Name="aciklama" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="tblDurum">
+          <Key>
+            <PropertyRef Name="durumId" />
+          </Key>
+          <Property Name="durumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="durumAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblKullanici">
+          <Key>
+            <PropertyRef Name="kullaniciId" />
+          </Key>
+          <Property Name="kullaniciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="kullaniciSoyadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="80" />
+          <Property Name="sifre" Type="nvarchar" MaxLength="64" />
+          <Property Name="sonGiris" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblKullaniciAltSurec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciId" Type="int" Nullable="false" />
+          <Property Name="altSurecId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblKullaniciProje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="kullaniciId" Type="int" Nullable="false" />
+          <Property Name="projeId" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblKullaniciRol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rolId" Type="int" Nullable="false" />
+          <Property Name="kullaniciId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblKullaniciSurec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="kullaniciId" Type="int" Nullable="false" />
+          <Property Name="surecId" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblOncelik">
+          <Key>
+            <PropertyRef Name="oncelikId" />
+          </Key>
+          <Property Name="oncelikId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="oncelikAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblProje">
+          <Key>
+            <PropertyRef Name="projeId" />
+          </Key>
+          <Property Name="projeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projeAdi" Type="nvarchar" MaxLength="80" />
+          <Property Name="projeAciklama" Type="nvarchar" MaxLength="300" />
+          <Property Name="olusturanKullaniciId" Type="int" />
+          <Property Name="olusturmaTarihi" Type="datetime" />
+          <Property Name="baslangicTarihi" Type="datetime" />
+          <Property Name="bitisTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblRol">
+          <Key>
+            <PropertyRef Name="rolId" />
+          </Key>
+          <Property Name="rolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rolAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblSurec">
+          <Key>
+            <PropertyRef Name="surecId" />
+          </Key>
+          <Property Name="surecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="surecAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="baslangicTarihi" Type="datetime" />
+          <Property Name="bitisTarihi" Type="datetime" />
+          <Property Name="bitirmeOrani" Type="int" />
+          <Property Name="durumId" Type="int" />
+          <Property Name="oncelikId" Type="int" />
+          <Property Name="projeId" Type="int" />
+          <Property Name="aciklama" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <Association Name="FK_tblAltSurec_tblDurum">
+          <End Role="tblDurum" Type="Self.tblDurum" Multiplicity="0..1" />
+          <End Role="tblAltSurec" Type="Self.tblAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDurum">
+              <PropertyRef Name="durumId" />
+            </Principal>
+            <Dependent Role="tblAltSurec">
+              <PropertyRef Name="durumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAltSurec_tblOncelik">
+          <End Role="tblOncelik" Type="Self.tblOncelik" Multiplicity="0..1" />
+          <End Role="tblAltSurec" Type="Self.tblAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOncelik">
+              <PropertyRef Name="oncelikId" />
+            </Principal>
+            <Dependent Role="tblAltSurec">
+              <PropertyRef Name="oncelikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAltSurec_tblSurec">
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="0..1" />
+          <End Role="tblAltSurec" Type="Self.tblAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSurec">
+              <PropertyRef Name="surecId" />
+            </Principal>
+            <Dependent Role="tblAltSurec">
+              <PropertyRef Name="surecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciAltSurec_tblAltSurec">
+          <End Role="tblAltSurec" Type="Self.tblAltSurec" Multiplicity="1" />
+          <End Role="tblKullaniciAltSurec" Type="Self.tblKullaniciAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAltSurec">
+              <PropertyRef Name="altSurecId" />
+            </Principal>
+            <Dependent Role="tblKullaniciAltSurec">
+              <PropertyRef Name="altSurecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciAltSurec_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+          <End Role="tblKullaniciAltSurec" Type="Self.tblKullaniciAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblKullaniciAltSurec">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciProje_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+          <End Role="tblKullaniciProje" Type="Self.tblKullaniciProje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblKullaniciProje">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciProje_tblProje">
+          <End Role="tblProje" Type="Self.tblProje" Multiplicity="1" />
+          <End Role="tblKullaniciProje" Type="Self.tblKullaniciProje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProje">
+              <PropertyRef Name="projeId" />
+            </Principal>
+            <Dependent Role="tblKullaniciProje">
+              <PropertyRef Name="projeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciRol_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+          <End Role="tblKullaniciRol" Type="Self.tblKullaniciRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblKullaniciRol">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciRol_tblRol">
+          <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+          <End Role="tblKullaniciRol" Type="Self.tblKullaniciRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRol">
+              <PropertyRef Name="rolId" />
+            </Principal>
+            <Dependent Role="tblKullaniciRol">
+              <PropertyRef Name="rolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciSurec_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+          <End Role="tblKullaniciSurec" Type="Self.tblKullaniciSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblKullaniciSurec">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciSurec_tblSurec">
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="1" />
+          <End Role="tblKullaniciSurec" Type="Self.tblKullaniciSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSurec">
+              <PropertyRef Name="surecId" />
+            </Principal>
+            <Dependent Role="tblKullaniciSurec">
+              <PropertyRef Name="surecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProje_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="0..1" />
+          <End Role="tblProje" Type="Self.tblProje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblProje">
+              <PropertyRef Name="olusturanKullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSurec_tblDurum">
+          <End Role="tblDurum" Type="Self.tblDurum" Multiplicity="0..1" />
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDurum">
+              <PropertyRef Name="durumId" />
+            </Principal>
+            <Dependent Role="tblSurec">
+              <PropertyRef Name="durumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSurec_tblOncelik">
+          <End Role="tblOncelik" Type="Self.tblOncelik" Multiplicity="0..1" />
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOncelik">
+              <PropertyRef Name="oncelikId" />
+            </Principal>
+            <Dependent Role="tblSurec">
+              <PropertyRef Name="oncelikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSurec_tblProje">
+          <End Role="tblProje" Type="Self.tblProje" Multiplicity="0..1" />
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProje">
+              <PropertyRef Name="projeId" />
+            </Principal>
+            <Dependent Role="tblSurec">
+              <PropertyRef Name="projeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BuyutecDBModelStoreContainer">
+          <EntitySet Name="tblAltSurec" EntityType="Self.tblAltSurec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDurum" EntityType="Self.tblDurum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKullanici" EntityType="Self.tblKullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKullaniciAltSurec" EntityType="Self.tblKullaniciAltSurec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKullaniciProje" EntityType="Self.tblKullaniciProje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKullaniciRol" EntityType="Self.tblKullaniciRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKullaniciSurec" EntityType="Self.tblKullaniciSurec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOncelik" EntityType="Self.tblOncelik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProje" EntityType="Self.tblProje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRol" EntityType="Self.tblRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSurec" EntityType="Self.tblSurec" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblAltSurec_tblDurum" Association="Self.FK_tblAltSurec_tblDurum">
+            <End Role="tblDurum" EntitySet="tblDurum" />
+            <End Role="tblAltSurec" EntitySet="tblAltSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAltSurec_tblOncelik" Association="Self.FK_tblAltSurec_tblOncelik">
+            <End Role="tblOncelik" EntitySet="tblOncelik" />
+            <End Role="tblAltSurec" EntitySet="tblAltSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAltSurec_tblSurec" Association="Self.FK_tblAltSurec_tblSurec">
+            <End Role="tblSurec" EntitySet="tblSurec" />
+            <End Role="tblAltSurec" EntitySet="tblAltSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciAltSurec_tblAltSurec" Association="Self.FK_tblKullaniciAltSurec_tblAltSurec">
+            <End Role="tblAltSurec" EntitySet="tblAltSurec" />
+            <End Role="tblKullaniciAltSurec" EntitySet="tblKullaniciAltSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciAltSurec_tblKullanici" Association="Self.FK_tblKullaniciAltSurec_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanici" />
+            <End Role="tblKullaniciAltSurec" EntitySet="tblKullaniciAltSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciProje_tblKullanici" Association="Self.FK_tblKullaniciProje_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanici" />
+            <End Role="tblKullaniciProje" EntitySet="tblKullaniciProje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciProje_tblProje" Association="Self.FK_tblKullaniciProje_tblProje">
+            <End Role="tblProje" EntitySet="tblProje" />
+            <End Role="tblKullaniciProje" EntitySet="tblKullaniciProje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciRol_tblKullanici" Association="Self.FK_tblKullaniciRol_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanici" />
+            <End Role="tblKullaniciRol" EntitySet="tblKullaniciRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciRol_tblRol" Association="Self.FK_tblKullaniciRol_tblRol">
+            <End Role="tblRol" EntitySet="tblRol" />
+            <End Role="tblKullaniciRol" EntitySet="tblKullaniciRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciSurec_tblKullanici" Association="Self.FK_tblKullaniciSurec_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanici" />
+            <End Role="tblKullaniciSurec" EntitySet="tblKullaniciSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciSurec_tblSurec" Association="Self.FK_tblKullaniciSurec_tblSurec">
+            <End Role="tblSurec" EntitySet="tblSurec" />
+            <End Role="tblKullaniciSurec" EntitySet="tblKullaniciSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProje_tblKullanici" Association="Self.FK_tblProje_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanici" />
+            <End Role="tblProje" EntitySet="tblProje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSurec_tblDurum" Association="Self.FK_tblSurec_tblDurum">
+            <End Role="tblDurum" EntitySet="tblDurum" />
+            <End Role="tblSurec" EntitySet="tblSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSurec_tblOncelik" Association="Self.FK_tblSurec_tblOncelik">
+            <End Role="tblOncelik" EntitySet="tblOncelik" />
+            <End Role="tblSurec" EntitySet="tblSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSurec_tblProje" Association="Self.FK_tblSurec_tblProje">
+            <End Role="tblProje" EntitySet="tblProje" />
+            <End Role="tblSurec" EntitySet="tblSurec" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BuyutecDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAltSurec">
+          <Key>
+            <PropertyRef Name="altSurecId" />
+          </Key>
+          <Property Name="altSurecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="altSurecAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="baslangicTarihi" Type="DateTime" Precision="3" />
+          <Property Name="bitisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="bitirmeOrani" Type="Int32" />
+          <Property Name="durumId" Type="Int32" />
+          <Property Name="oncelikId" Type="Int32" />
+          <Property Name="surecId" Type="Int32" />
+          <Property Name="aciklama" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblDurum" Relationship="Self.FK_tblAltSurec_tblDurum" FromRole="tblAltSurec" ToRole="tblDurum" />
+          <NavigationProperty Name="tblOncelik" Relationship="Self.FK_tblAltSurec_tblOncelik" FromRole="tblAltSurec" ToRole="tblOncelik" />
+          <NavigationProperty Name="tblSurec" Relationship="Self.FK_tblAltSurec_tblSurec" FromRole="tblAltSurec" ToRole="tblSurec" />
+          <NavigationProperty Name="tblKullaniciAltSurecs" Relationship="Self.FK_tblKullaniciAltSurec_tblAltSurec" FromRole="tblAltSurec" ToRole="tblKullaniciAltSurec" />
+        </EntityType>
+        <EntityType Name="tblDurum">
+          <Key>
+            <PropertyRef Name="durumId" />
+          </Key>
+          <Property Name="durumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="durumAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblAltSurecs" Relationship="Self.FK_tblAltSurec_tblDurum" FromRole="tblDurum" ToRole="tblAltSurec" />
+          <NavigationProperty Name="tblSurecs" Relationship="Self.FK_tblSurec_tblDurum" FromRole="tblDurum" ToRole="tblSurec" />
+        </EntityType>
+        <EntityType Name="tblKullanici">
+          <Key>
+            <PropertyRef Name="kullaniciId" />
+          </Key>
+          <Property Name="kullaniciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kullaniciSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="sifre" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="sonGiris" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblKullaniciAltSurecs" Relationship="Self.FK_tblKullaniciAltSurec_tblKullanici" FromRole="tblKullanici" ToRole="tblKullaniciAltSurec" />
+          <NavigationProperty Name="tblKullaniciProjes" Relationship="Self.FK_tblKullaniciProje_tblKullanici" FromRole="tblKullanici" ToRole="tblKullaniciProje" />
+          <NavigationProperty Name="tblKullaniciRols" Relationship="Self.FK_tblKullaniciRol_tblKullanici" FromRole="tblKullanici" ToRole="tblKullaniciRol" />
+          <NavigationProperty Name="tblKullaniciSurecs" Relationship="Self.FK_tblKullaniciSurec_tblKullanici" FromRole="tblKullanici" ToRole="tblKullaniciSurec" />
+          <NavigationProperty Name="tblProjes" Relationship="Self.FK_tblProje_tblKullanici" FromRole="tblKullanici" ToRole="tblProje" />
+        </EntityType>
+        <EntityType Name="tblKullaniciAltSurec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciId" Type="Int32" Nullable="false" />
+          <Property Name="altSurecId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblAltSurec" Relationship="Self.FK_tblKullaniciAltSurec_tblAltSurec" FromRole="tblKullaniciAltSurec" ToRole="tblAltSurec" />
+          <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblKullaniciAltSurec_tblKullanici" FromRole="tblKullaniciAltSurec" ToRole="tblKullanici" />
+        </EntityType>
+        <EntityType Name="tblKullaniciProje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="kullaniciId" Type="Int32" Nullable="false" />
+          <Property Name="projeId" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblKullaniciProje_tblKullanici" FromRole="tblKullaniciProje" ToRole="tblKullanici" />
+          <NavigationProperty Name="tblProje" Relationship="Self.FK_tblKullaniciProje_tblProje" FromRole="tblKullaniciProje" ToRole="tblProje" />
+        </EntityType>
+        <EntityType Name="tblKullaniciRol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rolId" Type="Int32" Nullable="false" />
+          <Property Name="kullaniciId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblKullaniciRol_tblKullanici" FromRole="tblKullaniciRol" ToRole="tblKullanici" />
+          <NavigationProperty Name="tblRol" Relationship="Self.FK_tblKullaniciRol_tblRol" FromRole="tblKullaniciRol" ToRole="tblRol" />
+        </EntityType>
+        <EntityType Name="tblKullaniciSurec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="kullaniciId" Type="Int32" Nullable="false" />
+          <Property Name="surecId" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblKullaniciSurec_tblKullanici" FromRole="tblKullaniciSurec" ToRole="tblKullanici" />
+          <NavigationProperty Name="tblSurec" Relationship="Self.FK_tblKullaniciSurec_tblSurec" FromRole="tblKullaniciSurec" ToRole="tblSurec" />
+        </EntityType>
+        <EntityType Name="tblOncelik">
+          <Key>
+            <PropertyRef Name="oncelikId" />
+          </Key>
+          <Property Name="oncelikId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="oncelikAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblAltSurecs" Relationship="Self.FK_tblAltSurec_tblOncelik" FromRole="tblOncelik" ToRole="tblAltSurec" />
+          <NavigationProperty Name="tblSurecs" Relationship="Self.FK_tblSurec_tblOncelik" FromRole="tblOncelik" ToRole="tblSurec" />
+        </EntityType>
+        <EntityType Name="tblProje">
+          <Key>
+            <PropertyRef Name="projeId" />
+          </Key>
+          <Property Name="projeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projeAdi" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="projeAciklama" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="olusturanKullaniciId" Type="Int32" />
+          <Property Name="olusturmaTarihi" Type="DateTime" Precision="3" />
+          <Property Name="baslangicTarihi" Type="DateTime" Precision="3" />
+          <Property Name="bitisTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblProje_tblKullanici" FromRole="tblProje" ToRole="tblKullanici" />
+          <NavigationProperty Name="tblKullaniciProjes" Relationship="Self.FK_tblKullaniciProje_tblProje" FromRole="tblProje" ToRole="tblKullaniciProje" />
+          <NavigationProperty Name="tblSurecs" Relationship="Self.FK_tblSurec_tblProje" FromRole="tblProje" ToRole="tblSurec" />
+        </EntityType>
+        <EntityType Name="tblRol">
+          <Key>
+            <PropertyRef Name="rolId" />
+          </Key>
+          <Property Name="rolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rolAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblKullaniciRols" Relationship="Self.FK_tblKullaniciRol_tblRol" FromRole="tblRol" ToRole="tblKullaniciRol" />
+        </EntityType>
+        <EntityType Name="tblSurec">
+          <Key>
+            <PropertyRef Name="surecId" />
+          </Key>
+          <Property Name="surecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="surecAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="baslangicTarihi" Type="DateTime" Precision="3" />
+          <Property Name="bitisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="bitirmeOrani" Type="Int32" />
+          <Property Name="durumId" Type="Int32" />
+          <Property Name="oncelikId" Type="Int32" />
+          <Property Name="projeId" Type="Int32" />
+          <Property Name="aciklama" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblAltSurecs" Relationship="Self.FK_tblAltSurec_tblSurec" FromRole="tblSurec" ToRole="tblAltSurec" />
+          <NavigationProperty Name="tblDurum" Relationship="Self.FK_tblSurec_tblDurum" FromRole="tblSurec" ToRole="tblDurum" />
+          <NavigationProperty Name="tblKullaniciSurecs" Relationship="Self.FK_tblKullaniciSurec_tblSurec" FromRole="tblSurec" ToRole="tblKullaniciSurec" />
+          <NavigationProperty Name="tblOncelik" Relationship="Self.FK_tblSurec_tblOncelik" FromRole="tblSurec" ToRole="tblOncelik" />
+          <NavigationProperty Name="tblProje" Relationship="Self.FK_tblSurec_tblProje" FromRole="tblSurec" ToRole="tblProje" />
+        </EntityType>
+        <Association Name="FK_tblAltSurec_tblDurum">
+          <End Role="tblDurum" Type="Self.tblDurum" Multiplicity="0..1" />
+          <End Role="tblAltSurec" Type="Self.tblAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDurum">
+              <PropertyRef Name="durumId" />
+            </Principal>
+            <Dependent Role="tblAltSurec">
+              <PropertyRef Name="durumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAltSurec_tblOncelik">
+          <End Role="tblOncelik" Type="Self.tblOncelik" Multiplicity="0..1" />
+          <End Role="tblAltSurec" Type="Self.tblAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOncelik">
+              <PropertyRef Name="oncelikId" />
+            </Principal>
+            <Dependent Role="tblAltSurec">
+              <PropertyRef Name="oncelikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAltSurec_tblSurec">
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="0..1" />
+          <End Role="tblAltSurec" Type="Self.tblAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSurec">
+              <PropertyRef Name="surecId" />
+            </Principal>
+            <Dependent Role="tblAltSurec">
+              <PropertyRef Name="surecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciAltSurec_tblAltSurec">
+          <End Role="tblAltSurec" Type="Self.tblAltSurec" Multiplicity="1" />
+          <End Role="tblKullaniciAltSurec" Type="Self.tblKullaniciAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAltSurec">
+              <PropertyRef Name="altSurecId" />
+            </Principal>
+            <Dependent Role="tblKullaniciAltSurec">
+              <PropertyRef Name="altSurecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSurec_tblDurum">
+          <End Role="tblDurum" Type="Self.tblDurum" Multiplicity="0..1" />
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDurum">
+              <PropertyRef Name="durumId" />
+            </Principal>
+            <Dependent Role="tblSurec">
+              <PropertyRef Name="durumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciAltSurec_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+          <End Role="tblKullaniciAltSurec" Type="Self.tblKullaniciAltSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblKullaniciAltSurec">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciProje_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+          <End Role="tblKullaniciProje" Type="Self.tblKullaniciProje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblKullaniciProje">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciRol_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+          <End Role="tblKullaniciRol" Type="Self.tblKullaniciRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblKullaniciRol">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciSurec_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+          <End Role="tblKullaniciSurec" Type="Self.tblKullaniciSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblKullaniciSurec">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProje_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="0..1" />
+          <End Role="tblProje" Type="Self.tblProje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblProje">
+              <PropertyRef Name="olusturanKullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciProje_tblProje">
+          <End Role="tblProje" Type="Self.tblProje" Multiplicity="1" />
+          <End Role="tblKullaniciProje" Type="Self.tblKullaniciProje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProje">
+              <PropertyRef Name="projeId" />
+            </Principal>
+            <Dependent Role="tblKullaniciProje">
+              <PropertyRef Name="projeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciRol_tblRol">
+          <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+          <End Role="tblKullaniciRol" Type="Self.tblKullaniciRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRol">
+              <PropertyRef Name="rolId" />
+            </Principal>
+            <Dependent Role="tblKullaniciRol">
+              <PropertyRef Name="rolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKullaniciSurec_tblSurec">
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="1" />
+          <End Role="tblKullaniciSurec" Type="Self.tblKullaniciSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSurec">
+              <PropertyRef Name="surecId" />
+            </Principal>
+            <Dependent Role="tblKullaniciSurec">
+              <PropertyRef Name="surecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSurec_tblOncelik">
+          <End Role="tblOncelik" Type="Self.tblOncelik" Multiplicity="0..1" />
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOncelik">
+              <PropertyRef Name="oncelikId" />
+            </Principal>
+            <Dependent Role="tblSurec">
+              <PropertyRef Name="oncelikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSurec_tblProje">
+          <End Role="tblProje" Type="Self.tblProje" Multiplicity="0..1" />
+          <End Role="tblSurec" Type="Self.tblSurec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProje">
+              <PropertyRef Name="projeId" />
+            </Principal>
+            <Dependent Role="tblSurec">
+              <PropertyRef Name="projeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BuyutecDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAltSurecs" EntityType="Self.tblAltSurec" />
+          <EntitySet Name="tblDurums" EntityType="Self.tblDurum" />
+          <EntitySet Name="tblKullanicis" EntityType="Self.tblKullanici" />
+          <EntitySet Name="tblKullaniciAltSurecs" EntityType="Self.tblKullaniciAltSurec" />
+          <EntitySet Name="tblKullaniciProjes" EntityType="Self.tblKullaniciProje" />
+          <EntitySet Name="tblKullaniciRols" EntityType="Self.tblKullaniciRol" />
+          <EntitySet Name="tblKullaniciSurecs" EntityType="Self.tblKullaniciSurec" />
+          <EntitySet Name="tblOnceliks" EntityType="Self.tblOncelik" />
+          <EntitySet Name="tblProjes" EntityType="Self.tblProje" />
+          <EntitySet Name="tblRols" EntityType="Self.tblRol" />
+          <EntitySet Name="tblSurecs" EntityType="Self.tblSurec" />
+          <AssociationSet Name="FK_tblAltSurec_tblDurum" Association="Self.FK_tblAltSurec_tblDurum">
+            <End Role="tblDurum" EntitySet="tblDurums" />
+            <End Role="tblAltSurec" EntitySet="tblAltSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAltSurec_tblOncelik" Association="Self.FK_tblAltSurec_tblOncelik">
+            <End Role="tblOncelik" EntitySet="tblOnceliks" />
+            <End Role="tblAltSurec" EntitySet="tblAltSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAltSurec_tblSurec" Association="Self.FK_tblAltSurec_tblSurec">
+            <End Role="tblSurec" EntitySet="tblSurecs" />
+            <End Role="tblAltSurec" EntitySet="tblAltSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciAltSurec_tblAltSurec" Association="Self.FK_tblKullaniciAltSurec_tblAltSurec">
+            <End Role="tblAltSurec" EntitySet="tblAltSurecs" />
+            <End Role="tblKullaniciAltSurec" EntitySet="tblKullaniciAltSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSurec_tblDurum" Association="Self.FK_tblSurec_tblDurum">
+            <End Role="tblDurum" EntitySet="tblDurums" />
+            <End Role="tblSurec" EntitySet="tblSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciAltSurec_tblKullanici" Association="Self.FK_tblKullaniciAltSurec_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanicis" />
+            <End Role="tblKullaniciAltSurec" EntitySet="tblKullaniciAltSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciProje_tblKullanici" Association="Self.FK_tblKullaniciProje_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanicis" />
+            <End Role="tblKullaniciProje" EntitySet="tblKullaniciProjes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciRol_tblKullanici" Association="Self.FK_tblKullaniciRol_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanicis" />
+            <End Role="tblKullaniciRol" EntitySet="tblKullaniciRols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciSurec_tblKullanici" Association="Self.FK_tblKullaniciSurec_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanicis" />
+            <End Role="tblKullaniciSurec" EntitySet="tblKullaniciSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProje_tblKullanici" Association="Self.FK_tblProje_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanicis" />
+            <End Role="tblProje" EntitySet="tblProjes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciProje_tblProje" Association="Self.FK_tblKullaniciProje_tblProje">
+            <End Role="tblProje" EntitySet="tblProjes" />
+            <End Role="tblKullaniciProje" EntitySet="tblKullaniciProjes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciRol_tblRol" Association="Self.FK_tblKullaniciRol_tblRol">
+            <End Role="tblRol" EntitySet="tblRols" />
+            <End Role="tblKullaniciRol" EntitySet="tblKullaniciRols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKullaniciSurec_tblSurec" Association="Self.FK_tblKullaniciSurec_tblSurec">
+            <End Role="tblSurec" EntitySet="tblSurecs" />
+            <End Role="tblKullaniciSurec" EntitySet="tblKullaniciSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSurec_tblOncelik" Association="Self.FK_tblSurec_tblOncelik">
+            <End Role="tblOncelik" EntitySet="tblOnceliks" />
+            <End Role="tblSurec" EntitySet="tblSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSurec_tblProje" Association="Self.FK_tblSurec_tblProje">
+            <End Role="tblProje" EntitySet="tblProjes" />
+            <End Role="tblSurec" EntitySet="tblSurecs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BuyutecDBModelStoreContainer" CdmEntityContainer="BuyutecDBEntities">
+          <EntitySetMapping Name="tblAltSurecs">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblAltSurec">
+              <MappingFragment StoreEntitySet="tblAltSurec">
+                <ScalarProperty Name="altSurecId" ColumnName="altSurecId" />
+                <ScalarProperty Name="altSurecAdi" ColumnName="altSurecAdi" />
+                <ScalarProperty Name="baslangicTarihi" ColumnName="baslangicTarihi" />
+                <ScalarProperty Name="bitisTarihi" ColumnName="bitisTarihi" />
+                <ScalarProperty Name="bitirmeOrani" ColumnName="bitirmeOrani" />
+                <ScalarProperty Name="durumId" ColumnName="durumId" />
+                <ScalarProperty Name="oncelikId" ColumnName="oncelikId" />
+                <ScalarProperty Name="surecId" ColumnName="surecId" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDurums">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblDurum">
+              <MappingFragment StoreEntitySet="tblDurum">
+                <ScalarProperty Name="durumId" ColumnName="durumId" />
+                <ScalarProperty Name="durumAdi" ColumnName="durumAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKullanicis">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblKullanici">
+              <MappingFragment StoreEntitySet="tblKullanici">
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+                <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+                <ScalarProperty Name="kullaniciSoyadi" ColumnName="kullaniciSoyadi" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="sonGiris" ColumnName="sonGiris" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKullaniciAltSurecs">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblKullaniciAltSurec">
+              <MappingFragment StoreEntitySet="tblKullaniciAltSurec">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+                <ScalarProperty Name="altSurecId" ColumnName="altSurecId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKullaniciProjes">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblKullaniciProje">
+              <MappingFragment StoreEntitySet="tblKullaniciProje">
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+                <ScalarProperty Name="projeId" ColumnName="projeId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKullaniciRols">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblKullaniciRol">
+              <MappingFragment StoreEntitySet="tblKullaniciRol">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rolId" ColumnName="rolId" />
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKullaniciSurecs">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblKullaniciSurec">
+              <MappingFragment StoreEntitySet="tblKullaniciSurec">
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+                <ScalarProperty Name="surecId" ColumnName="surecId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOnceliks">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblOncelik">
+              <MappingFragment StoreEntitySet="tblOncelik">
+                <ScalarProperty Name="oncelikId" ColumnName="oncelikId" />
+                <ScalarProperty Name="oncelikAdi" ColumnName="oncelikAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjes">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblProje">
+              <MappingFragment StoreEntitySet="tblProje">
+                <ScalarProperty Name="projeId" ColumnName="projeId" />
+                <ScalarProperty Name="projeAdi" ColumnName="projeAdi" />
+                <ScalarProperty Name="projeAciklama" ColumnName="projeAciklama" />
+                <ScalarProperty Name="olusturanKullaniciId" ColumnName="olusturanKullaniciId" />
+                <ScalarProperty Name="olusturmaTarihi" ColumnName="olusturmaTarihi" />
+                <ScalarProperty Name="baslangicTarihi" ColumnName="baslangicTarihi" />
+                <ScalarProperty Name="bitisTarihi" ColumnName="bitisTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRols">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblRol">
+              <MappingFragment StoreEntitySet="tblRol">
+                <ScalarProperty Name="rolId" ColumnName="rolId" />
+                <ScalarProperty Name="rolAdi" ColumnName="rolAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSurecs">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblSurec">
+              <MappingFragment StoreEntitySet="tblSurec">
+                <ScalarProperty Name="surecId" ColumnName="surecId" />
+                <ScalarProperty Name="surecAdi" ColumnName="surecAdi" />
+                <ScalarProperty Name="baslangicTarihi" ColumnName="baslangicTarihi" />
+                <ScalarProperty Name="bitisTarihi" ColumnName="bitisTarihi" />
+                <ScalarProperty Name="bitirmeOrani" ColumnName="bitirmeOrani" />
+                <ScalarProperty Name="durumId" ColumnName="durumId" />
+                <ScalarProperty Name="oncelikId" ColumnName="oncelikId" />
+                <ScalarProperty Name="projeId" ColumnName="projeId" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

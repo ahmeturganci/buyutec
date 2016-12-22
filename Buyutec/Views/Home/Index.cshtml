@@ -3,7 +3,7 @@
     ViewBag.Title = "Büyüteç";
     Layout = null;
 }
-<!DOCTYPE HTML>
+<!DOCTYPE HTML
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -44,7 +44,7 @@
 
             <!-- Kullanıcı Adı Giriş İnput -->
             <div class="group">
-                <input type="text" required>
+                <input type="email" id="txtGkulMail" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><i class="material-icons input-ikon">person_outline</i><span class="span-input">E-Mail</span></label>
@@ -52,14 +52,14 @@
             <!-- #Kullanıcı Adı Giriş İnput Bitiş -->
             <!-- Şifre İnput Giriş-->
             <div class="group">
-                <input type="password" required>
+                <input type="password" id="txtGkulSifre" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><i class="material-icons input-sifre-ikon">lock</i><span class="span-input">Şifre</span></label>
             </div>
             <!-- Şifre İnput Giriş Bitiş-->
             <!-- Giriş Yap Buton -->
-            <a href="javascript:void(0);" class="giris-yap-buton">Giriş Yap</a>
+            <a href="javascript:void(0);" class="giris-yap-buton" onclick="Giris();">Giriş Yap</a>
             <!-- #Giriş Yap Buton Bitiş -->
             <!-- Şifremi Unuttum ve Kaydol Linkleri -->
             <div class="forgot-and-create tab-menu">
@@ -80,7 +80,7 @@
 
             <!-- Kayıt Form Adı İnput -->
             <div class="group">
-                <input type="text" required>
+                <input type="text" id="txtAd" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><i class="material-icons input-ikon">person_outline</i><span class="span-input">Adınız</span></label>
@@ -88,7 +88,7 @@
             <!-- #Kayıt Form Adı İnput Bitiş -->
             <!-- Kayıt Form Soyadı İnput -->
             <div class="group">
-                <input type="text" required>
+                <input type="text" id="txtSoyad" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><i class="material-icons input-ikon">person_outline</i><span class="span-input">Soyadınız</span></label>
@@ -96,7 +96,7 @@
             <!-- #Kayıt Form Soyadı İnput Bitiş -->
             <!-- Kayıt Form Email İnput -->
             <div class="group">
-                <input type="text" required>
+                <input type="email" id="txtEmail" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><i class="material-icons input-ikon">mail_outline</i><span class="span-input">E-Mail</span></label>
@@ -104,14 +104,22 @@
             <!-- #Kayıt Form Email İnput Bitiş -->
             <!-- Kayıt Form Şifre İnput -->
             <div class="group">
-                <input type="password" required>
+                <input type="password" id="txtSifre" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label><i class="material-icons input-sifre-ikon">lock</i><span class="span-input">Şifre</span></label>
+            </div>
+            <!-- #Kayıt Form Şifre İnput Bitiş -->
+            <!-- Kayıt Form Şifre İnput -->
+            <div class="group">
+                <input type="password" id="txtSifreT" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><i class="material-icons input-sifre-ikon">lock</i><span class="span-input">Şifre</span></label>
             </div>
             <!-- #Kayıt Form Şifre İnput Bitiş -->
             <!-- Kayıt Ol Buton -->
-            <a href="javascript:void(0);" class="kayit-ol-buton">Kayıt Ol</a>
+            <a href="javascript:void(0);" class="kayit-ol-buton" onclick="KayitOl();">Kayıt Ol</a>
             <!-- #Kayıt Ol Buton Bitiş -->
             <!-- Zaten Hesap Var Link -->
             <a class="zaten-hesap-var-link" href="javascript:void('zaten-hesap-var-link');">Zaten Bir Hesabınız Var mı ? , Giriş Yapın.</a>
@@ -123,10 +131,70 @@
     <!-- #Kapsayıcı Bitiş -->
     <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 buyutec">
         <div class="col-lg-12">
-            <h1>Büyüteç<br /> Proje Yönetim Sistemi</h1>
-            <p>Büyüteç ile projenizi büyütün...</p>
+            <h1 style="text-shadow: 3px 2px 1px #000;">Büyüteç<br /> Proje Yönetim Sistemi</h1>
+            <p style="text-shadow: 1px 2px 1px #000;">Büyüteç ile büyüyen projeler...</p>
         </div>
     </div>
+    <script>
+        function Giris() {
+            var veri = {
+                kulMail: $("#txtGkulMail").val(),
+                kulSifre: $("#txtGkulSifre").val()
+            };
+            console.log(veri);
+            if (veri.kulMail == "" || veri.kulSifre == "")
+                alert("Boş Değer Geçersiz.");
+                //css le alert şekil yapıla bilir.
+            else {
+                $.post("/Home/Giris", veri, function (sonuc) {
+                    if (sonuc == '+')
+                        location.href = "/Profil/Index";//değişecek
+                    else
+                        window.location.reload(true);
+                });
+            }
+        }
+        
+        function KayitOl() {
 
+            var sifreTekrar = $("#txtSifreT").val();
+            alert(sifreTekrar);
+            var veri = {
+                kullaniciAdi: $("#txtAd").val(),
+                kullaniciSoyadi: $("#txtSoyad").val(),
+                email: $("#txtEmail").val(),
+                sifre: $("#txtSifreT").val()
+            };
+            console.log(veri);
+            if (veri.Sifre == sifreTekrar) {
+                alert("Şifreler uyuşmuyor tekrar giriniz");
+            }
+            
+            if (veri.Ad == "" || veri.Soyad == "" || veri.Email == "" || veri.Sifre == "")// değerler
+            {
+                //css ile sekillenecek
+                alert("Boş değer geçilemez.");
+            }
+            else//post ve yönlendirme.
+            {
+                $.post("/Home/KayitOl", veri, function (sonuc) {
+                    if (sonuc == "+")
+                    {
+                        alert("Kayır başarılı");//css verilecek.
+                        $("input").focus(function(){
+                            $(this).val("");
+                        });
+                        location.href="/Home/Index";
+                    }
+                    else {
+                        alert("değerleri kontrol ediniz.");
+                        }
+                
+                        
+                });
+            }
+
+        }
+    </script>
 </body>
 </html>
