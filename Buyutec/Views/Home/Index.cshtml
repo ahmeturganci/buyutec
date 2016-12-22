@@ -3,7 +3,7 @@
     ViewBag.Title = "Büyüteç";
     Layout = null;
 }
-<!DOCTYPE HTML
+<!DOCTYPE HTML>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -110,14 +110,6 @@
                 <label><i class="material-icons input-sifre-ikon">lock</i><span class="span-input">Şifre</span></label>
             </div>
             <!-- #Kayıt Form Şifre İnput Bitiş -->
-            <!-- Kayıt Form Şifre İnput -->
-            <div class="group">
-                <input type="password" id="txtSifreT" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><i class="material-icons input-sifre-ikon">lock</i><span class="span-input">Şifre</span></label>
-            </div>
-            <!-- #Kayıt Form Şifre İnput Bitiş -->
             <!-- Kayıt Ol Buton -->
             <a href="javascript:void(0);" class="kayit-ol-buton" onclick="KayitOl();">Kayıt Ol</a>
             <!-- #Kayıt Ol Buton Bitiş -->
@@ -131,8 +123,8 @@
     <!-- #Kapsayıcı Bitiş -->
     <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 buyutec">
         <div class="col-lg-12">
-            <h1 style="text-shadow: 3px 2px 1px #000;">Büyüteç<br /> Proje Yönetim Sistemi</h1>
-            <p style="text-shadow: 1px 2px 1px #000;">Büyüteç ile büyüyen projeler...</p>
+            <h1>Büyüteç<br /> Proje Yönetim Sistemi</h1>
+            <p >Büyüteç ile büyüyen projeler...</p>
         </div>
     </div>
     <script>
@@ -156,21 +148,14 @@
         }
         
         function KayitOl() {
-
-            var sifreTekrar = $("#txtSifreT").val();
-            alert(sifreTekrar);
             var veri = {
                 kullaniciAdi: $("#txtAd").val(),
                 kullaniciSoyadi: $("#txtSoyad").val(),
-                email: $("#txtEmail").val(),
-                sifre: $("#txtSifreT").val()
+                email: $("#txtEmail").val(), 
+                sifre:$("#txtSifre").val()
             };
             console.log(veri);
-            if (veri.Sifre == sifreTekrar) {
-                alert("Şifreler uyuşmuyor tekrar giriniz");
-            }
-            
-            if (veri.Ad == "" || veri.Soyad == "" || veri.Email == "" || veri.Sifre == "")// değerler
+            if (veri.Ad == " " || veri.Soyad == " " || veri.Email == " " || veri.Sifre == " ")// değerler
             {
                 //css ile sekillenecek
                 alert("Boş değer geçilemez.");
@@ -180,20 +165,14 @@
                 $.post("/Home/KayitOl", veri, function (sonuc) {
                     if (sonuc == "+")
                     {
-                        alert("Kayır başarılı");//css verilecek.
-                        $("input").focus(function(){
-                            $(this).val("");
-                        });
+                        alert("Kayıt başarılı");//css verilecek.
                         location.href="/Home/Index";
                     }
                     else {
-                        alert("değerleri kontrol ediniz.");
+                        alert("Değerleri kontrol ediniz.");
                         }
-                
-                        
                 });
             }
-
         }
     </script>
 </body>
