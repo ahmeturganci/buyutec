@@ -11,6 +11,8 @@ namespace Buyutec.Controllers
         // GET: Profil
         public ActionResult Index()
         {
+            if (Session["kulMail"] == null)
+                Response.Redirect("/Home/Index");
             return View();
         }
     }

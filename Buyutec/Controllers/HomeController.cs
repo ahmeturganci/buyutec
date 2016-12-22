@@ -20,12 +20,16 @@ namespace Buyutec.Controllers
             {
                 return Json("-");
             }
-            return Json(KullaniciIslem.KullaniciGiris(kulMail, kulSifre));
+            char c = KullaniciIslem.KullaniciGiris(kulMail, kulSifre);
+            if (c == '+')
+                Session.Add("kulMail", kulMail);
+            return Json(c);
 
         }
        public ActionResult Cikis()
         {
             //session çıkış
+            Session.Remove("kulMail");
             return View("Index");
         }
         public JsonResult KayitOl(tblKullanici kul)
