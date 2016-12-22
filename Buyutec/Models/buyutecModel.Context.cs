@@ -32,6 +32,7 @@ namespace Buyutec.Models
         public virtual DbSet<tblKullaniciProje> tblKullaniciProjes { get; set; }
         public virtual DbSet<tblKullaniciRol> tblKullaniciRols { get; set; }
         public virtual DbSet<tblKullaniciSurec> tblKullaniciSurecs { get; set; }
+        public virtual DbSet<tblLog> tblLogs { get; set; }
         public virtual DbSet<tblOncelik> tblOnceliks { get; set; }
         public virtual DbSet<tblProje> tblProjes { get; set; }
         public virtual DbSet<tblRol> tblRols { get; set; }

@@ -4,18 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1882224dc47344259273675ac757797d" Name="Diagram1">
-        <EntityTypeShape EntityType="BuyutecDBModel.tblAltSurec" Width="1.5" PointX="7.5" PointY="18" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblDurum" Width="1.5" PointX="5.25" PointY="22.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblKullanici" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciAltSurec" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciProje" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciRol" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciSurec" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblOncelik" Width="1.5" PointX="5.25" PointY="25.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblProje" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblRol" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BuyutecDBModel.tblSurec" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+      <Diagram DiagramId="f4a1d09408514bf6b750b63caeeaca08" Name="Diagram1">
+        <EntityTypeShape EntityType="BuyutecDBModel.tblAltSurec" Width="1.5" PointX="7.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblDurum" Width="1.5" PointX="5.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblKullanici" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciAltSurec" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciProje" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciRol" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciSurec" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblLog" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblOncelik" Width="1.5" PointX="5.25" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblProje" Width="1.5" PointX="3" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblRol" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblSurec" Width="1.5" PointX="5.25" PointY="20.625" IsExpanded="true" />
         <AssociationConnector Association="BuyutecDBModel.FK_tblAltSurec_tblDurum" ManuallyRouted="false" />
         <AssociationConnector Association="BuyutecDBModel.FK_tblAltSurec_tblOncelik" ManuallyRouted="false" />
         <AssociationConnector Association="BuyutecDBModel.FK_tblAltSurec_tblSurec" ManuallyRouted="false" />
@@ -25,6 +26,7 @@
         <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciProje_tblKullanici" ManuallyRouted="false" />
         <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciRol_tblKullanici" ManuallyRouted="false" />
         <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciSurec_tblKullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblLog_tblKullanici" ManuallyRouted="false" />
         <AssociationConnector Association="BuyutecDBModel.FK_tblProje_tblKullanici" ManuallyRouted="false" />
         <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciProje_tblProje" ManuallyRouted="false" />
         <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciRol_tblRol" ManuallyRouted="false" />

@@ -28,6 +28,8 @@ namespace Buyutec.Models
         public Nullable<System.DateTime> olusturmaTarihi { get; set; }
         public Nullable<System.DateTime> baslangicTarihi { get; set; }
         public Nullable<System.DateTime> bitisTarihi { get; set; }
+        public Nullable<decimal> butce { get; set; }
+        public Nullable<bool> aktifMi { get; set; }
     
         public virtual tblKullanici tblKullanici { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

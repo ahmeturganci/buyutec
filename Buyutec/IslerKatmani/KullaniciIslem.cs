@@ -59,7 +59,6 @@ namespace Buyutec.IslerKatmani
 
                 if (kul == null)
                 {
-                    kullanici.sonGiris = DateTime.Now;
                     kullanici.sifre = MD5Sifrele(kullanici.sifre);
                     db.tblKullanicis.Add(kullanici);
                     db.SaveChanges();
@@ -72,6 +71,38 @@ namespace Buyutec.IslerKatmani
             catch
             {
                 return 2; // işlem başarısız
+            }
+        }
+        public static void ProfilGuncelle()
+        {
+            //gerçekleştirilecek. 
+        }
+        public static tblKullanici KullaniciVer(string mail)
+        {
+
+            try
+            {
+
+                BuyutecDBEntities db = new BuyutecDBEntities();
+
+                var k = (from kul in db.tblKullanicis
+                         where kul.email == mail //email ve şifre dogrulaması.
+                         select kul).FirstOrDefault();
+
+                tblKullanici kk = new tblKullanici()
+                {
+                    kullaniciAdi = k.kullaniciAdi,
+                    kullaniciSoyadi = k.kullaniciSoyadi,
+                    sifre = k.sifre,
+                    email = k.email,
+                    kullaniciId = k.kullaniciId
+
+                };
+                return kk;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
     }

@@ -160,10 +160,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfilController.cs" />
+    <Compile Include="Controllers\ProjeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IslerKatmani\KullaniciIslem.cs" />
+    <Compile Include="IslerKatmani\ProjeIslem.cs" />
     <Compile Include="Models\buyutecModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,6 +202,9 @@
     <Compile Include="Models\tblKullaniciSurec.cs">
       <DependentUpon>buyutecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblLog.cs">
+      <DependentUpon>buyutecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblOncelik.cs">
       <DependentUpon>buyutecModel.tt</DependentUpon>
     </Compile>
@@ -232,6 +237,7 @@
     <Content Include="Models\buyutecModel.edmx.diagram">
       <DependentUpon>buyutecModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Home\ProjeOlustur.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -241,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Proje\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

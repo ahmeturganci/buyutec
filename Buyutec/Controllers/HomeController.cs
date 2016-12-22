@@ -22,7 +22,11 @@ namespace Buyutec.Controllers
             }
             char c = KullaniciIslem.KullaniciGiris(kulMail, kulSifre);
             if (c == '+')
+            {
+                var sessionKulId = KullaniciIslem.KullaniciVer(kulMail);
+                Session.Add("kulId", sessionKulId.kullaniciId);
                 Session.Add("kulMail", kulMail);
+            }
             return Json(c);
 
         }
@@ -40,5 +44,11 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
+
+        public ActionResult ProjeOlustur()
+        {
+            return View();
+        }
+       
     }
 }

@@ -35,7 +35,6 @@
           <Property Name="kullaniciSoyadi" Type="nvarchar" MaxLength="50" />
           <Property Name="email" Type="nvarchar" MaxLength="80" />
           <Property Name="sifre" Type="nvarchar" MaxLength="64" />
-          <Property Name="sonGiris" Type="datetime" />
         </EntityType>
         <EntityType Name="tblKullaniciAltSurec">
           <Key>
@@ -69,6 +68,14 @@
           <Property Name="surecId" Type="int" Nullable="false" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblLog">
+          <Key>
+            <PropertyRef Name="logId" />
+          </Key>
+          <Property Name="logId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciId" Type="int" />
+          <Property Name="logBilgisi" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="tblOncelik">
           <Key>
             <PropertyRef Name="oncelikId" />
@@ -87,6 +94,8 @@
           <Property Name="olusturmaTarihi" Type="datetime" />
           <Property Name="baslangicTarihi" Type="datetime" />
           <Property Name="bitisTarihi" Type="datetime" />
+          <Property Name="butce" Type="money" />
+          <Property Name="aktifMi" Type="bit" />
         </EntityType>
         <EntityType Name="tblRol">
           <Key>
@@ -241,6 +250,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblLog_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="0..1" />
+          <End Role="tblLog" Type="Self.tblLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblLog">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblProje_tblKullanici">
           <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="0..1" />
           <End Role="tblProje" Type="Self.tblProje" Multiplicity="*" />
@@ -297,6 +318,7 @@
           <EntitySet Name="tblKullaniciProje" EntityType="Self.tblKullaniciProje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblKullaniciRol" EntityType="Self.tblKullaniciRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblKullaniciSurec" EntityType="Self.tblKullaniciSurec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLog" EntityType="Self.tblLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOncelik" EntityType="Self.tblOncelik" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProje" EntityType="Self.tblProje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRol" EntityType="Self.tblRol" Schema="dbo" store:Type="Tables" />
@@ -344,6 +366,10 @@
           <AssociationSet Name="FK_tblKullaniciSurec_tblSurec" Association="Self.FK_tblKullaniciSurec_tblSurec">
             <End Role="tblSurec" EntitySet="tblSurec" />
             <End Role="tblKullaniciSurec" EntitySet="tblKullaniciSurec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLog_tblKullanici" Association="Self.FK_tblLog_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanici" />
+            <End Role="tblLog" EntitySet="tblLog" />
           </AssociationSet>
           <AssociationSet Name="FK_tblProje_tblKullanici" Association="Self.FK_tblProje_tblKullanici">
             <End Role="tblKullanici" EntitySet="tblKullanici" />
@@ -403,11 +429,11 @@
           <Property Name="kullaniciSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="sifre" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="sonGiris" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblKullaniciAltSurecs" Relationship="Self.FK_tblKullaniciAltSurec_tblKullanici" FromRole="tblKullanici" ToRole="tblKullaniciAltSurec" />
           <NavigationProperty Name="tblKullaniciProjes" Relationship="Self.FK_tblKullaniciProje_tblKullanici" FromRole="tblKullanici" ToRole="tblKullaniciProje" />
           <NavigationProperty Name="tblKullaniciRols" Relationship="Self.FK_tblKullaniciRol_tblKullanici" FromRole="tblKullanici" ToRole="tblKullaniciRol" />
           <NavigationProperty Name="tblKullaniciSurecs" Relationship="Self.FK_tblKullaniciSurec_tblKullanici" FromRole="tblKullanici" ToRole="tblKullaniciSurec" />
+          <NavigationProperty Name="tblLogs" Relationship="Self.FK_tblLog_tblKullanici" FromRole="tblKullanici" ToRole="tblLog" />
           <NavigationProperty Name="tblProjes" Relationship="Self.FK_tblProje_tblKullanici" FromRole="tblKullanici" ToRole="tblProje" />
         </EntityType>
         <EntityType Name="tblKullaniciAltSurec">
@@ -450,6 +476,15 @@
           <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblKullaniciSurec_tblKullanici" FromRole="tblKullaniciSurec" ToRole="tblKullanici" />
           <NavigationProperty Name="tblSurec" Relationship="Self.FK_tblKullaniciSurec_tblSurec" FromRole="tblKullaniciSurec" ToRole="tblSurec" />
         </EntityType>
+        <EntityType Name="tblLog">
+          <Key>
+            <PropertyRef Name="logId" />
+          </Key>
+          <Property Name="logId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciId" Type="Int32" />
+          <Property Name="logBilgisi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblLog_tblKullanici" FromRole="tblLog" ToRole="tblKullanici" />
+        </EntityType>
         <EntityType Name="tblOncelik">
           <Key>
             <PropertyRef Name="oncelikId" />
@@ -470,6 +505,8 @@
           <Property Name="olusturmaTarihi" Type="DateTime" Precision="3" />
           <Property Name="baslangicTarihi" Type="DateTime" Precision="3" />
           <Property Name="bitisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="butce" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="aktifMi" Type="Boolean" />
           <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblProje_tblKullanici" FromRole="tblProje" ToRole="tblKullanici" />
           <NavigationProperty Name="tblKullaniciProjes" Relationship="Self.FK_tblKullaniciProje_tblProje" FromRole="tblProje" ToRole="tblKullaniciProje" />
           <NavigationProperty Name="tblSurecs" Relationship="Self.FK_tblSurec_tblProje" FromRole="tblProje" ToRole="tblSurec" />
@@ -609,6 +646,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblLog_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="0..1" />
+          <End Role="tblLog" Type="Self.tblLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="tblLog">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblProje_tblKullanici">
           <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="0..1" />
           <End Role="tblProje" Type="Self.tblProje" Multiplicity="*" />
@@ -689,6 +738,7 @@
           <EntitySet Name="tblKullaniciProjes" EntityType="Self.tblKullaniciProje" />
           <EntitySet Name="tblKullaniciRols" EntityType="Self.tblKullaniciRol" />
           <EntitySet Name="tblKullaniciSurecs" EntityType="Self.tblKullaniciSurec" />
+          <EntitySet Name="tblLogs" EntityType="Self.tblLog" />
           <EntitySet Name="tblOnceliks" EntityType="Self.tblOncelik" />
           <EntitySet Name="tblProjes" EntityType="Self.tblProje" />
           <EntitySet Name="tblRols" EntityType="Self.tblRol" />
@@ -728,6 +778,10 @@
           <AssociationSet Name="FK_tblKullaniciSurec_tblKullanici" Association="Self.FK_tblKullaniciSurec_tblKullanici">
             <End Role="tblKullanici" EntitySet="tblKullanicis" />
             <End Role="tblKullaniciSurec" EntitySet="tblKullaniciSurecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLog_tblKullanici" Association="Self.FK_tblLog_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanicis" />
+            <End Role="tblLog" EntitySet="tblLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_tblProje_tblKullanici" Association="Self.FK_tblProje_tblKullanici">
             <End Role="tblKullanici" EntitySet="tblKullanicis" />
@@ -791,7 +845,6 @@
                 <ScalarProperty Name="kullaniciSoyadi" ColumnName="kullaniciSoyadi" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="sifre" ColumnName="sifre" />
-                <ScalarProperty Name="sonGiris" ColumnName="sonGiris" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -831,6 +884,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblLogs">
+            <EntityTypeMapping TypeName="BuyutecDBModel.tblLog">
+              <MappingFragment StoreEntitySet="tblLog">
+                <ScalarProperty Name="logId" ColumnName="logId" />
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+                <ScalarProperty Name="logBilgisi" ColumnName="logBilgisi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblOnceliks">
             <EntityTypeMapping TypeName="BuyutecDBModel.tblOncelik">
               <MappingFragment StoreEntitySet="tblOncelik">
@@ -849,6 +911,8 @@
                 <ScalarProperty Name="olusturmaTarihi" ColumnName="olusturmaTarihi" />
                 <ScalarProperty Name="baslangicTarihi" ColumnName="baslangicTarihi" />
                 <ScalarProperty Name="bitisTarihi" ColumnName="bitisTarihi" />
+                <ScalarProperty Name="butce" ColumnName="butce" />
+                <ScalarProperty Name="aktifMi" ColumnName="aktifMi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

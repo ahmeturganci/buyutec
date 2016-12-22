@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "ProjeOlustur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="sonuc"></div>
+
+<div class="row">
+    <section class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header ui-sortable-handle" style="cursor: move;">
+                <i class="ion ion-plus"></i>
+                <h3 class="box-title">Proje Oluştur</h3>
+            </div>
+            <div class="box-body">
+                <form>
+                    <!--Proje ad-->
+                    <div class="form-group">
+                        <label for="ProjeAdi">Proje Adı</label>
+                        <input type="text" class="form-control" id="txtProjeAdi" aria-describedby="projeAd" placeholder="Proje adını giriniz." required>
+                        <small id="projeAdAciklama" class="form-text text-muted">Gerçekleştirmek istediğiniz projenin adını düzgün bir şekilde yazınız.</small>
+                    </div>
+                    <!--Proje açıklama-->
+                    <div class="form-group">
+                        <label for="ProjeAciklama">Proje Açıklama</label>
+                        <textarea class="form-control" id="txtProjeAciklama" rows="4" placeholder="Proje açıklama." required></textarea>
+                        <small id="projeAciklamaKucuk" class="form-text text-muted">Projeninizi Anlaşılır şekilde açıklayınız.</small>
+                    </div>
+                    <!--proje oluşturma tarihi-->
+                    <div class="form-group">
+                        <label for="ProjeOlusturmaTarih">Proje Oluşturma Tarihi</label>
+                        <input type="text" class="form-control" id="txtProjeOlusturma" aria-describedby="projeOlusturmaTarih" placeholder="" disabled="" value="@DateTime.Now" required>
+                        <small id="projeAdAciklama" class="form-text text-muted" style="color:red;">Projenin oluşturulma tarihi sistem tarafından otomatik atanır.</small>
+                    </div>
+                    <!--başlama tarih-->
+                    <div class="form-group">
+                        <label for="BaslamaTarih">Proje Başlama Tarihi</label>
+                        <input type="date" class="form-control" id="txtBaslamaTarih" aria-describedby="projeBaslamaTarih" placeholder="Proje başlama tarihi giriniz." required>
+                        <small id="ProjeBaslamaTarih" class="form-text text-muted">Projenin başlangıç tarihi.</small>
+                    </div>
+                    <!--proje bitiş-->
+                    <div class="form-group">
+                        <label for="BitisTarih">Proje Bitiş Tarihi</label>
+                        <input type="date" class="form-control" id="txtBitisTarih" aria-describedby="projeBitisTarih" placeholder="Proje bitiş tarihi giriniz." required>
+                        <small id="ProjeBitisTarih" class="form-text text-muted">Projenin bitiş tarihi tarihi.</small>
+                    </div>
+                    <!--Bütçe-->
+                    <div class="form-group">
+                        <label for="projeButce">Proje Bütçesi</label>
+                        <input type="number" class="form-control" id="txtProjeButce" aria-describedby="projeButce" placeholder="Proje bütçesini giriniz." required>
+                        <small id="ProjeBitisTarih" class="form-text text-muted">Projenin için gerekli bütçe mikatrını giriniz.</small>
+                    </div>
+                </form>
+            </div>
+            <div class="box-footer clearfix no-border">
+                <button class="btn btn-primary pull-left" onclick="ProjeEkle();"> Proje Oluştur</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    var kulId=@Session["kulId"].ToString();
+    alert(kulId);
+    function ProjeEkle() {
+        var veri = {
+            projeAdi: $("#txtProjeAdi").val(),
+            projeAciklama: $("#txtProjeAciklama").val(),
+            olusturmaTarihi: $("#txtProjeOlusturma").val(),
+            baslangicTarihi: $("#txtBaslamaTarih").val(),
+            bitisTarihi: $("#txtBitisTarih").val(),
+            butce: $("#txtProjeButce").val(),
+            olusturanKullaniciId:kulId
+        };
+        console.log(veri);
+        if (veri.projeAdi == " " || veri.projeAciklama == " " || veri.olusturmaTarihi == " " || veri.baslangicTarihi == " " || veri.bitisTarihi == "" || veri.butce == " ") {
+            alert("Boş değer geçmeyiniz.");
+        }
+        else {
+
+            $.post("/Proje/ProjeEkle", veri, function (sonuc) {
+                if (sonuc == "+") {
+                  //  $("#sonuc").append('<div class="callout callout-info"><h4>Sonuç</h4><p>Proje başarı ile oluşturuldu. Projenin ana ve ara süreçlerini tanımlamak için Süreçler ekranına yönlendiriliyorsunuz.</p></div>').toggle(3000);
+                    alert("Eklendi");
+                    location.href="/Profil/Index";
+                    
+                }
+                else 
+                    alert("Değerleriniz kontrol ediniz.");
+            });
+        }
+    }
+</script>

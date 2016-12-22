@@ -33,9 +33,9 @@
             <!-- Logo -->
             <a href="index2.html" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>LT</span>
+                <span class="logo-mini"><b>BP</b>YS</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Admin</b>LTE</span>
+                <span class="logo-lg"><b>BÜYÜTEÇ</b>PYS</span>
             </a>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -63,7 +63,7 @@
                                             <a href="#">
                                                 <div class="pull-left">
                                                     <!-- User Image -->
-                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSe757u2WZSxqoXpCHJVBq-0yNn6qlitPodly4uAz00ANoGTd6NZQ" class="img-circle" alt="User Image">
                                                 </div>
                                                 <!-- Message title and timestamp -->
                                                 <h4>
@@ -143,37 +143,24 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <!-- User Account Menu -->
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSe757u2WZSxqoXpCHJVBq-0yNn6qlitPodly4uAz00ANoGTd6NZQ" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 @if (Session["kulMail"] != null)
                                 { <span class="hidden-xs">@Session["kulMail"].ToString()</span> }
-
-
-
-
-
-
-
-</a>
-
-
-
-
-
-
-<ul class="dropdown-menu">
+                            </a>
+                            <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSe757u2WZSxqoXpCHJVBq-0yNn6qlitPodly4uAz00ANoGTd6NZQ" class="img-circle" alt="User Image">
                                     <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        @if (Session["kulId"] != null)
+                                        { <span class="hidden-xs">@Session["kulId"].ToString()</span> }
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -220,7 +207,8 @@
                         <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Alexander Pierce</p>
+                        <p>@if (Session["kulMail"] != null)
+                        { <span class="hidden-xs">@Session["kulMail"].ToString()</span> }</p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
@@ -241,7 +229,7 @@
                 <ul class="sidebar-menu">
                     <li class="header">BÜYÜTEÇ.</li>
                     <!-- html.Action("","") Düzenlenecek buralar. -->
-                    <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+                    <li class="active"><a href="@Url.Action("ProjeOlustur","Home")"><i class="fa fa-plus"></i> <span>Proje Oluştur</span></a></li>
                     <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
                     <li class="treeview">
                         <a href="#">
