@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "Çalışılan Projeler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="col-md-6">
+    <div class="box box-primary">
+        <div class="box-header ui-sortable-handle" style="cursor: move;">
+            <i class="ion ion-plus"></i>
+            <h3 class="box-title">Projelerim</h3>
+        </div>
+        <div class="box-body">
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Proje Ara" id="txtProjeAra">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default" onclick="ProjeAra();"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Proje Adı</th>
+                            <th>Rol</th>
+                            <th>Aktiflik</th>
+                            <th>Detay</th>
+                        </tr>
+                        <tbody id="kisiProje"></tbody>
+
+
+                    </table>
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+            <div class="box-footer clearfix no-border">
+                <a href="/Proje/ProjeOlustur" class="btn btn-primary pull-right" onclick="ProjeEkle();"> Proje Oluştur</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="col-md-6">
+    <div class="box box-primary">
+        <div class="box-header ui-sortable-handle" style="cursor: move;">
+            <i class="ion ion-plus"></i>
+            <h3 class="box-title">Yer Aldığım Projeler</h3>
+        </div>
+        <div class="box-body">
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Proje Ara" id="" ">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Proje Adı</th>
+                            <th>Rol</th>
+                            <th>Aktiflik</th>
+                        </tr>
+                        <tbody id="kisiCalistigiProje"></tbody>
+
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="content"></section>
+<section class="content"></section>
+<script>
+    $(function () {
+        $("body").load(KisiselProjeListele());
+        $("body").load(CalisilanProjeListele());
+    });
+    //Kişisel proje listeleme/oluşturulan proje
+    function KisiselProjeListele() {
+        $.post("/Proje/ProjeListele", function (data) {
+            $.each(data, function (i, item) {
+                if (item.aktifMi == true)
+                    $("#kisiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-success">Aktif</span></td><td><a class="btn btn-default" href="/Proje/ProjeDetay/' + item.projeId + '">Detay</a></td> </tr>');
+                if (item.aktifMi == false)
+                    $("#kisiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-danger">Pasif</span></td> </tr>');
+            });
+        });
+
+    }
+    //çalıştığı projeler
+    function CalisilanProjeListele() {
+        $.post("/Proje/CalisilanProjeListele", function (data) {
+            $.each(data, function (i, item) {
+                if (item.aktifMi == true)
+                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-success">Aktif</span></td> </tr>');
+                if (item.aktifMi == false)
+                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-danger">Pasif</span></td> </tr>');
+            });
+        });
+    }
+    function ProjeAra() {
+        var veri = {
+            baslik: $("#txtProjeAra").val()
+        };
+        console.log(veri);
+        if (veri.baslik == "")
+            KisiselProjeListele();
+        $.post("/Proje/ProjeAra", veri, function (data) {
+            $.each(data, function (i, item) {
+                if (item.aktifMi == true) {
+                    $("#kisiProje").html("");
+                    $("#kisiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-success">Aktif</span></td><td><a class="btn btn-default" href="/Proje/ProjeDetay/' + item.projeId + '">Detay</a></td> </tr>');
+                }
+                if (item.aktifMi == false) {
+                    $("#kisiProje").html("");
+                    $("#kisiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-danger">Pasif</span></td> </tr>');
+                }
+            });
+
+        });
+    }
+
+</script>

@@ -81,10 +81,8 @@
 
             $.post("/Proje/ProjeEkle", veri, function (sonuc) {
                 if (sonuc == "+") {
-                  //  $("#sonuc").append('<div class="callout callout-info"><h4>Sonuç</h4><p>Proje başarı ile oluşturuldu. Projenin ana ve ara süreçlerini tanımlamak için Süreçler ekranına yönlendiriliyorsunuz.</p></div>').toggle(3000);
-                    alert("Eklendi");
-                    location.href="/Profil/Index";
-                    
+                    alert("Eklendi");//css li alert
+                    location.href="/Proje/Index";
                 }
                 else 
                     alert("Değerleriniz kontrol ediniz.");

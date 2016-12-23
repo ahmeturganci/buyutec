@@ -7,18 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Buyutec.Models
+namespace Buyutec.Models.DataModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class tblKullaniciSurec
+    public partial class tblLog
     {
-        public int kullaniciId { get; set; }
-        public int surecId { get; set; }
-        public int id { get; set; }
+        public int logId { get; set; }
+        public Nullable<int> kullaniciId { get; set; }
+        public string logBilgisi { get; set; }
     
         public virtual tblKullanici tblKullanici { get; set; }
-        public virtual tblSurec tblSurec { get; set; }
     }
 }

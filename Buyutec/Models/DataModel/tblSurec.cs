@@ -7,26 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Buyutec.Models
+namespace Buyutec.Models.DataModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class tblOncelik
+    public partial class tblSurec
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblOncelik()
+        public tblSurec()
         {
             this.tblAltSurecs = new HashSet<tblAltSurec>();
-            this.tblSurecs = new HashSet<tblSurec>();
+            this.tblKullaniciSurecs = new HashSet<tblKullaniciSurec>();
         }
     
-        public int oncelikId { get; set; }
-        public string oncelikAdi { get; set; }
+        public int surecId { get; set; }
+        public string surecAdi { get; set; }
+        public Nullable<System.DateTime> baslangicTarihi { get; set; }
+        public Nullable<System.DateTime> bitisTarihi { get; set; }
+        public Nullable<int> bitirmeOrani { get; set; }
+        public Nullable<int> durumId { get; set; }
+        public Nullable<int> oncelikId { get; set; }
+        public Nullable<int> projeId { get; set; }
+        public string aciklama { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAltSurec> tblAltSurecs { get; set; }
+        public virtual tblDurum tblDurum { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblSurec> tblSurecs { get; set; }
+        public virtual ICollection<tblKullaniciSurec> tblKullaniciSurecs { get; set; }
+        public virtual tblOncelik tblOncelik { get; set; }
+        public virtual tblProje tblProje { get; set; }
     }
 }

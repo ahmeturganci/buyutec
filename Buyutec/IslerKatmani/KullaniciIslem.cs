@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Buyutec.Models;
+using Buyutec.Models.DataModel;
 using System.Security.Cryptography;
 using System.Text;
 

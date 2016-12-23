@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Buyutec.Models;
+using Buyutec.Models.DataModel;
 using Buyutec.IslerKatmani;
 namespace Buyutec.Controllers
 {
@@ -16,11 +16,10 @@ namespace Buyutec.Controllers
                 Response.Redirect("/Home/Index");
             return View();
         }
-        public ActionResult ProjeOlustur()
-        {
-            return View();
-        }
         
+
+       
+
 
     }
 }

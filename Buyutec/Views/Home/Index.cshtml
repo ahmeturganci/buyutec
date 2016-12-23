@@ -1,4 +1,4 @@
-﻿
+﻿<!--Kayıt ve Giriş Ekranı-->
 @{
     ViewBag.Title = "Büyüteç";
     Layout = null;
@@ -20,10 +20,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- #Dışarıdan Çağırılan Dosyalar Font ve Materyal İkonlar Bitiş -->
     <!-- Çekirdek Js -->
-
-    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-    <script src="~/Scripts/custom.js"></script>
-    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/loginScript/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/loginScript/jquery-ui.js"></script>
+    <script src="~/Scripts/loginScript/custom.js"></script>
+    
     <!-- # Çekirdek JS Bitiş -->
 </head>
 <body>
@@ -141,7 +141,7 @@
             else {
                 $.post("/Home/Giris", veri, function (sonuc) {
                     if (sonuc == '+')
-                        location.href = "/Profil/Index";//değişecek
+                        location.href = "/Proje/Index";//değişecek
                     else
                         window.location.reload(true);
                 });

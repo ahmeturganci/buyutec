@@ -7,23 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Buyutec.Models
+namespace Buyutec.Models.DataModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class tblRol
+    public partial class tblDurum
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblRol()
+        public tblDurum()
         {
-            this.tblKullaniciRols = new HashSet<tblKullaniciRol>();
+            this.tblAltSurecs = new HashSet<tblAltSurec>();
+            this.tblSurecs = new HashSet<tblSurec>();
         }
     
-        public int rolId { get; set; }
-        public string rolAdi { get; set; }
+        public int durumId { get; set; }
+        public string durumAdi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblKullaniciRol> tblKullaniciRols { get; set; }
+        public virtual ICollection<tblAltSurec> tblAltSurecs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblSurec> tblSurecs { get; set; }
     }
 }

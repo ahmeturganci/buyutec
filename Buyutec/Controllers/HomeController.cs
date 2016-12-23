@@ -4,16 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Buyutec.IslerKatmani;
-using Buyutec.Models;
+using Buyutec.Models.DataModel;
 namespace Buyutec.Controllers
 {
     public class HomeController : Controller
     {
+        //Sayfa
         public ActionResult Index()
         {
             //session 
             return View();
         }
+        //Giriş
         public JsonResult Giris(string kulMail, string kulSifre)
         {
             if (kulMail == " " || kulSifre == " ")
@@ -25,17 +27,20 @@ namespace Buyutec.Controllers
             {
                 var sessionKulId = KullaniciIslem.KullaniciVer(kulMail);
                 Session.Add("kulId", sessionKulId.kullaniciId);
+                Session.Add("kulAd", sessionKulId.kullaniciAdi);
                 Session.Add("kulMail", kulMail);
             }
             return Json(c);
 
         }
-       public ActionResult Cikis()
+        //Çıkış
+        public ActionResult Cikis()
         {
             //session çıkış
             Session.Remove("kulMail");
             return View("Index");
         }
+        //kayıt ol
         public JsonResult KayitOl(tblKullanici kul)
         {
             int sonuc = KullaniciIslem.KullaniciKayit(kul);
@@ -44,16 +49,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-        [HttpPost]
-        public JsonResult ProjeListele()
-        {
-            int kulId = int.Parse(Session["kulID"].ToString());
-            var sList = ProjeIslem.ProjeListele(kulId);
-            if (sList != null)
-                return Json(sList);
-            else
-                return Json("-");
-        }
+
 
     }
 }
