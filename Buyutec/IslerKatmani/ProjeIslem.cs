@@ -32,5 +32,27 @@ namespace Buyutec.IslerKatmani
                 return 2; // işlem başarısız
             }
         }
+        public static List<tblProje> ProjeListele(int kulId)
+        {
+            List<tblProje> projeler = new List<tblProje>();
+            try
+            {
+                BuyutecDBEntities db = new BuyutecDBEntities();
+                var projeListe = (from k in db.tblProjes
+                                  where k.olusturanKullaniciId == kulId
+                                  select k);
+                foreach (var item in projeListe)
+                {
+                    projeler.Add(item);
+                }
+                return projeler;
+            }
+            catch
+            {
+                return null;
+
+            }
+
+        }
     }
 }

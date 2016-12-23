@@ -44,11 +44,16 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-
-        public ActionResult ProjeOlustur()
+        [HttpPost]
+        public JsonResult ProjeListele()
         {
-            return View();
+            int kulId = int.Parse(Session["kulID"].ToString());
+            var sList = ProjeIslem.ProjeListele(kulId);
+            if (sList != null)
+                return Json(sList);
+            else
+                return Json("-");
         }
-       
+
     }
 }

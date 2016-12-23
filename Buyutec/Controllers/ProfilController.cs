@@ -16,6 +16,11 @@ namespace Buyutec.Controllers
                 Response.Redirect("/Home/Index");
             return View();
         }
-       
+        public ActionResult ProjeOlustur()
+        {
+            return View();
+        }
+        
+
     }
 }

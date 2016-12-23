@@ -153,6 +153,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -237,7 +238,7 @@
     <Content Include="Models\buyutecModel.edmx.diagram">
       <DependentUpon>buyutecModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Home\ProjeOlustur.cshtml" />
+    <Content Include="Views\Profil\ProjeOlustur.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -247,7 +248,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Proje\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
