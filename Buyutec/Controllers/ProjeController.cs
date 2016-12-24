@@ -9,18 +9,24 @@ namespace Buyutec.Controllers
 {
     public class ProjeController : Controller
     {
+        public static int projeId;
+
         public ActionResult Index()
         {
             return View();
         }
+
         public ActionResult ProjeOlustur()
         {
             return View();
         }
-        public ActionResult ProjeDetay()
+
+        public ActionResult ProjeDetay(int id)
         {
+            projeId = id;
             return View();
         }
+
         public JsonResult ProjeEkle(tblProje proje)
         {
             proje.aktifMi = true;
@@ -30,6 +36,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
+
         public JsonResult ProjeListele()
         {
             int kulId = int.Parse(Session["kulID"].ToString());
@@ -39,6 +46,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
+
         public JsonResult CalisilanProjeListele()
         {
             int kulId = int.Parse(Session["kulID"].ToString());
@@ -48,6 +56,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
+
         public JsonResult ProjeAra(string baslik)
         {
             var bList = ProjeIslem.ProjeAra(baslik);
@@ -57,5 +66,47 @@ namespace Buyutec.Controllers
                 return Json("-");
         }
 
+        public JsonResult ProjeCek()
+        {
+            var sonuc = ProjeIslem.ProjeCek(projeId);
+            return Json(sonuc.ToList());
+        }
+
+        public JsonResult DurumCek()
+        {
+            var sonuc = ProjeIslem.DurumListele();
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json("-");
+        }
+
+        public JsonResult OncelikListele()
+        {
+            var sonuc = ProjeIslem.OncelikListele();
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json("-");
+        }
+
+        public JsonResult KisiCek()
+        {
+            var sonuc = ProjeIslem.KisiCek();
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json("-");
+        }
+
+        public JsonResult SurecEkle(tblSurec surec)
+        {
+            var sonuc = ProjeIslem.SurecEkle(surec);
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json("-");
+
+        }
     }
 }
