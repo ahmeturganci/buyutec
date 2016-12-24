@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-     <div class="box box-primary">
+<div class="box box-primary">
     <div class="box-header">
         <i class="ion ion-clipboard"></i>
         <h3 class="box-title">Proje Detayları</h3>
@@ -22,9 +22,7 @@
                         <th>Durum
                         <th>
                     </tr>
-                    <tbody id="pDetay">
-
-                    </tbody>
+                    <tbody id="pDetay"></tbody>
                 </table>
             </div>
         </div>
@@ -135,7 +133,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="ion ion-clipboard" style="margin-right:5px;" ></i>Süreç Ekle</h4>
+                    <h4 class="modal-title"><i class="ion ion-clipboard" style="margin-right:5px;"></i>Süreç Ekle</h4>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -181,7 +179,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <script>
-       
+
         function ProjeCek() {
             $.post("/Proje/ProjeCek", function (data) {
                 console.log(data);
@@ -197,18 +195,17 @@
                         $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td>ROL</td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
                 });
             });
-            
+
 
         }
-        function DurumCek()
-        {
-            
+        function DurumCek() {
+
             $.post("/Proje/DurumCek", function (data) {
                 console.log(data);
                 $("#durumlar").html("");
                 $.each(data, function (i, item) {
                     console.log(data);
-                    $("#durumlar").append('<option>'+item.durumId+' '+ item.durumAdi + '</option>');
+                    $("#durumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
                 });
             });
         }
@@ -219,7 +216,7 @@
                 $("#oncelikler").html("");
                 $.each(data, function (i, item) {
                     console.log(data);
-                    $("#oncelikler").append('<option>'+item.oncelikAdi + '</option>');
+                    $("#oncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
                 });
             });
         }
@@ -230,24 +227,23 @@
                 $("#kisiler").html("");
                 $.each(data, function (i, item) {
                     console.log(data);
-                    $("#kisiler").append('<option>'+ item.kullaniciAdi +' '+item.kullaniciSoyadi+ '</option>');
+                    $("#kisiler").append('<option>' + item.kullaniciId + ' ' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
                 });
             });
         }
         function SurecEkle() {
-
+            var kullaniciId = parseInt($("#kisiler option:selected").val())
+            alert(kullaniciId);
             var veri = {
                 surecAdi: $("#txtSurecAdi").val(),
-                surecAciklama: $("#txtSurecAciklama").val(),
+                aciklama: $("#txtSurecAciklama").val(),
                 baslangicTarihi: $("#txtSurecBaslamaTarih").val(),
                 bitisTarihi: $("#txtSurecBitisTarih").val(),
                 durumId: parseInt($("#durumlar option:selected").val()),
                 oncelikId: parseInt($("#oncelikler option:selected").val()),
-                kullaniciId: parseInt($("#kisiler option:selected").val())
             };
-            alert(veri.durumId);
             console.log(veri);
-            $.post("/Proje/SurecEkle", veri, function (sonuc) {
+            $.post("/Proje/SurecEkle", { veri: veri, kullaniciId: kullaniciId }, function (sonuc) {
                 console.log(sonuc);
             });
         }

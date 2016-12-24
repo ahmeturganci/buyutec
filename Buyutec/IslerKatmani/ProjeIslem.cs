@@ -14,20 +14,21 @@ namespace Buyutec.IslerKatmani
         {
             try
             {
-                BuyutecDBEntities db = new BuyutecDBEntities();
-
-                var p = (from k in db.tblProjes
-                         where k.projeAdi == null
-                         select k).SingleOrDefault();
-
-                if (p == null)
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
-                    db.tblProjes.Add(proje);
-                    db.SaveChanges();
-                    return 0; // proje ekleme başarılı
+                    var p = (from k in db.tblProjes
+                             where k.projeAdi == null
+                             select k).SingleOrDefault();
+
+                    if (p == null)
+                    {
+                        db.tblProjes.Add(proje);
+                        db.SaveChanges();
+                        return 0; // proje ekleme başarılı
+                    }
+                    else
+                        return 1; //proje başarısız
                 }
-                else
-                    return 1; //proje başarısız
             }
             catch
             {
@@ -39,13 +40,14 @@ namespace Buyutec.IslerKatmani
         {
             try
             {
-                BuyutecDBEntities db = new BuyutecDBEntities();
-                var projeListe = (from k in db.tblProjes
-                                  orderby k.olusturmaTarihi
-                                  where k.olusturanKullaniciId == kulId
-                                  select k);
-
-                return Proje.MapData(projeListe.ToList()); ;
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var projeListe = (from k in db.tblProjes
+                                      orderby k.olusturmaTarihi
+                                      where k.olusturanKullaniciId == kulId
+                                      select k);
+                    return Proje.MapData(projeListe.ToList());
+                }
             }
             catch
             {
@@ -59,15 +61,16 @@ namespace Buyutec.IslerKatmani
         {
             try
             {
-                BuyutecDBEntities db = new BuyutecDBEntities();
-                var cListe = (from k in db.tblProjes
-                              join c in db.tblKullaniciProjes on k.projeId equals c.projeId
-                              orderby k.olusturmaTarihi
-                              where c.kullaniciId == kulId
-                              select k);
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var cListe = (from k in db.tblProjes
+                                  join c in db.tblKullaniciProjes on k.projeId equals c.projeId
+                                  orderby k.olusturmaTarihi
+                                  where c.kullaniciId == kulId
+                                  select k);
 
-
-                return Proje.MapData(cListe.ToList()); ;
+                    return Proje.MapData(cListe.ToList());
+                }
             }
             catch
             {
@@ -137,18 +140,21 @@ namespace Buyutec.IslerKatmani
             }
         }
         //süreç ekle
-        public static int SurecEkle(tblSurec surec)//??!!BAMM
+        public static int SurecEkle(tblSurec surec, int kullaniciId)//??!!zzzBAMM ;)
         {
             try
             {
-                BuyutecDBEntities db = new BuyutecDBEntities();
-                db.tblSurecs.Add(surec);
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    db.tblSurecs.Add(surec);
 
-                tblKullaniciSurec ks = new tblKullaniciSurec();
-                ks.surecId = surec.surecId;
-                surec.tblKullaniciSurecs.Add(ks);
+                    tblKullaniciSurec ks = new tblKullaniciSurec();
+                    ks.surecId = surec.surecId;
+                    ks.kullaniciId = kullaniciId;
+                    surec.tblKullaniciSurecs.Add(ks);
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
                 return 0;
             }
             catch
@@ -161,14 +167,16 @@ namespace Buyutec.IslerKatmani
         {
             try
             {
-                BuyutecDBEntities db = new BuyutecDBEntities();
-                db.tblAltSurecs.Add(altSurec);
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    db.tblAltSurecs.Add(altSurec);
 
-                tblKullaniciAltSurec kas = new tblKullaniciAltSurec();
-                kas.altSurecId = altSurec.altSurecId;
-                altSurec.tblKullaniciAltSurecs.Add(kas);
+                    tblKullaniciAltSurec kas = new tblKullaniciAltSurec();
+                    kas.altSurecId = altSurec.altSurecId;
+                    altSurec.tblKullaniciAltSurecs.Add(kas);
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
                 return 0;
             }
             catch
@@ -181,12 +189,13 @@ namespace Buyutec.IslerKatmani
         {
             try
             {
-                BuyutecDBEntities db = new BuyutecDBEntities();
-                var rolListe = (from r in db.tblRols
-                                orderby r.rolAdi
-                                select r);
-
-                return Rol.MapData(rolListe.ToList());
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var rolListe = (from r in db.tblRols
+                                    orderby r.rolAdi
+                                    select r);
+                    return Rol.MapData(rolListe.ToList());
+                }
             }
             catch
             {
@@ -198,12 +207,13 @@ namespace Buyutec.IslerKatmani
         {
             try
             {
-                BuyutecDBEntities db = new BuyutecDBEntities();
-                var durumListe = (from r in db.tblDurums
-                                  orderby r.durumAdi
-                                  select r);
-
-                return Durum.MapData(durumListe.ToList());
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var durumListe = (from r in db.tblDurums
+                                      orderby r.durumAdi
+                                      select r);
+                    return Durum.MapData(durumListe.ToList());
+                }
             }
             catch
             {
@@ -223,10 +233,10 @@ namespace Buyutec.IslerKatmani
                     return Oncelik.MapData(oncelikL.ToList());
                 }
             }
-            catch 
+            catch
             {
                 return null;
-                
+
             }
         }
         //proje getir
@@ -260,7 +270,7 @@ namespace Buyutec.IslerKatmani
                              select pc);
                     return Kullanici.MapData(p.ToList());
                 }
-}
+            }
             catch
             {
 

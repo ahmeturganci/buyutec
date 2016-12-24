@@ -12,9 +12,9 @@ namespace Buyutec.Models.DataViewModel
         public string projeAdi { get; set; }
         public string projeAciklama { get; set; }
         public Nullable<int> olusturanKullaniciId { get; set; }
-        public Nullable<System.DateTime> olusturmaTarihi { get; set; }
-        public Nullable<System.DateTime> baslangicTarihi { get; set; }
-        public Nullable<System.DateTime> bitisTarihi { get; set; }
+        public string olusturmaTarihi { get; set; }
+        public string baslangicTarihi { get; set; }
+        public string bitisTarihi { get; set; }
         public Nullable<decimal> butce { get; set; }
         public Nullable<bool> aktifMi { get; set; }
 
@@ -22,14 +22,15 @@ namespace Buyutec.Models.DataViewModel
         {
             Proje proje = new Proje()
             {
-                projeId=p.projeId,
-                projeAdi=p.projeAdi,
-                projeAciklama=p.projeAciklama,
-                olusturanKullaniciId=p.olusturanKullaniciId,
-                olusturmaTarihi=p.olusturmaTarihi,
-                bitisTarihi=p.bitisTarihi,
-                butce=p.butce,
-                aktifMi=p.aktifMi       
+                projeId = p.projeId,
+                projeAdi = p.projeAdi,
+                projeAciklama = p.projeAciklama,
+                olusturanKullaniciId = p.olusturanKullaniciId,
+                olusturmaTarihi = p.olusturmaTarihi.ToString(),
+                baslangicTarihi = p.baslangicTarihi.ToString(),
+                bitisTarihi = p.bitisTarihi.ToString(),
+                butce = p.butce,
+                aktifMi = p.aktifMi
             };
             return proje;
         }
@@ -42,8 +43,9 @@ namespace Buyutec.Models.DataViewModel
                 projeAdi = p.projeAdi,
                 projeAciklama = p.projeAciklama,
                 olusturanKullaniciId = p.olusturanKullaniciId,
-                olusturmaTarihi = p.olusturmaTarihi,
-                bitisTarihi = p.bitisTarihi,
+                olusturmaTarihi = Convert.ToDateTime(p.olusturmaTarihi),
+                baslangicTarihi = Convert.ToDateTime(p.baslangicTarihi),
+                bitisTarihi = Convert.ToDateTime(p.bitisTarihi),
                 butce = p.butce,
                 aktifMi = p.aktifMi
             };

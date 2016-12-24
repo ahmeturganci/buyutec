@@ -99,10 +99,11 @@ namespace Buyutec.Controllers
                 return Json("-");
         }
 
-        public JsonResult SurecEkle(tblSurec surec)
+        public JsonResult SurecEkle(tblSurec veri, int kullaniciId)
         {
-            var sonuc = ProjeIslem.SurecEkle(surec);
-            if (sonuc != null)
+            veri.projeId = projeId;
+            var sonuc = ProjeIslem.SurecEkle(veri, kullaniciId);
+            if (sonuc == 0)
                 return Json(sonuc);
             else
                 return Json("-");
