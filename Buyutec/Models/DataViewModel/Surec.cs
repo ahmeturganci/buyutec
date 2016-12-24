@@ -22,7 +22,8 @@ namespace Buyutec.Models.DataViewModel
         {
             Surec surec = new Surec()
             {
-                surecAdi=s.surecAdi
+                surecId = s.surecId,
+                surecAdi = s.surecAdi
             };
             return surec;
         }
@@ -31,6 +32,7 @@ namespace Buyutec.Models.DataViewModel
         {
             tblSurec surec = new tblSurec()
             {
+                surecId = s.surecId,
                 surecAdi = s.surecAdi
             };
             return surec;

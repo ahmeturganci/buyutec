@@ -13,6 +13,7 @@ namespace Buyutec.Models.DataViewModel
         {
             Durum durum = new Durum()
             {
+                durumId = d.durumId,
                 durumAdi = d.durumAdi
             };
             return durum;

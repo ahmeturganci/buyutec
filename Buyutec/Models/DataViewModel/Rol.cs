@@ -15,6 +15,7 @@ namespace Buyutec.Models.DataViewModel
         {
             Rol rol = new Rol()
             {
+                rolId=r.rolId,
                 rolAdi = r.rolAdi
             };
             return rol;

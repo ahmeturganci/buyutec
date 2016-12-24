@@ -15,6 +15,7 @@ namespace Buyutec.Models.DataViewModel
         {
             Oncelik oncelik = new Oncelik()
             {
+                oncelikId = r.oncelikId,
                 oncelikAdi = r.oncelikAdi
             };
             return oncelik;
@@ -23,6 +24,7 @@ namespace Buyutec.Models.DataViewModel
         {
             tblOncelik oncelik = new tblOncelik()
             {
+                oncelikId = r.oncelikId,
                 oncelikAdi = r.oncelikAdi
             };
             return oncelik;

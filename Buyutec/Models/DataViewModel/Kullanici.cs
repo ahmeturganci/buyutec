@@ -17,6 +17,7 @@ namespace Buyutec.Models.DataViewModel
         {
             Kullanici kul = new Kullanici()
             {
+                kullaniciId=k.kullaniciId,
                 kullaniciAdi = k.kullaniciAdi,
                 kullaniciSoyadi=k.kullaniciSoyadi,
                 email=k.email,
@@ -28,6 +29,7 @@ namespace Buyutec.Models.DataViewModel
         {
             tblKullanici kul = new tblKullanici()
             {
+                kullaniciId = k.kullaniciId,
                 kullaniciAdi = k.kullaniciAdi,
                 kullaniciSoyadi = k.kullaniciSoyadi,
                 email = k.email,
