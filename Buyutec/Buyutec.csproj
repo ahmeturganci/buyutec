@@ -220,6 +220,7 @@
       <DependentUpon>buyutecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataViewModel\Proje.cs" />
+    <Compile Include="Models\DataViewModel\Surec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
