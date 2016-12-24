@@ -3,4 +3,165 @@
     ViewBag.Title = "Kullanıcı Profil";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>Profil ekranı gelecek.</h1>
+<!-- Profil -->
+<div class="col-md-4">
+    <div class="box box-primary">
+        <div class="box-body box-profile">
+            <img class="profile-user-img img-responsive img-circle" src="http://previews.123rf.com/images/gmast3r/gmast3r1504/gmast3r150400166/38548354-profile-icon-male-hispanic-avatar-portrait-casual-Stock-Photo.jpg"
+                 alt="User profile picture">
+            <h3 class="profile-username text-center">Kadir Mutlu</h3>
+            <p class="text-muted text-center">kadirmutluu@gmail.com</p>
+            <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                    <b>Toplam Projeler</b> <a class="pull-right">3</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Kendi Projelerim</b> <a class="pull-right">2</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Yer Aldığım Projeler</b> <a class="pull-right">1</a>
+                </li>
+            </ul>
+            <button href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#profilDuzenle"><b>Profil Düzenle</b></button>
+            <button href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#parolaDegistir"><b>Parola Değiştir</b></button>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title"><strong><i class="fa fa-book margin-r-5"></i> Hakkımda</strong></h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <p class="text-muted">
+                B.S. in Computer Science from the University of Tennessee at Knoxville
+            </p>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</div>
+
+<!-- Projeler -->
+<div class="col-md-8">
+    <div class="box box-primary">
+        <div class="box-header ui-sortable-handle" style="cursor: move;">
+            <i class="ion ion-plus"></i>
+            <h3 class="box-title">Projelerim</h3>
+        </div>
+        <div class="box-body">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Proje Ara" id="txtProjeAra">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default" onclick="ProjeAra();"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Proje Adı</th>
+                            <th>Rol</th>
+                            <th>Aktiflik</th>
+                            <th>Detay</th>
+                        </tr>
+                        <tbody id="kisiProje"></tbody>
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <div class="box-footer clearfix no-border">
+                <a href="/Proje/ProjeOlustur" class="btn btn-primary pull-right" onclick="ProjeEkle();"> Proje Oluştur</a>
+            </div>
+        </div>
+    </div>
+</div>
+      </section>
+
+<!-- Profil Düzenle Modal -->
+<div id="profilDuzenle" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-user margin-r-5"></i>Profil Düzenle</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <!--Ad-->
+                    <div class="form-group">
+                        <label for="Ad">Adınız</label>
+                        <input type="text" class="form-control" id="txtAd" aria-describedby="Ad" placeholder="Adınızı giriniz." required>
+                    </div>
+                    <!--Soyad-->
+                    <div class="form-group">
+                        <label for="SurecAdi">Soyadınız</label>
+                        <input type="text" class="form-control" id="txtSoyad" aria-describedby="Soyad" placeholder="Soyadınızı giriniz." required>
+                    </div>
+                    <!--Avatar-->
+                    <div class="form-group">
+                        <label for="ProfilResmi">Profil Resmi</label>
+                        <input type="text" class="form-control" id="txtAvatar" aria-describedby="Avatar" placeholder="Profil resmi linkini giriniz."
+                               required>
+                    </div>
+                    <!--Proje açıklama-->
+                    <div class="form-group">
+                        <label for="ProjeAciklama">Hakkımda</label>
+                        <textarea class="form-control" id="txtHakkimda" rows="4" placeholder="Hakkınızda birşeyler yazın." required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Parola Değiştir Modal -->
+<div id="parolaDegistir" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-lock margin-r-5"></i>Parola Değiştir</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <!--Eski Parola-->
+                    <div class="form-group">
+                        <label for="EskiParola">Eski Parola</label>
+                        <input type="password" class="form-control" id="txtAd" aria-describedby="Ad" placeholder="Eski parolanızı giriniz." required>
+                    </div>
+                    <!--Yeni Parola-->
+                    <div class="form-group">
+                        <label for="YeniParola">Yeni Parola</label>
+                        <input type="password" class="form-control" id="txtAd" aria-describedby="Ad" placeholder="Yeni parolanızı giriniz." required>
+                    </div>
+                    <!--Yeni Parola Onayla-->
+                    <div class="form-group">
+                        <label for="YeniParola">Yeni Parola Onayla</label>
+                        <input type="password" class="form-control" id="txtAd" aria-describedby="Ad" placeholder="Yeni parolanızı tekrar giriniz." required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- BİTİŞ -->

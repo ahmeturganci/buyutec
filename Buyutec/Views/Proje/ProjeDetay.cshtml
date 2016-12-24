@@ -8,6 +8,8 @@
     <div class="box-header">
         <i class="ion ion-clipboard"></i>
         <h3 class="box-title">Proje Detayları</h3>
+
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#kisiEkle" style="margin:-5px;"><i class="fa fa-plus"></i> Projeye Kişi Ekle</button>
         <div class="box-body">
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
@@ -174,6 +176,43 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
                     <button type="button" class="btn btn-primary" onclick="SurecEkle();">Süreç Ekle</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Projeye Eleman Ekle Modal -->
+    <div id="kisiEkle" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="ion ion-clipboard" style="margin-right:5px;"></i>Proje Kişi Ekle</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <!--Kişi ad-->
+                        <div class="form-group">
+                            <label for="KisiAdi">Kişi Adı</label>
+                            <div class="box-tools">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Kişi Ara" id="">
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Rol-->
+                        <div class="form-group">
+                            <label for="Rol">Rol</label>
+                            <select class="form-control" id="kisiler"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary" onclick="SurecEkle();">Kişi Ekle</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
