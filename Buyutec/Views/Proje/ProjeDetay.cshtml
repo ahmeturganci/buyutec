@@ -3,6 +3,196 @@
     ViewBag.Title = "ProjeDetay";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="box box-primary">
+    <div class="box-header">
+        <i class="ion ion-clipboard"></i>
+        <h3 class="box-title">Proje Detayları</h3>
+        <div class="box-body">
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Proje Adı</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Başlama Tarihi</th>
+                        <th>Bitiş Tarihi</th>
+                        <th>Bütçe</th>
+                        <th>Rol</th>
+                        <th>Açıklama</th>
+                        <th>Durum
+                        <th>
+                    </tr>
+                    <tr>
+                        <td>buyutec</td>
+                        <td>12-12-2016</td>
+                        <td>14-12-2016</td>
+                        <td>16-12-2016</td>
+                        <td>5000</td>
+                        <td>Yazılım Mühendisi</td>
+                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        <td><span class="label label-success">Aktif</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
 
-<h2>ProjeDetay</h2>
+<div class="row">
+    <div class="col-md-6">
+        <!-- Süreç Listeleme -->
+        <div class="box box-primary">
+            <div class="box-header">
+                <i class="ion ion-clipboard"></i>
+                <h3 class="box-title">Süreçler</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <ul class="todo-list">
+                    <li id="surec1">
+                        <!-- drag handle -->
+                        <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                        </span>
+                        <!-- todo text -->
+                        <span class="text">Proje gereksinimlerinin çıkarılması</span>
+                        <!-- Emphasis label -->
+                        <small class="label label-danger">Acil</small>
+                    </li>
+                    <div id="altSurec1" style="margin-left:20px; margin-bottom:2px;">
+                        <ul class="todo-list">
+                            <li>
+                                <!-- drag handle -->
+                                <span class="handle">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </span>
+                                <!-- todo text -->
+                                <span class="text">Design a nice theme</span>
+                                <!-- Emphasis label -->
+                                <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                            </li>
+                        </ul>
+                    </div>
+                    <li>
+                        <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                        </span>
+                        <span class="text">Make the theme responsive</span>
+                        <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
+                    </li>
+                    <li>
+                        <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                        </span>
+                        <span class="text">Let theme shine like a star</span>
+                        <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
+                    </li>
+                    <li>
+                        <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                        </span>
+                        <span class="text">Let theme shine like a star</span>
+                        <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
+                    </li>
+                    <li>
+                        <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                        </span>
+                        <span class="text">Check your messages and notifications</span>
+                        <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
+                    </li>
+                    <li>
+                        <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                        </span>
+                        <span class="text">Let theme shine like a star</span>
+                        <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+                <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#surecEkle"><i class="fa fa-plus"></i> Süreç Ekle</button>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
 
+    <!-- Süreç Düzenleme -->
+    <div class="col-md-6">
+        <div id="surecDetay" class="box box-primary">
+            <div class="box-header">
+                <i class="ion ion-clipboard"></i>
+                <h3 class="box-title">Süreç Detay</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Süreç Ekle Modal -->
+    <div id="surecEkle" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="ion ion-clipboard" style="margin-right:5px;"></i>Süreç Ekle</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <!--Proje ad-->
+                        <div class="form-group">
+                            <label for="SurecAdi">Süreç Adı</label>
+                            <input type="text" class="form-control" id="txtSurecAdi" aria-describedby="surecAd" placeholder="Süreç adını giriniz." required>
+                        </div>
+                        <!--Proje açıklama-->
+                        <div class="form-group">
+                            <label for="ProjeAciklama">Süreç Açıklama</label>
+                            <textarea class="form-control" id="txtSurecAciklama" rows="4" placeholder="Süreç açıklamasını giriniz." required></textarea>
+                        </div>
+                        <!--başlama tarih-->
+                        <div class="form-group">
+                            <label for="BaslamaTarih">Süreç Başlangıç Tarihi</label>
+                            <input type="date" class="form-control" id="txtSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz." required>
+                        </div>
+                        <!--proje bitiş-->
+                        <div class="form-group">
+                            <label for="BitisTarih">Süreç Bitiş Tarihi</label>
+                            <input type="date" class="form-control" id="txtSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz." required>
+                        </div>
+                        <!--Bütçe-->
+                        <div class="form-group">
+                            <label for="projeButce">Durum</label>
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary">Süreç Ekle</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script>
+        $(document).ready(function () {
+            $("#altSurec1").hide();
+            $("#surecDetay").hide();
+            $("#surec1").click(function () {
+                $("#altSurec1").toggle(500);
+                $("#surecDetay").show();
+            });
+        });
+    </script>

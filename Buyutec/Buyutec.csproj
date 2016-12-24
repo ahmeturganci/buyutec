@@ -133,6 +133,7 @@
     <Content Include="Content\creative.min.css" />
     <Content Include="Content\grid12.css" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\skin-blue.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
