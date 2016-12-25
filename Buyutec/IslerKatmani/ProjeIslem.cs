@@ -324,14 +324,14 @@ namespace Buyutec.IslerKatmani
                 return 1;
             }
         }
-        public static List<string> RolAdiCek(int kullaniciId)
+        public static List<string> RolAdiCek(int kullaniciId,int projeId)
         {
             try
             {
                 List<string> rollerim = new List<string>();
                 using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
-                    var rolCek = (from p in db.tblKullaniciProjeRols join o in db.tblRols on p.rolId equals o.rolId where p.kullaniciId == kullaniciId select new { o.rolAdi });
+                    var rolCek = (from p in db.tblKullaniciProjeRols join o in db.tblRols on p.rolId equals o.rolId where p.kullaniciId == kullaniciId && p.projeId == projeId select new { o.rolAdi });
                     foreach (var item in rolCek)
                     {
                         rollerim.Add(item.rolAdi);

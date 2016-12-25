@@ -132,10 +132,10 @@ namespace Buyutec.Controllers
                 return Json(kpEkle);
             return Json('-');
         }
-        public JsonResult Rollerim()
+        public JsonResult Rollerim(int projeId)
         {
             int kullaniciId = int.Parse(Session["kulId"].ToString());
-            var rol = ProjeIslem.RolAdiCek(kullaniciId);
+            var rol = ProjeIslem.RolAdiCek(kullaniciId, projeId);
             if(rol != null)
                 return Json(rol);
             return Json('-');
