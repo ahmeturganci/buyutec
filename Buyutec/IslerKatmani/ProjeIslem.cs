@@ -282,13 +282,13 @@ namespace Buyutec.IslerKatmani
         {
             try
             {
-                using (BuyutecDBEntities db=new BuyutecDBEntities())
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
                     var veri = db.tblRols;
                     return Rol.MapData(veri.ToList());
                 }
             }
-            catch(Exception ex) // ex debug modda hata içeriği için
+            catch (Exception ex) // ex debug modda hata içeriği için
             {
                 return null;
             }
@@ -324,7 +324,7 @@ namespace Buyutec.IslerKatmani
                 return 1;
             }
         }
-        public static List<string> RolAdiCek(int kullaniciId,int projeId)
+        public static List<string> RolAdiCek(int kullaniciId, int projeId)
         {
             try
             {
@@ -339,7 +339,25 @@ namespace Buyutec.IslerKatmani
                 }
                 return rollerim;
             }
-            catch (Exception ex)
+            catch
+            {
+
+                return null;
+            }
+        }
+        public static List<Surec> SurecGetir(int sId)
+        {
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var istenenSurec = (from s in db.tblSurecs
+                                        where s.surecId == sId
+                                        select s);
+                    return Surec.MapData(istenenSurec.ToList());
+                }
+            }
+            catch
             {
 
                 return null;

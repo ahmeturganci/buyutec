@@ -21,6 +21,8 @@ namespace Buyutec.Models.DataViewModel
         {
             AltSurec tblAlt = new AltSurec()
             {
+
+                altSurecId = altsurec.altSurecId,
                 altSurecAdi = altsurec.altSurecAdi,
                 aciklama=altsurec.aciklama,
                 baslangicTarihi=altsurec.baslangicTarihi,
@@ -36,6 +38,7 @@ namespace Buyutec.Models.DataViewModel
         {
             tblAltSurec tblAlt = new tblAltSurec()
             {
+                altSurecId = altsurec.altSurecId,
                 altSurecAdi = altsurec.altSurecAdi,
                 aciklama = altsurec.aciklama,
                 baslangicTarihi = altsurec.baslangicTarihi,

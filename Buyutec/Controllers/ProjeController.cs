@@ -140,5 +140,32 @@ namespace Buyutec.Controllers
                 return Json(rol);
             return Json('-');
         }
+
+        public JsonResult SurecListele()
+        {
+            var sonuc = ProjeIslem.SurecListele(projeDetayId);
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json("-");
+        }
+        public JsonResult AltSurecListele(int surecId)
+        {
+            var sonuc = ProjeIslem.AltSurecList(surecId);
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json("-");
+
+        }
+
+        public JsonResult SurecCek(int sId)
+        {
+            var sonuc = ProjeIslem.SurecGetir(sId);
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json("-");
+        }
     }
 }

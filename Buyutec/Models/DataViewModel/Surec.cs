@@ -23,7 +23,14 @@ namespace Buyutec.Models.DataViewModel
             Surec surec = new Surec()
             {
                 surecId = s.surecId,
-                surecAdi = s.surecAdi
+                surecAdi = s.surecAdi,
+                aciklama = s.aciklama,
+                durumId = s.durumId,
+                oncelikId = s.oncelikId,
+                baslangicTarihi = s.baslangicTarihi,
+                bitirmeOrani = s.bitirmeOrani,
+                bitisTarihi = s.bitisTarihi,
+                projeId = s.projeId
             };
             return surec;
         }
@@ -33,7 +40,14 @@ namespace Buyutec.Models.DataViewModel
             tblSurec surec = new tblSurec()
             {
                 surecId = s.surecId,
-                surecAdi = s.surecAdi
+                surecAdi = s.surecAdi,
+                aciklama = s.aciklama,
+                durumId = s.durumId,
+                oncelikId = s.oncelikId,
+                baslangicTarihi = s.baslangicTarihi,
+                bitirmeOrani = s.bitirmeOrani,
+                bitisTarihi = s.bitisTarihi,
+                projeId = s.projeId
             };
             return surec;
         }

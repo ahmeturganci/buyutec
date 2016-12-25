@@ -33,6 +33,93 @@
 <br />
 
 <div class="row">
+    @*    <div class="col-md-6">
+            <!-- Süreç Listeleme -->
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title">Süreçler</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="todo-list">
+                        <li id="surec1">
+                            <!-- drag handle -->
+                            <span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                            </span>
+                            <!-- todo text -->
+                            <span class="text">Proje gereksinimlerinin çıkarılması</span>
+                            <!-- Emphasis label -->
+                            <small class="label label-danger">Acil</small>
+                        </li>
+                        <div id="altSurec1" style="margin-left:20px; margin-bottom:2px;">
+                            <ul class="todo-list">
+                                <li>
+                                    <!-- drag handle -->
+                                    <span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+                                    <!-- todo text -->
+                                    <span class="text">Design a nice theme</span>
+                                    <!-- Emphasis label -->
+                                    <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                                </li>
+                            </ul>
+                        </div>
+                        <li>
+                            <span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">Make the theme responsive</span>
+                            <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
+                        </li>
+                        <li>
+                            <span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">Let theme shine like a star</span>
+                            <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
+                        </li>
+                        <li>
+                            <span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">Let theme shine like a star</span>
+                            <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
+                        </li>
+                        <li>
+                            <span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">Check your messages and notifications</span>
+                            <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
+                        </li>
+                        <li>
+                            <span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">Let theme shine like a star</span>
+                            <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix no-border">
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#surecEkle"><i class="fa fa-plus"></i> Süreç Ekle</button>
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>*@
+
+
     <div class="col-md-6">
         <!-- Süreç Listeleme -->
         <div class="box box-primary">
@@ -42,74 +129,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <ul class="todo-list">
-                    <li id="surec1">
-                        <!-- drag handle -->
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <!-- todo text -->
-                        <span class="text">Proje gereksinimlerinin çıkarılması</span>
-                        <!-- Emphasis label -->
-                        <small class="label label-danger">Acil</small>
-                    </li>
-                    <div id="altSurec1" style="margin-left:20px; margin-bottom:2px;">
-                        <ul class="todo-list">
-                            <li>
-                                <!-- drag handle -->
-                                <span class="handle">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    <i class="fa fa-ellipsis-v"></i>
-                                </span>
-                                <!-- todo text -->
-                                <span class="text">Design a nice theme</span>
-                                <!-- Emphasis label -->
-                                <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                            </li>
-                        </ul>
-                    </div>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <span class="text">Make the theme responsive</span>
-                        <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <span class="text">Check your messages and notifications</span>
-                        <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                    </li>
-                </ul>
+                <ul class="todo-list" id="SurecAltSurec"></ul>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
@@ -118,6 +138,7 @@
         </div>
         <!-- /.box -->
     </div>
+
 
     <!-- Süreç Düzenleme -->
     <div class="col-md-6">
@@ -371,12 +392,14 @@
     </div><!-- /.modal -->
     <script>
 
+
+
         function RolAdiCek(projeId) {
             var veri = {
                 projeId: projeId
             };
             $.post("/Proje/Rollerim", veri, function (sonuc) {
-                console.log(sonuc);
+               // console.log(sonuc);
                 $.each(sonuc, function (j, jtem) {
                     $("#rollu" + projeId).append(jtem);
                 });
@@ -387,7 +410,7 @@
 
 
             $.post("/Proje/ProjeCek", function (data) {
-                console.log(data);
+                //console.log(data);
                 //alert(veri.butce);
                 //if(veri.aktifMi==true)
                 //    $("#pDetay")
@@ -408,12 +431,12 @@
         function DurumCek() {
 
             $.post("/Proje/DurumCek", function (data) {
-                console.log(data);
+                //console.log(data);
                 $("#durumlar").html("");
                 $("#ydurumlar").html("");
                 $("#adurumlar").html("");
                 $.each(data, function (i, item) {
-                    console.log(data);
+                    //console.log(data);
                     $("#durumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
                     $("#ydurumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
                     $("#adurumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
@@ -423,12 +446,12 @@
         function OncelikCek() {
 
             $.post("/Proje/OncelikListele", function (data) {
-                console.log(data);
+                //console.log(data);
                 $("#oncelikler").html("");
                 $("#yoncelikler").html("");
                 $("#aoncelikler").html("");
                 $.each(data, function (i, item) {
-                    console.log(data);
+                    //console.log(data);
                     $("#oncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
                     $("#yoncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
                     $("#aoncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
@@ -438,7 +461,7 @@
         function KullaniciCek() {
 
             $.post("/Proje/KisiCek", function (data) {
-                console.log(data);
+                //console.log(data);
                 $("#kisiler").html("");
                 $.each(data, function (i, item) {
                     console.log(data);
@@ -448,7 +471,7 @@
         }
         function RolCek() {
             $.post("/Proje/RolCek", function (sonuc) {
-                console.log(sonuc);
+                //console.log(sonuc);
                 $("#roller").html("");
                 $.each(sonuc, function (i, item) {
                     $("#roller").append('<option>' + item.rolId + ' ' + item.rolAdi + '</option>')
@@ -469,7 +492,8 @@
             console.log(veri);
             //$.post("/Proje/SurecEkle", { veri: veri, kullaniciId: kullaniciId }, function (sonuc) {
             $.post("/Proje/SurecEkle", veri, function (sonuc) {
-                console.log(sonuc);
+                alert(sonuc);
+                window.location.reload(true);
             });
         }
         function KisiEkle() {
@@ -477,21 +501,93 @@
                 kullaniciId: parseInt($("#kisiler option:selected").val()),
                 rolId: parseInt($("#roller option:selected").val()),
             };
-            console.log(veri);
+            //console.log(veri);
             $.post("/Proje/KullaniciProjeEkle", veri, function (sonuc) {
-                console.log(sonuc);
+              //  console.log(sonuc);
             });
 
         }
+        function AltSurecCek(surecId) {
+            var data = {
+                surecId: surecId
+            };
+            console.log("alt surec");
+
+            $.post("/Proje/AltSurecListele", data, function (sonuc) {
+                $.each(sonuc, function (i, item) {
+
+                    alert(item.altSurecId);
+                    if (item.oncelikId == 1)//düşük
+                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"> <li class="altsurec"> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-info"><i class="fa fa-clock-o"></i>Düşük</small> </li> </ul> </div>');
+                    if (item.oncelikId == 2)//orta
+                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"> <li class="altsurec"> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-success"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
+                    if (item.oncelikId == 3)//yüksek
+                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"> <li class="altsurec"> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-warning"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
+                    if (item.oncelikId == 4)//acil
+                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"> <li class="altsurec"> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-danger"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
+                });
+            });
+        }
+        function SurecCek() {
+            $.post("/Proje/SurecListele", function (sonuc) {
+                $.each(sonuc, function (i, item) {
+                    console.log(item);
+                    var sId = item.surecId;
+                    if (item.oncelikId == 1)//düşük
+                        $("#SurecAltSurec").append('<li id="surec' + item.surecId + '" class="surec"><span class="text">' + item.surecAdi + '</span> <small class="label label-info">Düşük</small></li><div id="altSurecListe"></div>');
+                    if (item.oncelikId == 2)//orta
+                        $("#SurecAltSurec").append('<li id="surec' + item.surecId + '" class="surec"> <span class="text">' + item.surecAdi + '</span> <small class="label label-success">Orta</small> </li><div id="altSurecListe"></div>');
+                    if (item.oncelikId == 3)//yüksek
+                        $("#SurecAltSurec").append('<li id="surec' + item.surecId + '"class="surec"> <span class="text">' + item.surecAdi + '</span> <small class="label label-warning">Yüksek</small> </li><div id="altSurecListe"></div>');
+                    if (item.oncelikId == 4)//acil
+                        $("#SurecAltSurec").append('<li id="surec' + item.surecId + '" class="surec"> <span class="text">' + item.surecAdi + '</span> <small class="label label-danger">Acil</small> </li><div id="altSurecListe"></div>');
+
+                    AltSurecCek(sId);
+                    SurecGetir(sId);
+
+                });
+            });
+        }
+
         $(document).ready(function () {
-            $("body").load(ProjeCek()).load(DurumCek()).load(OncelikCek()).load(KullaniciCek()).load(RolCek());
+            $("body").load(ProjeCek()).load(DurumCek()).load(OncelikCek()).load(KullaniciCek()).load(RolCek()).load(SurecCek());
             $("#altSurec1").hide();
             $("#surecDetay").hide();
-            $("#surec1").click(function () {
-                $("#altSurec1").toggle(500);
-                $("#surecDetay").show();
+
+            //$("#surec1").on("click",function () {
+            //    alert("asdasdasd");
+            //    $(".altSurec").toggle(500);
+            //    $("#surecDetay").show();
+            //});
+            $("#asd").hide(500);
+            $("#asd").click(function () {
+                console.log("hop");
+            });
+            $(document.body).on("load", function () {
+                $(".altsurec").hide();
+            });
+            $(document.body).on("click","li.surec", function () {
+                $("#altSurec").toggle(500);
+                $("#surecDetay").toggle(300);
+                alert($(this).val()+"Deger");
+                SurecGetir();
+            });
+
+            $(document.body).on("click", "li.altsurec", function () {
+                $("#surecDetay").toggle(300);
             });
         });
+        function SurecGetir(sId)
+        {
+            var data = {
+                sId: sId
+            };
+            $.post("/Proje/SurecCek", data, function (sonuc) {
+                $.each(sonuc, function (i, item) {
+                    $("#ytxtSurecAdi").html(item.surecAdi);
+                });
+            });
+        }
         function ProjeKullaniciDoldur() {
             //$.post("/Proje", veri, function (sonuc) {
             //    console.log(sonuc);
