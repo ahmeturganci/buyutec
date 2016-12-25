@@ -27,9 +27,9 @@ namespace Buyutec.Models.DataViewModel
                 aciklama = s.aciklama,
                 durumId = s.durumId,
                 oncelikId = s.oncelikId,
-                baslangicTarihi = s.baslangicTarihi,
+                baslangicTarihi = Convert.ToDateTime(s.baslangicTarihi),
                 bitirmeOrani = s.bitirmeOrani,
-                bitisTarihi = s.bitisTarihi,
+                bitisTarihi = Convert.ToDateTime(s.bitisTarihi),
                 projeId = s.projeId
             };
             return surec;
@@ -44,9 +44,9 @@ namespace Buyutec.Models.DataViewModel
                 aciklama = s.aciklama,
                 durumId = s.durumId,
                 oncelikId = s.oncelikId,
-                baslangicTarihi = s.baslangicTarihi,
+                baslangicTarihi = Convert.ToDateTime(s.baslangicTarihi),
                 bitirmeOrani = s.bitirmeOrani,
-                bitisTarihi = s.bitisTarihi,
+                bitisTarihi = Convert.ToDateTime(s.bitisTarihi),
                 projeId = s.projeId
             };
             return surec;

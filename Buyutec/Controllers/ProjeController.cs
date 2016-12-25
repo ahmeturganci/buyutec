@@ -41,7 +41,7 @@ namespace Buyutec.Controllers
 
         public JsonResult ProjeListele()
         {
-            int kulId = int.Parse(Session["kulID"].ToString());
+            int kulId = int.Parse(Session["kulId"].ToString());
             var sList = ProjeIslem.ProjeListele(kulId);
             if (sList != null)
                 return Json(sList);

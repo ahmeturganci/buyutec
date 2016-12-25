@@ -12,13 +12,13 @@ namespace Buyutec.Controllers
         //Sayfa
         public ActionResult Index()
         {
-            //session 
+            
             return View();
         }
         //Giriş
         public JsonResult Giris(string kulMail, string kulSifre)
         {
-            if (kulMail == " " || kulSifre == " ")
+            if (kulMail == "" || kulSifre == "")
             {
                 return Json("-");
             }
@@ -28,7 +28,7 @@ namespace Buyutec.Controllers
                 var sessionKulId = KullaniciIslem.KullaniciVer(kulMail);
                 Session.Add("kulId", sessionKulId.kullaniciId);
                 Session.Add("kulAd", sessionKulId.kullaniciAdi);
-                Session.Add("kulMail", kulMail);
+                Session.Add("kulMail", sessionKulId.email);
             }
             return Json(c);
 

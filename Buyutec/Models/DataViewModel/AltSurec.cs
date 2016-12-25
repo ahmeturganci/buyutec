@@ -24,11 +24,11 @@ namespace Buyutec.Models.DataViewModel
 
                 altSurecId = altsurec.altSurecId,
                 altSurecAdi = altsurec.altSurecAdi,
-                aciklama=altsurec.aciklama,
-                baslangicTarihi=altsurec.baslangicTarihi,
-                bitisTarihi=altsurec.bitisTarihi,
-                bitirmeOrani=altsurec.bitirmeOrani,
-                durumId=altsurec.durumId,
+                aciklama = altsurec.aciklama,
+                baslangicTarihi = Convert.ToDateTime(altsurec.baslangicTarihi),
+                bitisTarihi = Convert.ToDateTime(altsurec.bitisTarihi),
+                bitirmeOrani = altsurec.bitirmeOrani,
+                durumId = altsurec.durumId,
                 oncelikId = altsurec.oncelikId
             };
             return tblAlt;
@@ -41,8 +41,8 @@ namespace Buyutec.Models.DataViewModel
                 altSurecId = altsurec.altSurecId,
                 altSurecAdi = altsurec.altSurecAdi,
                 aciklama = altsurec.aciklama,
-                baslangicTarihi = altsurec.baslangicTarihi,
-                bitisTarihi = altsurec.bitisTarihi,
+                baslangicTarihi = Convert.ToDateTime(altsurec.baslangicTarihi),
+                bitisTarihi = Convert.ToDateTime(altsurec.bitisTarihi),
                 bitirmeOrani = altsurec.bitirmeOrani,
                 durumId = altsurec.durumId,
                 oncelikId = altsurec.oncelikId
