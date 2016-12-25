@@ -124,10 +124,160 @@
         <div id="surecDetay" class="box box-primary">
             <div class="box-header">
                 <i class="ion ion-clipboard"></i>
-                <h3 class="box-title">Süreç Detay</h3>
+                <h3 class="box-title">Süreci Yönet</h3>
+                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#kisiAta" style="margin:-1px;"><i class="fa fa-plus"></i> Sürece Kişi Ata</button>
+            </div>
+            <div class="box-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!--Proje ad-->
+                            <div class="form-group">
+                                <label for="SurecAdi">Süreç Adı</label>
+                                <input type="text" class="form-control" id="txtSurecAdi" aria-describedby="surecAd" placeholder="Süreç adını giriniz." required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Öncelik</label>
+                                <select class="form-control" id="oncelikler"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <!--Proje ad-->
+                            <div class="form-group">
+                                <label for="SurecAdi">Tamamlanma Oranı</label>
+                                <input type="text" class="form-control" id="txtSurecAdi" aria-describedby="surecAd" placeholder="0-100" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!--başlama tarih-->
+                            <div class="form-group">
+                                <label for="BaslamaTarih">Süreç Başlangıç Tarihi</label>
+                                <input type="date" class="form-control" id="txtSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz."
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <!--proje bitiş-->
+                            <div class="form-group">
+                                <label for="BitisTarih">Süreç Bitiş Tarihi</label>
+                                <input type="date" class="form-control" id="txtSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz."
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Durum</label>
+                                <select class="form-control" id="durumlar"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Proje açıklama-->
+                    <div class="form-group">
+                        <label for="ProjeAciklama">Süreç Açıklama</label>
+                        <textarea class="form-control" id="txtSurecAciklama" rows="4" placeholder="Süreç açıklamasını giriniz." required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="box-footer clearfix no-border">
+                <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#altSurecEkle"><i class="fa fa-plus"></i> Alt Süreç Ekle</button>
             </div>
         </div>
     </div>
+    <!--Alt Süreç Ekle Modal -->
+    <div id="altSurecEkle" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="ion ion-clipboard"></i> Alt Süreç Ekle</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <!--Proje ad-->
+                        <div class="form-group">
+                            <label for="SurecAdi">Süreç Adı</label>
+                            <input type="text" class="form-control" id="txtaSurecAdi" aria-describedby="surecAd" placeholder="Süreç adını giriniz." required>
+                        </div>
+                        <!--Proje açıklama-->
+                        <div class="form-group">
+                            <label for="ProjeAciklama">Süreç Açıklama</label>
+                            <textarea class="form-control" id="txtaSurecAciklama" rows="4" placeholder="Süreç açıklamasını giriniz." required></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--başlama tarih-->
+                                <div class="form-group">
+                                    <label for="BaslamaTarih">Süreç Başlangıç Tarihi</label>
+                                    <input type="date" class="form-control" id="txtaSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz."
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!--proje bitiş-->
+                                <div class="form-group">
+                                    <label for="BitisTarih">Süreç Bitiş Tarihi</label>
+                                    <input type="date" class="form-control" id="txtaSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz."
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Durum</label>
+                                    <select class="form-control" id="adurumlar"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Öncelik</label>
+                                    <select class="form-control" id="aoncelikler"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary" onclick="AltSurecEkle();">Alt Süreç Ekle</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <!-- Sürece Kişi Ata Modal -->
+    <div id="kisiAta" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="ion ion-clipboard" style="margin-right:5px;"></i>Sürece Kişi Ata</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <!--Kişi ad-->
+                        <div class="form-group">
+                            <label for="KisiAdi">Kişi Adı</label>
+                            <select class="form-control" id="kisiler"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-success" onclick="KisiAta();"><i class="fa fa-plus"></i> Kişi Ata</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
     <!-- Süreç Ekle Modal -->
     <div id="surecEkle" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
