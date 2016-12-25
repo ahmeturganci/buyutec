@@ -17,7 +17,7 @@ namespace Buyutec.Models.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblProje()
         {
-            this.tblKullaniciProjes = new HashSet<tblKullaniciProje>();
+            this.tblKullaniciProjeRols = new HashSet<tblKullaniciProjeRol>();
             this.tblSurecs = new HashSet<tblSurec>();
         }
     
@@ -33,7 +33,7 @@ namespace Buyutec.Models.DataModel
     
         public virtual tblKullanici tblKullanici { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblKullaniciProje> tblKullaniciProjes { get; set; }
+        public virtual ICollection<tblKullaniciProjeRol> tblKullaniciProjeRols { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblSurec> tblSurecs { get; set; }
     }

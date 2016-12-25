@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7d1c042d501c42be8b12b70ddf406b24" Name="Diagram1">
+        <EntityTypeShape EntityType="BuyutecDBModel.tblAltSurec" Width="1.5" PointX="7.5" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblDurum" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblKullanici" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciAltSurec" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciProjeRol" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblKullaniciSurec" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblLog" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblOncelik" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblProje" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblRol" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyutecDBModel.tblSurec" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblAltSurec_tblDurum" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblAltSurec_tblOncelik" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblAltSurec_tblSurec" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciAltSurec_tblAltSurec" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblSurec_tblDurum" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciAltSurec_tblKullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciProjeRol_tblKullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciSurec_tblKullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblLog_tblKullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblProje_tblKullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciProjeRol_tblProje" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciProjeRol_tblRol" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblKullaniciSurec_tblSurec" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblSurec_tblOncelik" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyutecDBModel.FK_tblSurec_tblProje" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

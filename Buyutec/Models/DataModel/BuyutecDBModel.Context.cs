@@ -29,8 +29,7 @@ namespace Buyutec.Models.DataModel
         public virtual DbSet<tblDurum> tblDurums { get; set; }
         public virtual DbSet<tblKullanici> tblKullanicis { get; set; }
         public virtual DbSet<tblKullaniciAltSurec> tblKullaniciAltSurecs { get; set; }
-        public virtual DbSet<tblKullaniciProje> tblKullaniciProjes { get; set; }
-        public virtual DbSet<tblKullaniciRol> tblKullaniciRols { get; set; }
+        public virtual DbSet<tblKullaniciProjeRol> tblKullaniciProjeRols { get; set; }
         public virtual DbSet<tblKullaniciSurec> tblKullaniciSurecs { get; set; }
         public virtual DbSet<tblLog> tblLogs { get; set; }
         public virtual DbSet<tblOncelik> tblOnceliks { get; set; }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\aahme\Desktop\buyutec\Buyutec\Models\DataModel\buyutecModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\MEG\Desktop\a\buyutec\Buyutec\Models\DataModel\BuyutecDBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

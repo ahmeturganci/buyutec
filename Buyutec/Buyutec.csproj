@@ -140,18 +140,19 @@
     <Content Include="Images\giris.jpg" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\arkaplan.jpg" />
-    <Content Include="Models\DataModel\buyutecModel.Context.tt">
+    <Content Include="Models\DataModel\BuyutecDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>buyutecModel.edmx</DependentUpon>
-      <LastGenOutput>buyutecModel.Context.cs</LastGenOutput>
+      <DependentUpon>BuyutecDBModel.edmx</DependentUpon>
+      <LastGenOutput>BuyutecDBModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DataModel\buyutecModel.tt">
+    <Content Include="Models\DataModel\BuyutecDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>buyutecModel.edmx</DependentUpon>
-      <LastGenOutput>buyutecModel.cs</LastGenOutput>
+      <DependentUpon>BuyutecDBModel.edmx</DependentUpon>
+      <LastGenOutput>BuyutecDBModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap3-typeahead.min.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\loginScript\custom.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
@@ -169,56 +170,53 @@
     </Compile>
     <Compile Include="IslerKatmani\KullaniciIslem.cs" />
     <Compile Include="IslerKatmani\ProjeIslem.cs" />
-    <Compile Include="Models\DataModel\buyutecModel.Context.cs">
+    <Compile Include="Models\DataModel\BuyutecDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>buyutecModel.Context.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModel\buyutecModel.cs">
+    <Compile Include="Models\DataModel\BuyutecDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModel\buyutecModel.Designer.cs">
+    <Compile Include="Models\DataModel\BuyutecDBModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>buyutecModel.edmx</DependentUpon>
+      <DependentUpon>BuyutecDBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblAltSurec.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblDurum.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblKullanici.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblKullaniciAltSurec.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModel\tblKullaniciProje.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataModel\tblKullaniciRol.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+    <Compile Include="Models\DataModel\tblKullaniciProjeRol.cs">
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblKullaniciSurec.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblLog.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblOncelik.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblProje.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblRol.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel\tblSurec.cs">
-      <DependentUpon>buyutecModel.tt</DependentUpon>
+      <DependentUpon>BuyutecDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataViewModel\AltSurec.cs" />
     <Compile Include="Models\DataViewModel\Durum.cs" />
@@ -227,6 +225,7 @@
     <Compile Include="Models\DataViewModel\Proje.cs" />
     <Compile Include="Models\DataViewModel\Rol.cs" />
     <Compile Include="Models\DataViewModel\Surec.cs" />
+    <Compile Include="Models\Helper\KullaniciProjeRol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -240,16 +239,16 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Profil\Index.cshtml" />
-    <EntityDeploy Include="Models\DataModel\buyutecModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>buyutecModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DataModel\buyutecModel.edmx.diagram">
-      <DependentUpon>buyutecModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\Proje\ProjeOlustur.cshtml" />
     <Content Include="Views\Proje\Index.cshtml" />
     <Content Include="Views\Proje\ProjeDetay.cshtml" />
+    <EntityDeploy Include="Models\DataModel\BuyutecDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BuyutecDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DataModel\BuyutecDBModel.edmx.diagram">
+      <DependentUpon>BuyutecDBModel.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

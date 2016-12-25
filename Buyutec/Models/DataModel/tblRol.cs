@@ -17,13 +17,13 @@ namespace Buyutec.Models.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblRol()
         {
-            this.tblKullaniciRols = new HashSet<tblKullaniciRol>();
+            this.tblKullaniciProjeRols = new HashSet<tblKullaniciProjeRol>();
         }
     
         public int rolId { get; set; }
         public string rolAdi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblKullaniciRol> tblKullaniciRols { get; set; }
+        public virtual ICollection<tblKullaniciProjeRol> tblKullaniciProjeRols { get; set; }
     }
 }

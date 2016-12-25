@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Buyutec.Models.DataModel;
 using Buyutec.IslerKatmani;
+using Buyutec.Models.Helper;
+
 namespace Buyutec.Controllers
 {
     public class ProjeController : Controller
@@ -99,15 +101,44 @@ namespace Buyutec.Controllers
                 return Json("-");
         }
 
-        public JsonResult SurecEkle(tblSurec veri, int kullaniciId)
+        public JsonResult SurecEkle(tblSurec veri)
         {
             veri.projeId = projeId;
+            int kullaniciId = 0;
+            if (Session["kulId"] != null)
+                kullaniciId = int.Parse(Session["kulId"].ToString());
+            else
+                return Json('?'); // kullanıcı giriş yapmamış
             var sonuc = ProjeIslem.SurecEkle(veri, kullaniciId);
             if (sonuc == 0)
                 return Json(sonuc);
             else
                 return Json("-");
 
+        }
+        public JsonResult RolCek()
+        {
+            var rol = ProjeIslem.RolCek();
+            if (rol != null)
+                return Json(rol);
+            else
+                return Json('-');
+        }
+        public JsonResult KullaniciProjeEkle(KullaniciProjeRol veri)
+        {
+            veri.projeId = projeId;
+            var kpEkle = ProjeIslem.KullaniciProjeEkle(veri);
+            if (kpEkle == 0)
+                return Json(kpEkle);
+            return Json('-');
+        }
+        public JsonResult Rollerim()
+        {
+            int kullaniciId = int.Parse(Session["kulId"].ToString());
+            var rol = ProjeIslem.RolAdiCek(kullaniciId);
+            if(rol != null)
+                return Json(rol);
+            return Json('-');
         }
     }
 }

@@ -167,10 +167,10 @@
                             <label for="">Öncelik</label>
                             <select class="form-control" id="oncelikler"></select>
                         </div>
-                        <div class="form-group">
-                            <label for="">Kişiler</label>
-                            <select class="form-control" id="kisiler"></select>
-                        </div>
+                        @*<div class="form-group">
+                                <label for="">Kişiler</label>
+                                <select class="form-control" id="kisiler"></select>
+                            </div>*@
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -180,7 +180,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
     <!-- Projeye Eleman Ekle Modal -->
     <div id="kisiEkle" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -193,33 +192,48 @@
                     <form>
                         <!--Kişi ad-->
                         <div class="form-group">
-                            <label for="KisiAdi">Kişi Adı</label>
+                            @*<label for="KisiAdi">Kişi Adı</label>*@
                             <div class="box-tools">
-                                <div class="input-group input-group-sm">
-                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Kişi Ara" id="">
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                    </div>
+                                @*<div class="input-group input-group-sm">
+                                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Kişi Ara" id="">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>*@
+                                <div class="form-group">
+                                    <label for="kisiler">Kişiler</label>
+                                    <select class="form-control" id="kisiler"></select>
                                 </div>
                             </div>
                         </div>
                         <!--Rol-->
                         <div class="form-group">
                             <label for="Rol">Rol</label>
-                            <select class="form-control" id="kisiler"></select>
+                            <select class="form-control" id="roller"></select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                    <button type="button" class="btn btn-primary" onclick="SurecEkle();">Kişi Ekle</button>
+                    <button type="button" class="btn btn-primary" onclick="KisiEkle();">Kişi Ekle</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <script>
 
+        function RolAdiCek(){
+            $.post("/Proje/Rollerim", function (sonuc) {
+                console.log(sonuc);
+                $.each(sonuc, function (j, jtem) {
+                    $("#rollu").append(jtem);
+                });
+            });
+        }
+
         function ProjeCek() {
+
+
             $.post("/Proje/ProjeCek", function (data) {
                 console.log(data);
                 //alert(veri.butce);
@@ -228,10 +242,12 @@
                 //if(veri.aktifMi==false)
                 //    $("#pDetay").append('<tr> <td>' + veri.projeAdi + '</td> <td>' + veri.olusturmaTarihi + '</td> <td>' + veri.baslangicTarihi + '</td> <td>' + veri.bitisTarihi + '</td><td>' + veri.butce + '</td> <td>ROL</td><td>' + veri.projeAciklama + '</td> <td><span class="label label-danger">Aktif</span></td></tr>');
                 $.each(data, function (i, item) {
-                    if (item.aktifMi == true)
-                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td>ROL</td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
-                    if (item.aktifMi == false)
-                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td>ROL</td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
+                    RolAdiCek();
+                            if (item.aktifMi == true)
+                                $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
+                            if (item.aktifMi == false)
+                                $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
+                 
                 });
             });
 
@@ -270,9 +286,18 @@
                 });
             });
         }
+        function RolCek() {
+            $.post("/Proje/RolCek", function (sonuc) {
+                console.log(sonuc);
+                $("#roller").html("");
+                $.each(sonuc, function (i, item) {
+                    $("#roller").append('<option>' + item.rolId + ' ' + item.rolAdi + '</option>')
+                });
+            });
+        }
         function SurecEkle() {
-            var kullaniciId = parseInt($("#kisiler option:selected").val())
-            alert(kullaniciId);
+            //var kullaniciId = parseInt($("#kisiler option:selected").val())
+            //alert(kullaniciId);
             var veri = {
                 surecAdi: $("#txtSurecAdi").val(),
                 aciklama: $("#txtSurecAciklama").val(),
@@ -282,12 +307,24 @@
                 oncelikId: parseInt($("#oncelikler option:selected").val()),
             };
             console.log(veri);
-            $.post("/Proje/SurecEkle", { veri: veri, kullaniciId: kullaniciId }, function (sonuc) {
+            //$.post("/Proje/SurecEkle", { veri: veri, kullaniciId: kullaniciId }, function (sonuc) {
+            $.post("/Proje/SurecEkle", veri, function (sonuc) {
                 console.log(sonuc);
             });
         }
+        function KisiEkle() {
+            var veri = {
+                kullaniciId: parseInt($("#kisiler option:selected").val()),
+                rolId: parseInt($("#roller option:selected").val()),
+            };
+            console.log(veri);
+            $.post("/Proje/KullaniciProjeEkle", veri, function (sonuc) {
+                console.log(sonuc);
+            });
+
+        }
         $(document).ready(function () {
-            $("body").load(ProjeCek()).load(DurumCek()).load(OncelikCek()).load(KullaniciCek());
+            $("body").load(ProjeCek()).load(DurumCek()).load(OncelikCek()).load(KullaniciCek()).load(RolCek());
             $("#altSurec1").hide();
             $("#surecDetay").hide();
             $("#surec1").click(function () {
@@ -295,4 +332,9 @@
                 $("#surecDetay").show();
             });
         });
+        function ProjeKullaniciDoldur() {
+            //$.post("/Proje", veri, function (sonuc) {
+            //    console.log(sonuc);
+            //});
+        }
     </script>

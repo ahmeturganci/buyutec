@@ -18,8 +18,7 @@ namespace Buyutec.Models.DataModel
         public tblKullanici()
         {
             this.tblKullaniciAltSurecs = new HashSet<tblKullaniciAltSurec>();
-            this.tblKullaniciProjes = new HashSet<tblKullaniciProje>();
-            this.tblKullaniciRols = new HashSet<tblKullaniciRol>();
+            this.tblKullaniciProjeRols = new HashSet<tblKullaniciProjeRol>();
             this.tblKullaniciSurecs = new HashSet<tblKullaniciSurec>();
             this.tblLogs = new HashSet<tblLog>();
             this.tblProjes = new HashSet<tblProje>();
@@ -30,13 +29,13 @@ namespace Buyutec.Models.DataModel
         public string kullaniciSoyadi { get; set; }
         public string email { get; set; }
         public string sifre { get; set; }
+        public string profilFoto { get; set; }
+        public string hakkimda { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblKullaniciAltSurec> tblKullaniciAltSurecs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblKullaniciProje> tblKullaniciProjes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblKullaniciRol> tblKullaniciRols { get; set; }
+        public virtual ICollection<tblKullaniciProjeRol> tblKullaniciProjeRols { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblKullaniciSurec> tblKullaniciSurecs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

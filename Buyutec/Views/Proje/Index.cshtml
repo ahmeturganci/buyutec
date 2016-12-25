@@ -93,14 +93,23 @@
         $("body").load(KisiselProjeListele());
         $("body").load(CalisilanProjeListele());
     });
+    function RolAdiCek() {
+        $.post("/Proje/Rollerim", function (sonuc) {
+            console.log(sonuc);
+            $.each(sonuc, function (j, jtem) {
+                $("#rollu").append(jtem);
+                $("#rolluCal").append(jtem);
+            });
+        });
+    }
     //Kişisel proje listeleme/oluşturulan proje
     function KisiselProjeListele() {
         $.post("/Proje/ProjeListele", function (data) {
             $.each(data, function (i, item) {
                 if (item.aktifMi == true)
-                    $("#kisiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-success">Aktif</span></td><td><a class="btn btn-default" href="/Proje/ProjeDetay/' + item.projeId + '">Detay</a></td> </tr>');
+                    $("#kisiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td id="rollu"></td> <td><span class="label label-success">Aktif</span></td><td><a class="btn btn-default" href="/Proje/ProjeDetay/' + item.projeId + '">Detay</a></td> </tr>');
                 if (item.aktifMi == false)
-                    $("#kisiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-danger">Pasif</span></td> </tr>');
+                    $("#kisiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td id="rollu"></td> <td><span class="label label-danger">Pasif</span></td> </tr>');
             });
         });
 
@@ -109,10 +118,11 @@
     function CalisilanProjeListele() {
         $.post("/Proje/CalisilanProjeListele", function (data) {
             $.each(data, function (i, item) {
+                RolAdiCek();
                 if (item.aktifMi == true)
-                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-success">Aktif</span></td> </tr>');
+                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td id="rolluCal"></td> <td><span class="label label-success">Aktif</span></td> </tr>');
                 if (item.aktifMi == false)
-                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td>KulROL</td> <td><span class="label label-danger">Pasif</span></td> </tr>');
+                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td id="rolluCal"></td> <td><span class="label label-danger">Pasif</span></td> </tr>');
             });
         });
     }

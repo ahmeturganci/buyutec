@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Buyutec.Models.DataViewModel;
 using Buyutec.Models.DataModel;
+using Buyutec.Models.Helper;
 
 namespace Buyutec.IslerKatmani
 {
@@ -64,7 +65,7 @@ namespace Buyutec.IslerKatmani
                 using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
                     var cListe = (from k in db.tblProjes
-                                  join c in db.tblKullaniciProjes on k.projeId equals c.projeId
+                                  join c in db.tblKullaniciProjeRols on k.projeId equals c.projeId
                                   orderby k.olusturmaTarihi
                                   where c.kullaniciId == kulId
                                   select k);
@@ -272,6 +273,73 @@ namespace Buyutec.IslerKatmani
                 }
             }
             catch
+            {
+
+                return null;
+            }
+        }
+        public static List<Rol> RolCek()
+        {
+            try
+            {
+                using (BuyutecDBEntities db=new BuyutecDBEntities())
+                {
+                    var veri = db.tblRols;
+                    return Rol.MapData(veri.ToList());
+                }
+            }
+            catch(Exception ex) // ex debug modda hata içeriği için
+            {
+                return null;
+            }
+        }
+
+        public static int KullaniciProjeEkle(KullaniciProjeRol veri)
+        {
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var sonuc = (from p in db.tblKullaniciProjeRols where p.projeId == veri.projeId && p.kullaniciId == veri.kullaniciId && p.rolId != veri.rolId select p).SingleOrDefault();
+                    if (sonuc == null)
+                    {
+                        tblKullaniciProjeRol kp = new tblKullaniciProjeRol
+                        {
+                            projeId = veri.projeId,
+                            kullaniciId = veri.kullaniciId,
+                            rolId = veri.rolId
+                        };
+                        db.tblKullaniciProjeRols.Add(kp);
+                        db.SaveChanges();
+                        return 0;
+                    }
+                    else
+                        return 2;
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return 1;
+            }
+        }
+        public static List<string> RolAdiCek(int kullaniciId)
+        {
+            try
+            {
+                List<string> rollerim = new List<string>();
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var rolCek = (from p in db.tblKullaniciProjeRols join o in db.tblRols on p.rolId equals o.rolId where p.kullaniciId == kullaniciId select new { o.rolAdi });
+                    foreach (var item in rolCek)
+                    {
+                        rollerim.Add(item.rolAdi);
+                    }
+                }
+                return rollerim;
+            }
+            catch (Exception ex)
             {
 
                 return null;
