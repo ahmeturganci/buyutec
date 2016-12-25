@@ -134,20 +134,20 @@
                             <!--Proje ad-->
                             <div class="form-group">
                                 <label for="SurecAdi">Süreç Adı</label>
-                                <input type="text" class="form-control" id="txtSurecAdi" aria-describedby="surecAd" placeholder="Süreç adını giriniz." required>
+                                <input type="text" class="form-control" id="ytxtSurecAdi" aria-describedby="surecAd" placeholder="Süreç adını giriniz." required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Öncelik</label>
-                                <select class="form-control" id="oncelikler"></select>
+                                <select class="form-control" id="yoncelikler"></select>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <!--Proje ad-->
                             <div class="form-group">
                                 <label for="SurecAdi">Tamamlanma Oranı</label>
-                                <input type="text" class="form-control" id="txtSurecAdi" aria-describedby="surecAd" placeholder="0-100" required>
+                                <input type="text" class="form-control" id="ytxtSurecAdi" aria-describedby="surecAd" placeholder="0-100" required>
                             </div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                             <!--başlama tarih-->
                             <div class="form-group">
                                 <label for="BaslamaTarih">Süreç Başlangıç Tarihi</label>
-                                <input type="date" class="form-control" id="txtSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz."
+                                <input type="date" class="form-control" id="ytxtSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz."
                                        required>
                             </div>
                         </div>
@@ -164,21 +164,21 @@
                             <!--proje bitiş-->
                             <div class="form-group">
                                 <label for="BitisTarih">Süreç Bitiş Tarihi</label>
-                                <input type="date" class="form-control" id="txtSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz."
+                                <input type="date" class="form-control" id="ytxtSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz."
                                        required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Durum</label>
-                                <select class="form-control" id="durumlar"></select>
+                                <select class="form-control" id="ydurumlar"></select>
                             </div>
                         </div>
                     </div>
                     <!--Proje açıklama-->
                     <div class="form-group">
                         <label for="ProjeAciklama">Süreç Açıklama</label>
-                        <textarea class="form-control" id="txtSurecAciklama" rows="4" placeholder="Süreç açıklamasını giriniz." required></textarea>
+                        <textarea class="form-control" id="ytxtSurecAciklama" rows="4" placeholder="Süreç açıklamasını giriniz." required></textarea>
                     </div>
                 </form>
             </div>
@@ -410,9 +410,13 @@
             $.post("/Proje/DurumCek", function (data) {
                 console.log(data);
                 $("#durumlar").html("");
+                $("#ydurumlar").html("");
+                $("#adurumlar").html("");
                 $.each(data, function (i, item) {
                     console.log(data);
                     $("#durumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
+                    $("#ydurumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
+                    $("#adurumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
                 });
             });
         }
@@ -421,9 +425,13 @@
             $.post("/Proje/OncelikListele", function (data) {
                 console.log(data);
                 $("#oncelikler").html("");
+                $("#yoncelikler").html("");
+                $("#aoncelikler").html("");
                 $.each(data, function (i, item) {
                     console.log(data);
                     $("#oncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
+                    $("#yoncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
+                    $("#aoncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
                 });
             });
         }
