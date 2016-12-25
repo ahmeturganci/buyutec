@@ -278,7 +278,6 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-
     <!-- Süreç Ekle Modal -->
     <div id="surecEkle" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -372,11 +371,14 @@
     </div><!-- /.modal -->
     <script>
 
-        function RolAdiCek(){
-            $.post("/Proje/Rollerim", function (sonuc) {
+        function RolAdiCek(projeId) {
+            var veri = {
+                projeId: projeId
+            };
+            $.post("/Proje/Rollerim", veri, function (sonuc) {
                 console.log(sonuc);
                 $.each(sonuc, function (j, jtem) {
-                    $("#rollu").append(jtem);
+                    $("#rollu" + projeId).append(jtem);
                 });
             });
         }
@@ -392,12 +394,12 @@
                 //if(veri.aktifMi==false)
                 //    $("#pDetay").append('<tr> <td>' + veri.projeAdi + '</td> <td>' + veri.olusturmaTarihi + '</td> <td>' + veri.baslangicTarihi + '</td> <td>' + veri.bitisTarihi + '</td><td>' + veri.butce + '</td> <td>ROL</td><td>' + veri.projeAciklama + '</td> <td><span class="label label-danger">Aktif</span></td></tr>');
                 $.each(data, function (i, item) {
-                    RolAdiCek();
-                            if (item.aktifMi == true)
-                                $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
-                            if (item.aktifMi == false)
-                                $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
-                 
+                    RolAdiCek(item.projeId);
+                    if (item.aktifMi == true)
+                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
+                    if (item.aktifMi == false)
+                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
+
                 });
             });
 

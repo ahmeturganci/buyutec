@@ -11,7 +11,7 @@ namespace Buyutec.Controllers
 {
     public class ProjeController : Controller
     {
-        public static int projeId;
+        public static int projeDetayId;
 
         public ActionResult Index()
         {
@@ -25,7 +25,7 @@ namespace Buyutec.Controllers
 
         public ActionResult ProjeDetay(int id)
         {
-            projeId = id;
+            projeDetayId = id;
             return View();
         }
 
@@ -70,7 +70,7 @@ namespace Buyutec.Controllers
 
         public JsonResult ProjeCek()
         {
-            var sonuc = ProjeIslem.ProjeCek(projeId);
+            var sonuc = ProjeIslem.ProjeCek(projeDetayId);
             return Json(sonuc.ToList());
         }
 
@@ -103,7 +103,7 @@ namespace Buyutec.Controllers
 
         public JsonResult SurecEkle(tblSurec veri)
         {
-            veri.projeId = projeId;
+            veri.projeId = projeDetayId;
             int kullaniciId = 0;
             if (Session["kulId"] != null)
                 kullaniciId = int.Parse(Session["kulId"].ToString());
@@ -126,7 +126,7 @@ namespace Buyutec.Controllers
         }
         public JsonResult KullaniciProjeEkle(KullaniciProjeRol veri)
         {
-            veri.projeId = projeId;
+            veri.projeId = projeDetayId;
             var kpEkle = ProjeIslem.KullaniciProjeEkle(veri);
             if (kpEkle == 0)
                 return Json(kpEkle);
