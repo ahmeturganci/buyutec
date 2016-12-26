@@ -249,6 +249,7 @@
     <Content Include="Models\DataModel\BuyutecDBModel.edmx.diagram">
       <DependentUpon>BuyutecDBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Proje\ProjeSurecDetay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

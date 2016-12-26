@@ -29,6 +29,11 @@ namespace Buyutec.Controllers
             return View();
         }
 
+        public ActionResult ProjeSurecDetay()
+        {
+            return View();
+        }
+
         public JsonResult ProjeEkle(tblProje proje)
         {
             proje.aktifMi = true;
