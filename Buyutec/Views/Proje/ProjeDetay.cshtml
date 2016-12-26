@@ -483,8 +483,8 @@
              });*/
             $(document.body).on("click", "li.surec", function () {
                 $("#surecDetay").toggle(300);
-
-
+                var id = parseInt($(this).text());
+                SurecGetir(id);
             });
 
             $(document.body).on("click", "li.altsurec", function () {
@@ -500,11 +500,13 @@
                 console.log(sonuc);
                 $.each(sonuc, function (i, item) {
                     $("#ytxtSurecAdi").val(item.surecAdi);
-                    $("#yoncelikler").val(item.oncelikId);
                     $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
                     $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
                     $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
                     $("#ydurumlar").val(item.durumId);
+                    console.log("durumId :" + item.durumId);
+                    $("#yoncelikler").val(item.oncelikId);
+                    console.log("oncelikId :" + item.oncelikId);
                     $("#ytxtSurecAciklama").val(item.aciklama);
                 });
             });
