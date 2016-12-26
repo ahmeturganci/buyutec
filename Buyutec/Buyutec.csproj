@@ -226,6 +226,7 @@
     <Compile Include="Models\DataViewModel\Rol.cs" />
     <Compile Include="Models\DataViewModel\Surec.cs" />
     <Compile Include="Models\Helper\KullaniciProjeRol.cs" />
+    <Compile Include="Models\Helper\KullaniciSurec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

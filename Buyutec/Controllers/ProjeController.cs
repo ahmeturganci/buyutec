@@ -198,5 +198,21 @@ namespace Buyutec.Controllers
         {
             return Json("+");
         }
+        public JsonResult ProjeKisiDoldur()//new { k.kullaniciId, k.kullaniciAdi, k.kullaniciSoyadi, p.projeId }
+        {
+            var sonuc = ProjeIslem.ProjeKisilerDoldur(projeDetayId);
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json('-');
+        }
+        public JsonResult SureceKisiAta(KullaniciSurec ks)
+        {
+            var sonuc = ProjeIslem.SureceKisiAta(ks,projeDetayId);
+            if (sonuc == '+')
+                return Json(sonuc);
+            else
+                return Json('-');
+        }
     }
 }

@@ -60,7 +60,7 @@
             <div class="box-header">
                 <i class="ion ion-clipboard"></i>
                 <h3 class="box-title">Süreci Yönet</h3><p id="ssID"></p>
-                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#kisiAta" style="margin:-1px;"><i class="fa fa-plus"></i> Sürece Kişi Ata</button>
+                <button type="button" id="projeKisilerDoldur" class="btn btn-success pull-right" data-toggle="modal" data-target="#kisiAta" style="margin:-1px;"><i class="fa fa-plus"></i> Sürece Kişi Ata</button>
             </div>
             <div class="box-body">
                 <form>
@@ -200,7 +200,7 @@
                         <!--Kişi ad-->
                         <div class="form-group">
                             <label for="KisiAdi">Kişi Adı</label>
-                            <select class="form-control" id="kisiler"></select>
+                            <select class="form-control" id="projeKisiler"></select>
                         </div>
                     </form>
                 </div>
@@ -428,17 +428,18 @@
             };
             //console.log("alt surec");
             $.post("/Proje/AltSurecListele", data, function (sonuc) {
+                $("#altSurecListe" + surecId).append('<div id="altSurec"  style="margin-left:20px; margin-bottom:2px;"> <ul id="alts'+surecId+'" class="todo-list"></ul> </div>');
                 $.each(sonuc, function (i, item) {
                     //alert(item.altSurecId);
                     var sId = item.altSurecId;
                     if (item.oncelikId == 1)//düşük
-                        $("#altSurecListe").append('<div id="altSurec"  style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-info"><i class="fa fa-clock-o"></i>Düşük</small> </li> </ul> </div>');
+                        $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-info"><i class="fa fa-clock-o"></i>Düşük</small> </li>');
                     if (item.oncelikId == 2)//orta
-                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-success"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
+                        $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-success"><i class="fa fa-clock-o"></i>Orta</small> </li>');
                     if (item.oncelikId == 3)//yüksek
-                        $("#altSurecListe").append('<div id="altSurec"  style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-warning"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
+                        $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-warning"><i class="fa fa-clock-o"></i>Yüksek</small> </li>');
                     if (item.oncelikId == 4)//acil
-                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-danger"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
+                        $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-danger"><i class="fa fa-clock-o"></i>Acil</small> </li>');
 
                 });
             });
@@ -449,13 +450,13 @@
                     console.log(item);
                     var sId = item.surecId;
                     if (item.oncelikId == 1)//düşük
-                        $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b><span class="text">' + item.surecAdi + '</span> <small class="label label-info">Düşük</small></li><div id="altSurecListe"></div>');
+                        $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b><span class="text">' + item.surecAdi + '</span> <small class="label label-info">Düşük</small></li><div id="altSurecListe' + sId + '"></div>');
                     if (item.oncelikId == 2)//orta
-                        $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b><span class="text">' + item.surecAdi + '</span> <small class="label label-success">Orta</small> </li><div id="altSurecListe"></div>');
+                        $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b><span class="text">' + item.surecAdi + '</span> <small class="label label-success">Orta</small> </li><div id="altSurecListe' + sId + '"></div>');
                     if (item.oncelikId == 3)//yüksek
-                        $("#SurecAltSurec").append('<li id="surec"class="surec"><b id="surecID">' + sId + '</b> <span class="text">' + item.surecAdi + '</span> <small class="label label-warning">Yüksek</small> </li><div id="altSurecListe"></div>');
+                        $("#SurecAltSurec").append('<li id="surec"class="surec"><b id="surecID">' + sId + '</b> <span class="text">' + item.surecAdi + '</span> <small class="label label-warning">Yüksek</small> </li><div id="altSurecListe' + sId + '"></div>');
                     if (item.oncelikId == 4)//acil
-                        $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b> <span class="text">' + item.surecAdi + '</span> <small class="label label-danger">Acil</small> </li><div id="altSurecListe"></div>');
+                        $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b> <span class="text">' + item.surecAdi + '</span> <small class="label label-danger">Acil</small> </li><div id="altSurecListe' + sId + '"></div>');
                     SurecGetir(sId);
                     AltSurecCek(sId);
 
@@ -467,7 +468,7 @@
             $("body").load(ProjeCek()).load(DurumCek()).load(OncelikCek()).load(KullaniciCek()).load(RolCek()).load(SurecCek());
             $("#altSurec1").hide();
             $("#surecDetay").hide();
-
+            $("#ssID").hide();
             //$("#surec1").on("click",function () {
             //    alert("asdasdasd");
             //    $(".altSurec").toggle(500);
@@ -491,6 +492,7 @@
             $(document.body).on("click", "li.altsurec", function () {
                 $("#surecDetay").show(300);
                 var id = parseInt($(this).text());
+                //alert(id);
                 AltSurecGetir(id);
             });
         });
@@ -519,7 +521,7 @@
             var durumId,oncelikId;
             var veri = { surecId: surecId };
             $.post("/Proje/AltSurecCek", veri, function (sonuc) {
-                console.log(sonuc);
+                //console.log(sonuc);
                 $.each(sonuc, function (i, item) {
                     durumId = item.durumId;
                     oncelikId = item.oncelikId;
@@ -540,9 +542,26 @@
             //    console.log(sonuc);
             //});
         }
-        //$("#kisiAta").click(function () {
-        //    $.post("/Proje/SureceKisiAta")
-        //});
+        $("#projeKisilerDoldur").click(function () {
+            $.post("/Proje/ProjeKisiDoldur", "", function (data) {
+                console.log(data);
+                $("#projeKisiler").html("");
+                $.each(data, function (i, item) {
+                    $("#projeKisiler").append('<option>' + item.kullaniciId + ' ' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
+                });
+            });
+        });
+        function KisiAta() {
+            var veri = {
+                kullaniciId: parseInt($("#projeKisiler option:selected").val()),
+                surecId: parseInt($("#ssID").text())
+            };
+            alert(veri.kullaniciId + ' ' + veri.surecId);
+            $.post("/Proje/SureceKisiAta", veri, function (sonuc) {
+                console.log(sonuc);
+            });
+            
+        }
         function AltSurecEkle() {
             var data = {
                 altSurecAdi: $("#txtaSurecAdi").val(),
@@ -553,24 +572,24 @@
                 oncelikId: parseInt($("#aoncelikler option:selected").val()),
                 surecId: $("#ssID").text()
             };
-            console.log(data);
+            //console.log(data);
             $.post("/Proje/AltSurecEkle", data, function () {
-                console.log(sonuc);
+                //console.log(sonuc);
             });
         }
     
         function GuncelleSurec() {
              
             var veri = {
-                surecAdi: $("#txtSurecAdi").text(),
-                aciklama: $("#txtSurecAciklama").html(),
-                baslangicTarihi: $("#txtSurecBaslamaTarih").val(),
-                bitisTarihi: $("#txtSurecBitisTarih").val(),
-                durumId: parseInt($("#durumlar option:selected").val()),
-                oncelikId: parseInt($("#oncelikler option:selected").val()),
+                surecAdi: $("#ytxtSurecAdi").val(),
+                aciklama: $("#ytxtSurecAciklama").val(),
+                baslangicTarihi: $("#ytxtSurecBaslamaTarih").val(),
+                bitisTarihi: $("#ytxtSurecBitisTarih").val(),
+                durumId: parseInt($("#ydurumlar option:selected").val()),
+                oncelikId: parseInt($("#yoncelikler option:selected").val()),
                 sId:$("#ssID").text()
             };
-            console.log(veri);
+            //console.log(veri);
             $.post("/Proje/SGuncelle", veri, function (sonuc) {
                 console.log(sonuc);
             });
