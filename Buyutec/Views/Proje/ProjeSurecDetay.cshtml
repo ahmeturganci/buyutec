@@ -3,7 +3,6 @@
     ViewBag.Title = "ProjeSurecDetay";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="box box-primary">
     <div class="box-header">
         <i class="ion ion-clipboard"></i>
@@ -22,94 +21,47 @@
                         <th>Bitirme Oranı</th>
                         <th></th>
                     </tr>
-                    <tbody id="pDetay">
-                        <tr>
-                            <td>Proje gereksinimlerinin çıkarılması</td>
-                            <td>12.12.2016</td>
-                            <td>20.12.2016</td>
-                            <td>Kadir Mutlu, Mehmet Emin Gelmedi</td>
-                            <td>Bu bir açıklamadır.</td>
-                            <td><span class="label label-danger">Acil</span></td>
-                            <td>Yüksek</td>
-                            <td>
-                                <div class="progress progress-md progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width:90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                            <div id="altSurecListe">
-                        <tr>
-                            <td><i class="fa fa-arrow-right" aria-hidden="true"></i> Alt Süreç bro</td>
-                            <td>12.12.2016</td>
-                            <td>20.12.2016</td>
-                            <td>Kadir Mutlu, Mehmet Emin Gelmedi</td>
-                            <td>Bu bir açıklamadır.</td>
-                            <td><span class="label label-danger">Acil</span></td>
-                            <td>Yüksek</td>
-                            <td>
-                                <div class="progress progress-md progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width:90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-arrow-right" aria-hidden="true"></i> Alt Süreç 2 bro</td>
-                            <td>12.12.2016</td>
-                            <td>20.12.2016</td>
-                            <td>Kadir Mutlu, Mehmet Emin Gelmedi</td>
-                            <td>Bu bir açıklamadır.</td>
-                            <td><span class="label label-danger">Acil</span></td>
-                            <td>Yüksek</td>
-                            <td>
-                                <div class="progress progress-md progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width:90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
+                    <tbody id="pDetay"></tbody>
+                </table>
             </div>
-            </tr>
-
-            <tr>
-                <td>Proje gereksinimlerinin çıkarılması</td>
-                <td>15.12.2016</td>
-                <td>20.12.2016</td>
-                <td>Ahmet Urgancı, Mehmet Emin Gelmedi</td>
-                <td>Bu bir açıklamadır.</td>
-                <td><span class="label label-danger">Acil</span></td>
-                <td>Yüksek</td>
-                <td>
-                    <div class="progress progress-md progress-striped active">
-                        <div class="progress-bar progress-bar-success" style="width:40%"></div>
-                    </div>
-                </td>
-                <td><span class="badge bg-green">40%</span></td>
-            </tr>
-            <tr>
-                <td>Proje gereksinimlerinin çıkarılması</td>
-                <td>12.12.2016</td>
-                <td>20.12.2016</td>
-                <td>Ahmet Urgancı, Kadir Mutlu</td>
-                <td>Bu bir açıklamadır.</td>
-                <td><span class="label label-danger">Acil</span></td>
-                <td>Orta</td>
-                <td>
-                    <div class="progress progress-md progress-striped active">
-                        <div class="progress-bar progress-bar-success" style="width:20%"></div>
-                    </div>
-                </td>
-                <td><span class="badge bg-green">20%</span></td>
-            </tr>
-            </tbody>
-            </table>
         </div>
     </div>
 </div>
 <div class="box-body">
-    <button id="Yazdır" class="btn btn-primary pull-right" onclick="x""><i class="fa fa-print"></i> Yazdır</button>
+    <button id="Yazdır" class="btn btn-primary pull-right" onclick=" window.print();" ><i class="fa fa-print"></i> Yazdır</button>
 </div>
 
 <script>
+    $(function () {
+        $("body").load(SurecCek());
+    });
+    function AltSurecCek(surecId) {
+        var data = {
+            surecId: surecId
+        };
+        //console.log("alt surec");
+        $.post("/Proje/AltSurecListele", data, function (sonuc) {
+            $.each(sonuc, function (i, item) {
+                //alert(item.altSurecId);
+                var sId = item.altSurecId;
+                $("#tr" + surecId).after('<tr style="background-color: #222d32;color: white;"><td><i class="fa fa-arrow-right"></i>' + item.altSurecAdi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td> <td id="altSurectekiKullanicilar"></td> <td>' + item.aciklama + '</td> <td><span class="label label-danger">' + item.durumId + '</span></td> <td>' + item.oncelikId + '</td> <td> <div class="progress progress-md progress-striped active"> <div class="progress-bar progress-bar-success" style="width:90%">' + item.bitirmeOrani + '</div> </div> </td> <td><span class="badge bg-green">' + item.bitirmeOrani + '%</span></td> </tr>')
+            });
+        });
+    }
+    function SurecCek() {
+        $.post("/Proje/SurecListele", function (sonuc) {
+            $.each(sonuc, function (i, item) {
+                console.log(item);
+                var sId = item.surecId;
+                $("#pDetay").append('<tr id="tr'+item.surecId+'"><td>' + item.surecAdi + '</td><td>' + item.baslangicTarihi + '</td><td>' + item.bitisTarihi + '</td><td id="surectekiKullanicilar"></td><td>' + item.aciklama + '</td><td><span class="label label-danger">' + item.durumId + '</span></td><td>' + item.oncelikId + '</td><td><div class="progress progress-md progress-striped active"><div class="progress-bar progress-bar-success" style="width:90%">' + item.bitirmeOrani + '</div></div></td><td><span class="badge bg-green">' + item.bitirmeOrani + '%</span></td></tr><br>');
+                
+                AltSurecCek(sId);
+                
+
+
+            });
+        });
+    }
+
    
 </script>
