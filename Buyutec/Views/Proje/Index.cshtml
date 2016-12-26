@@ -74,6 +74,7 @@
                             <th>Proje Adı</th>
                             <th>Rol</th>
                             <th>Aktiflik</th>
+                            <th>Detay</th>
                         </tr>
                         <tbody id="kisiCalistigiProje"></tbody>
 
@@ -134,9 +135,9 @@
             $.each(data, function (i, item) {
                 RolAdiCekCal(item.projeId);
                 if (item.aktifMi == true)
-                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td id="rolluCal' + item.projeId + '"></td> <td><span class="label label-success">Aktif</span></td> </tr>');
+                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td id="rolluCal' + item.projeId + '"></td> <td><span class="label label-success">Aktif</span></td><td><a class="btn btn-default" href="/Proje/ProjeDetay/' + item.projeId + '">Detay</a></td> </tr>');
                 if (item.aktifMi == false)
-                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td id="rolluCal' + item.projeId + '"></td> <td><span class="label label-danger">Pasif</span></td> </tr>');
+                    $("#kisiCalistigiProje").append('<tr> <td>' + item.projeId + '</td> <td>' + item.projeAdi + '</td> <td id="rolluCal' + item.projeId + '"></td> <td><span class="label label-danger">Pasif</span></td><td><a class="btn btn-default" href="/Proje/ProjeDetay/' + item.projeId + '">Detay</a></td> </tr>');
             });
         });
     }

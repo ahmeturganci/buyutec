@@ -59,7 +59,7 @@
         <div id="surecDetay" class="box box-primary">
             <div class="box-header">
                 <i class="ion ion-clipboard"></i>
-                <h3 class="box-title">Süreci Yönet</h3>
+                <h3 class="box-title">Süreci Yönet</h3><p id="ssID"></p>
                 <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#kisiAta" style="margin:-1px;"><i class="fa fa-plus"></i> Sürece Kişi Ata</button>
             </div>
             <div class="box-body">
@@ -105,8 +105,8 @@
                         <div class="col-md-4">
                             <!--Proje ad-->
                             <div class="form-group">
-                                <label for="SurecAdi">Tamamlanma Oranı</label>
-                                <input type="text" class="form-control" id="ytxtSurecTamamlamaOran" aria-describedby="surecAd" placeholder="0-100" required>
+                                <label for="tamamlanmaOran">Tamamlanma Oranı</label>
+                                <input type="number" max="100" min="0" class="form-control" id="ytxtSurecTamamlamaOran" aria-describedby="surecAd" placeholder="0-100" required>
                             </div>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                 </form>
             </div>
             <div class="box-footer clearfix no-border">
-                <button type="button" class="btn btn-primary pull-right" style="margin-left:5px;">Güncelle</button>
+                <button type="button" class="btn btn-primary pull-right" style="margin-left:5px;" onclick="GuncelleSurec();">Güncelle</button>
                 <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#altSurecEkle" ><i class="fa fa-plus"></i> Alt Süreç Ekle</button>
             </div>
         </div>
@@ -129,7 +129,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="ion ion-clipboard"></i> Alt Süreç Ekle</h4>
+                    <h4 class="modal-title"><i class="ion ion-clipboard" ></i> Alt Süreç Ekle</h4>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -392,6 +392,7 @@
                     $("#roller").append('<option>' + item.rolId + ' ' + item.rolAdi + '</option>')
                 });
             });
+
         }
         function SurecEkle() {
             //var kullaniciId = parseInt($("#kisiler option:selected").val())
@@ -462,7 +463,6 @@
                 });
             });
         }
-
         $(document).ready(function () {
             $("body").load(ProjeCek()).load(DurumCek()).load(OncelikCek()).load(KullaniciCek()).load(RolCek()).load(SurecCek());
             $("#altSurec1").hide();
@@ -480,9 +480,11 @@
             /* $(document.body).on("load", function () {
                  $(".altsurec").hide();
              });*/
+            
             $(document.body).on("click", "li.surec", function () {
                 $("#surecDetay").show(300);
                 var id = parseInt($(this).text());
+                
                 SurecGetir(id);
             });
 
@@ -509,6 +511,7 @@
                     $("#yoncelikler").val(item.oncelikId);
                     console.log("oncelikId :" + item.oncelikId);
                     $("#ytxtSurecAciklama").val(item.aciklama);
+                    $("#ssID").text(item.surecId);
                 });
             });
         }
@@ -540,4 +543,49 @@
         //$("#kisiAta").click(function () {
         //    $.post("/Proje/SureceKisiAta")
         //});
+        function AltSurecEkle() {
+            var data = {
+                altSurecAdi: $("#txtaSurecAdi").val(),
+                aciklama: $("#txtaSurecAciklama").val(),
+                baslangicTarihi: $("#txtaSurecBaslamaTarih").val(),
+                bitisTarihi: $("#txtaSurecBitisTarih").val(),
+                durumId: parseInt($("#adurumlar option:selected").val()),
+                oncelikId: parseInt($("#aoncelikler option:selected").val()),
+                surecId: $("#ssID").text()
+            };
+            console.log(data);
+            $.post("/Proje/AltSurecEkle", data, function () {
+                console.log(sonuc);
+            });
+        }
+    
+        function GuncelleSurec() {
+             
+            var veri = {
+                surecAdi: $("#txtSurecAdi").text(),
+                aciklama: $("#txtSurecAciklama").html(),
+                baslangicTarihi: $("#txtSurecBaslamaTarih").val(),
+                bitisTarihi: $("#txtSurecBitisTarih").val(),
+                durumId: parseInt($("#durumlar option:selected").val()),
+                oncelikId: parseInt($("#oncelikler option:selected").val()),
+                sId:$("#ssID").text()
+            };
+            console.log(veri);
+            $.post("/Proje/SGuncelle", veri, function (sonuc) {
+                console.log(sonuc);
+            });
+        }
+        function AltSurecGuncelle() {
+            var data = {
+                surecAdi: $("#txtSurecAdi").val(),
+                aciklama: $("#txtSurecAciklama").val(),
+                baslangicTarihi: $("#txtSurecBaslamaTarih").val(),
+                bitisTarihi: $("#txtSurecBitisTarih").val(),
+                durumId: parseInt($("#durumlar option:selected").val()),
+                oncelikId: parseInt($("#oncelikler option:selected").val())
+            };
+            $.post("/Proje/AltSurecGuncelle", veri, function (sonuc) {
+                console.log(sonuc);
+            });
+        }
     </script>

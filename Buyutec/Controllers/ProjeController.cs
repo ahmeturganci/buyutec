@@ -141,7 +141,7 @@ namespace Buyutec.Controllers
         {
             int kullaniciId = int.Parse(Session["kulId"].ToString());
             var rol = ProjeIslem.RolAdiCek(kullaniciId, projeId);
-            if(rol != null)
+            if (rol != null)
                 return Json(rol);
             return Json('-');
         }
@@ -181,5 +181,22 @@ namespace Buyutec.Controllers
                 return Json('-');
         }
         //public JsonResult SureceKisiEkle(int kisiId, int )
+        public JsonResult AltSurecEkle(tblAltSurec alt)
+        {
+            var s = ProjeIslem.AltSurecEkle(alt);
+            if (s == 0)
+                return Json("+");
+            else
+                return Json("-");
+        }
+        public JsonResult SGuncelle(tblSurec ss, int sId)
+        {
+            var s = ProjeIslem.SurecGuncelle(ss, sId);
+            return Json("+");
+        }
+        public JsonResult AltSurecGuncelle(tblAltSurec alts)
+        {
+            return Json("+");
+        }
     }
 }

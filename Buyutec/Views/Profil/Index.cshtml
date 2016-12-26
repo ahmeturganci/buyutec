@@ -213,6 +213,10 @@
                 $("#kulAdSoyad").text(item.kullaniciAdi + ' ' + item.kullaniciSoyadi);
                 $("#kulResim").attr("src", item.profilFoto);
                 $("#kulHak").text(item.hakkimda);
+                $("#txtAd").val(item.kullaniciAdi);
+                $("#txtSoyad").val(item.kullaniciSoyadi);
+                $("#txtAvatar").val(item.profilFoto);
+                $("#txtHakkimda").val(item.hakkimda);
             });
 
         });

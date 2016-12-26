@@ -60,6 +60,8 @@ namespace Buyutec.IslerKatmani
                 if (kul == null)
                 {
                     kullanici.sifre = MD5Sifrele(kullanici.sifre);
+                    kullanici.profilFoto = "https://upload.wikimedia.org/wikipedia/commons/d/d5/Simpleicons_Interface_magnifier-on-a-user.svg";
+                    kullanici.hakkimda = "Büyüteç PYS sistem kullanıcısı";
                     db.tblKullanicis.Add(kullanici);
                     db.SaveChanges();
 
@@ -87,8 +89,6 @@ namespace Buyutec.IslerKatmani
                     {
                         kullanici.kullaniciAdi = kul.kullaniciAdi;
                         kullanici.kullaniciSoyadi = kul.kullaniciSoyadi;
-                        
-                        kullanici.email = kul.email;
                         kullanici.profilFoto = kul.profilFoto;
                         kullanici.hakkimda = kul.hakkimda;
                         db.SaveChanges();

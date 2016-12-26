@@ -170,17 +170,17 @@ namespace Buyutec.IslerKatmani
             {
                 using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
-                    db.tblAltSurecs.Add(altSurec);
+                    
 
                     tblKullaniciAltSurec kas = new tblKullaniciAltSurec();
-                    kas.altSurecId = altSurec.altSurecId;
+                    //kas.altSurecId = altSurec.altSurecId;
                     altSurec.tblKullaniciAltSurecs.Add(kas);
-
+                    db.tblAltSurecs.Add(altSurec);
                     db.SaveChanges();
                 }
                 return 0;
             }
-            catch
+            catch(Exception ex)
             {
                 return 1; // işlem başarısız
             }
@@ -378,6 +378,71 @@ namespace Buyutec.IslerKatmani
 
                 return null;
             }
+        }
+
+        public static char SurecGuncelle(tblSurec surec, int surecId)
+        {
+            char sonuc = '*';
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var s = db.tblSurecs.Find(surecId);
+                    if (s != null)
+                    {
+                        s.surecAdi = surec.surecAdi;
+                        s.oncelikId = surec.oncelikId;
+                        s.durumId = surec.durumId;
+                        s.bitirmeOrani = surec.bitirmeOrani;
+                        s.aciklama = surec.aciklama;
+                        db.SaveChanges();
+                        sonuc = '+';
+
+                    }
+                    else
+                        sonuc = '-';
+                }
+                return sonuc;
+            }
+            catch
+            {
+                sonuc = '?';
+
+            }
+            return sonuc;
+        }
+
+        public static char AltSurecGuncelle(tblAltSurec altSurec, int altSurecId)
+        {
+            char sonuc = '*';
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var s = db.tblAltSurecs.Find(altSurecId);
+                    if (s != null)
+                    {
+                        s.altSurecAdi = altSurec.altSurecAdi;
+                        s.oncelikId = altSurec.oncelikId;
+                        s.durumId = altSurec.durumId;
+                        s.bitirmeOrani = altSurec.bitirmeOrani;
+                        s.aciklama = altSurec.aciklama;
+                        db.SaveChanges();
+                        sonuc = '+';
+
+                    }
+                    else
+                        sonuc = '-';
+                }
+                return sonuc;
+            }
+
+            catch
+            {
+
+                sonuc = '?';
+            }
+            return sonuc;
         }
     }
 }
