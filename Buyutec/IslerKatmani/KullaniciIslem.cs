@@ -5,7 +5,7 @@ using System.Web;
 using Buyutec.Models.DataModel;
 using System.Security.Cryptography;
 using System.Text;
-
+using Buyutec.Models.DataViewModel;
 namespace Buyutec.IslerKatmani
 {
     public class KullaniciIslem
@@ -73,9 +73,39 @@ namespace Buyutec.IslerKatmani
                 return 2; // işlem başarısız
             }
         }
-        public static void ProfilGuncelle()
+        public static char ProfilGuncelle(tblKullanici kul,int kId)
         {
-            //gerçekleştirilecek. 
+            try
+            {
+                char res = '*';
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var kullanici = (from k in db.tblKullanicis
+                                     where k.kullaniciId == kId
+                                     select k).SingleOrDefault();
+                    if (kullanici != null)
+                    {
+                        kullanici.kullaniciAdi = kul.kullaniciAdi;
+                        kullanici.kullaniciSoyadi = kul.kullaniciSoyadi;
+                        
+                        kullanici.email = kul.email;
+                        kullanici.profilFoto = kul.profilFoto;
+                        kullanici.hakkimda = kul.hakkimda;
+                        db.SaveChanges();
+                        res = '+';
+                    }
+                    else
+                        res = '-';
+
+                    return res;
+
+
+                }
+            }
+            catch
+            {
+                return '?';
+            }
         }
         public static tblKullanici KullaniciVer(string mail)
         {
@@ -100,7 +130,52 @@ namespace Buyutec.IslerKatmani
                 };
                 return kk;
             }
-            catch (Exception ex)
+            catch
+            {
+                return null;
+            }
+        }
+        public static char SifreGuncelle(string eski, string yeni, int kId)
+        {
+            char sonuc = '*';
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    eski = MD5Sifrele(eski);
+                    var kulS = db.tblKullanicis.Find(kId);
+                    if (kulS.sifre == eski)
+                    {
+                        kulS.sifre = MD5Sifrele(yeni);
+                        db.SaveChanges();
+                        sonuc = '+';
+                    }
+                    else
+                        sonuc = '-';
+
+                }
+                return sonuc;
+
+            }
+            catch
+            {
+                sonuc = '?';
+            }
+            return sonuc;
+        }
+        public static List<Kullanici> BilgiCek(int kId)
+        {
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var bilgiL = (from k in db.tblKullanicis
+                                  where k.kullaniciId == kId
+                                  select k);
+                    return Kullanici.MapData(bilgiL.ToList());
+                }
+            }
+            catch
             {
                 return null;
             }

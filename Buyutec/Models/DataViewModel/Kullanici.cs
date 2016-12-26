@@ -12,6 +12,8 @@ namespace Buyutec.Models.DataViewModel
         public string kullaniciSoyadi { get; set; }
         public string email { get; set; }
         public string sifre { get; set; }
+        public string profilFoto { get; set; }
+        public string hakkimda { get; set; }
 
         public static Kullanici MapData(tblKullanici k)
         {
@@ -21,7 +23,10 @@ namespace Buyutec.Models.DataViewModel
                 kullaniciAdi = k.kullaniciAdi,
                 kullaniciSoyadi=k.kullaniciSoyadi,
                 email=k.email,
-                sifre=k.email
+                sifre=k.email,
+                hakkimda=k.hakkimda,
+                profilFoto=k.profilFoto
+                
             };
             return kul;
         }
@@ -33,7 +38,9 @@ namespace Buyutec.Models.DataViewModel
                 kullaniciAdi = k.kullaniciAdi,
                 kullaniciSoyadi = k.kullaniciSoyadi,
                 email = k.email,
-                sifre = k.email
+                sifre = k.email,
+                hakkimda = k.hakkimda,
+                profilFoto = k.profilFoto
             };
             return kul;
         }
