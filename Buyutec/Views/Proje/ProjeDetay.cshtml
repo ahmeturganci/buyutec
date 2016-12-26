@@ -107,7 +107,7 @@
                             <div class="form-group">
                                 <label for="tamamlanmaOran">Tamamlanma Oranı</label>
                                 <input type="number" max="100" min="0" class="form-control" id="ytxtSurecTamamlamaOran" aria-describedby="surecAd" placeholder="0-100" required>
-                                <div class="progress-bar progress-bar-green" style="margin-top:2px;" id="oran"></div>
+                                <div class="progress-bar progress-bar-green" style="margin-top:2px;width:50%" id="oran"></div>
                             </div>
                         </div>
                     </div>
@@ -302,7 +302,7 @@
                         <!--Rol-->
                         <div class="form-group">
                             <label for="Rol">Rol</label>
-                            <select class="form-control" id="roller"></select>
+                            <select class="form-control" id="kullaniciRoller"></select>
                         </div>
                     </form>
                 </div>
@@ -333,7 +333,7 @@
                     if (item.aktifMi == true)
                         $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
                     if (item.aktifMi == false)
-                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
+                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
                 });
             });
         }
@@ -377,9 +377,9 @@
         function RolCek() {
             $.post("/Proje/RolCek", function (sonuc) {
                 //console.log(sonuc);
-                $("#roller").html("");
+                $("#kullaniciRoller").html("");
                 $.each(sonuc, function (i, item) {
-                    $("#roller").append('<option>' + item.rolId + ' ' + item.rolAdi + '</option>')
+                    $("#kullaniciRoller").append('<option>' + item.rolId + ' ' + item.rolAdi + '</option>')
                 });
             });
 
@@ -403,12 +403,13 @@
         }
         function KisiEkle() {
             var veri = {
-                kullaniciId: parseInt($("#kisiler option:selected").val()),
-                rolId: parseInt($("#roller option:selected").val()),
+                kullaniciId: parseInt($("#kullanicilar option:selected").val()),
+                rolId: parseInt($("#kullaniciRoller option:selected").val()),
             };
+            //alert(veri.rolId);
             //console.log(veri);
             $.post("/Proje/KullaniciProjeEkle", veri, function (sonuc) {
-                //  console.log(sonuc);
+                  console.log(sonuc);
             });
 
         }
@@ -497,8 +498,8 @@
                     $("#ytxtSurecAdi").val(item.surecAdi);
                     $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
                     $("#oran").text("%" + item.bitirmeOrani);
-                    console.log(item.bitirmeOrani);
-                    $("#oran").css("width", '%' + item.bitirmeOrani);
+                    
+                    $("#oran").css("width", item.bitirmeOrani + '%');
                     //$("#oran").width(item.bitirmeOrani);
                     $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
                     $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
