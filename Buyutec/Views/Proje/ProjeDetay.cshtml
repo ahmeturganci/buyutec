@@ -33,7 +33,6 @@
 <br />
 
 <div class="row">
-    </div>
 
     <div class="col-md-6">
         <!-- Süreç Listeleme -->
@@ -80,10 +79,9 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <!--Proje ad-->
                             <div class="form-group">
-                                <label for="SurecAdi">Tamamlanma Oranı</label>
-                                <input type="text" class="form-control" id="ytxtSurecTamamlamaOran" aria-describedby="surecAd" placeholder="0-100" required>
+                                <label for="">Durum</label>
+                                <select class="form-control" id="ydurumlar"></select>
                             </div>
                         </div>
                     </div>
@@ -92,7 +90,7 @@
                             <!--başlama tarih-->
                             <div class="form-group">
                                 <label for="BaslamaTarih">Süreç Başlangıç Tarihi</label>
-                                <input type="date" class="form-control" id="ytxtSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz."
+                                <input type="text" disabled class="form-control" id="ytxtSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz."
                                        required>
                             </div>
                         </div>
@@ -100,14 +98,15 @@
                             <!--proje bitiş-->
                             <div class="form-group">
                                 <label for="BitisTarih">Süreç Bitiş Tarihi</label>
-                                <input type="date" class="form-control" id="ytxtSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz."
+                                <input type="text" disabled class="form-control" id="ytxtSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz."
                                        required>
                             </div>
                         </div>
                         <div class="col-md-4">
+                            <!--Proje ad-->
                             <div class="form-group">
-                                <label for="">Durum</label>
-                                <select class="form-control" id="ydurumlar"></select>
+                                <label for="SurecAdi">Tamamlanma Oranı</label>
+                                <input type="text" class="form-control" id="ytxtSurecTamamlamaOran" aria-describedby="surecAd" placeholder="0-100" required>
                             </div>
                         </div>
                     </div>
@@ -286,8 +285,8 @@
                                         </div>
                                     </div>*@
                                 <div class="form-group">
-                                    <label for="kisiler">Kişiler</label>
-                                    <select class="form-control" id="kisiler"></select>
+                                    <label for="kullanicilar">Kişiler</label>
+                                    <select class="form-control" id="kullanicilar"></select>
                                 </div>
                             </div>
                         </div>
@@ -305,6 +304,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+</div>
     <script>
 
 
@@ -352,9 +352,9 @@
                 $("#adurumlar").html("");
                 $.each(data, function (i, item) {
                     //console.log(data);
-                    $("#durumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
-                    $("#ydurumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
-                    $("#adurumlar").append('<option>' + item.durumId + ' ' + item.durumAdi + '</option>');
+                    $("#durumlar").append('<option value="' + item.durumId + '">' + item.durumId + ' ' + item.durumAdi + '</option>');
+                    $("#ydurumlar").append('<option value="' + item.durumId + '">' + item.durumId + ' ' + item.durumAdi + '</option>');
+                    $("#adurumlar").append('<option value="' + item.durumId + '">' + item.durumId + ' ' + item.durumAdi + '</option>');
                 });
             });
         }
@@ -367,9 +367,9 @@
                 $("#aoncelikler").html("");
                 $.each(data, function (i, item) {
                     //console.log(data);
-                    $("#oncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
-                    $("#yoncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
-                    $("#aoncelikler").append('<option>' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
+                    $("#oncelikler").append('<option value="' + item.oncelikId + '">' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
+                    $("#yoncelikler").append('<option value="' + item.oncelikId + '">' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
+                    $("#aoncelikler").append('<option value="' + item.oncelikId + '">' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
                 });
             });
         }
@@ -377,10 +377,9 @@
 
             $.post("/Proje/KisiCek", function (data) {
                 //console.log(data);
-                $("#kisiler").html("");
+                $("#kullanicilar").html("");
                 $.each(data, function (i, item) {
-                    console.log(data);
-                    $("#kisiler").append('<option>' + item.kullaniciId + ' ' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
+                    $("#kullanicilar").append('<option>' + item.kullaniciId + ' ' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
                 });
             });
         }
@@ -407,7 +406,6 @@
             console.log(veri);
             //$.post("/Proje/SurecEkle", { veri: veri, kullaniciId: kullaniciId }, function (sonuc) {
             $.post("/Proje/SurecEkle", veri, function (sonuc) {
-                alert(sonuc);
                 window.location.reload(true);
             });
         }
@@ -430,20 +428,20 @@
             $.post("/Proje/AltSurecListele", data, function (sonuc) {
                 $.each(sonuc, function (i, item) {
                     //alert(item.altSurecId);
+                    var sId = item.altSurecId;
                     if (item.oncelikId == 1)//düşük
-                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><b id="altSurecId">' + item.altSurecId + '</b> <li class="altsurec"> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-info"><i class="fa fa-clock-o"></i>Düşük</small> </li> </ul> </div>');
+                        $("#altSurecListe").append('<div id="altSurec"  style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-info"><i class="fa fa-clock-o"></i>Düşük</small> </li> </ul> </div>');
                     if (item.oncelikId == 2)//orta
-                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><b id="altSurecId">' + item.altSurecId + '</b> <li class="altsurec"> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-success"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
+                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-success"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
                     if (item.oncelikId == 3)//yüksek
-                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><b id="altSurecId">' + item.altSurecId + '</b> <li class="altsurec"> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-warning"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
+                        $("#altSurecListe").append('<div id="altSurec"  style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-warning"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
                     if (item.oncelikId == 4)//acil
-                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><b id="altSurecId">' + item.altSurecId + '</b> <li class="altsurec"> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-danger"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
+                        $("#altSurecListe").append('<div id="altSurec" style="margin-left:20px; margin-bottom:2px;"> <ul class="todo-list"><li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-danger"><i class="fa fa-clock-o"></i> Ortas</small> </li> </ul> </div>');
 
                 });
             });
         }
         function SurecCek() {
-            alert("süreç çekiliyor.");
             $.post("/Proje/SurecListele", function (sonuc) {
                 $.each(sonuc, function (i, item) {
                     console.log(item);
@@ -482,13 +480,15 @@
                  $(".altsurec").hide();
              });*/
             $(document.body).on("click", "li.surec", function () {
-                $("#surecDetay").toggle(300);
+                $("#surecDetay").show(300);
                 var id = parseInt($(this).text());
                 SurecGetir(id);
             });
 
             $(document.body).on("click", "li.altsurec", function () {
-                $("#surecDetay").toggle(300);
+                $("#surecDetay").show(300);
+                var id = parseInt($(this).text());
+                AltSurecGetir(id);
             });
         });
         function SurecGetir(sId) {
@@ -511,9 +511,32 @@
                 });
             });
         }
+        function AltSurecGetir(surecId) {
+            var durumId,oncelikId;
+            var veri = { surecId: surecId };
+            $.post("/Proje/AltSurecCek", veri, function (sonuc) {
+                console.log(sonuc);
+                $.each(sonuc, function (i, item) {
+                    durumId = item.durumId;
+                    oncelikId = item.oncelikId;
+                    $("#ytxtSurecAdi").val(item.altSurecAdi);
+                    $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
+                    $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
+                    $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
+                    //$("#ydurumlar option:selected").val();
+                    //$("#yoncelikler option:selected").val();
+                    $('#ydurumlar option[value=' + durumId + ']').prop('selected', true);
+                    $('#yoncelikler option[value=' + oncelikId + ']').prop('selected', true);
+                    $("#ytxtSurecAciklama").val(item.aciklama);
+                });
+            });
+        }
         function ProjeKullaniciDoldur() {
             //$.post("/Proje", veri, function (sonuc) {
             //    console.log(sonuc);
             //});
         }
+        //$("#kisiAta").click(function () {
+        //    $.post("/Proje/SureceKisiAta")
+        //});
     </script>

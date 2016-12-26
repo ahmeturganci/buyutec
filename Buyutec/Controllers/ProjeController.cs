@@ -167,5 +167,14 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
+        public JsonResult AltSurecCek(int surecId)
+        {
+            var s = ProjeIslem.AltSurecGetir(surecId);
+            if (s != null)
+                return Json(s);
+            else
+                return Json('-');
+        }
+        //public JsonResult SureceKisiEkle(int kisiId, int )
     }
 }

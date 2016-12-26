@@ -363,5 +363,21 @@ namespace Buyutec.IslerKatmani
                 return null;
             }
         }
+        public static List<AltSurec> AltSurecGetir(int surecId)
+        {
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var altSurec = (from p in db.tblAltSurecs where p.surecId == surecId select p);
+                    return AltSurec.MapData(altSurec.ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
     }
 }

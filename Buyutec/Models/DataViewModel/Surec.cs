@@ -10,8 +10,8 @@ namespace Buyutec.Models.DataViewModel
     {
         public int surecId { get; set; }
         public string surecAdi { get; set; }
-        public Nullable<System.DateTime> baslangicTarihi { get; set; }
-        public Nullable<System.DateTime> bitisTarihi { get; set; }
+        public string baslangicTarihi { get; set; }
+        public string bitisTarihi { get; set; }
         public Nullable<int> bitirmeOrani { get; set; }
         public Nullable<int> durumId { get; set; }
         public Nullable<int> oncelikId { get; set; }
@@ -27,9 +27,9 @@ namespace Buyutec.Models.DataViewModel
                 aciklama = s.aciklama,
                 durumId = s.durumId,
                 oncelikId = s.oncelikId,
-                baslangicTarihi = Convert.ToDateTime(s.baslangicTarihi),
+                baslangicTarihi = s.baslangicTarihi.ToString(),
+                bitisTarihi = s.bitisTarihi.ToString(),
                 bitirmeOrani = s.bitirmeOrani,
-                bitisTarihi = Convert.ToDateTime(s.bitisTarihi),
                 projeId = s.projeId
             };
             return surec;

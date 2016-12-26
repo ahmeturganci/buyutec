@@ -9,8 +9,8 @@ namespace Buyutec.Models.DataViewModel
     {
         public int altSurecId { get; set; }
         public string altSurecAdi { get; set; }
-        public Nullable<System.DateTime> baslangicTarihi { get; set; }
-        public Nullable<System.DateTime> bitisTarihi { get; set; }
+        public string baslangicTarihi { get; set; }
+        public string bitisTarihi { get; set; }
         public Nullable<int> bitirmeOrani { get; set; }
         public Nullable<int> durumId { get; set; }
         public Nullable<int> oncelikId { get; set; }
@@ -21,12 +21,12 @@ namespace Buyutec.Models.DataViewModel
         {
             AltSurec tblAlt = new AltSurec()
             {
-
+                surecId = altsurec.surecId,
                 altSurecId = altsurec.altSurecId,
                 altSurecAdi = altsurec.altSurecAdi,
                 aciklama = altsurec.aciklama,
-                baslangicTarihi = Convert.ToDateTime(altsurec.baslangicTarihi),
-                bitisTarihi = Convert.ToDateTime(altsurec.bitisTarihi),
+                baslangicTarihi = altsurec.baslangicTarihi.ToString(),
+                bitisTarihi = altsurec.bitisTarihi.ToString(),
                 bitirmeOrani = altsurec.bitirmeOrani,
                 durumId = altsurec.durumId,
                 oncelikId = altsurec.oncelikId
@@ -38,6 +38,7 @@ namespace Buyutec.Models.DataViewModel
         {
             tblAltSurec tblAlt = new tblAltSurec()
             {
+                surecId = altsurec.surecId,
                 altSurecId = altsurec.altSurecId,
                 altSurecAdi = altsurec.altSurecAdi,
                 aciklama = altsurec.aciklama,
