@@ -107,6 +107,7 @@
                             <div class="form-group">
                                 <label for="tamamlanmaOran">Tamamlanma Oranı</label>
                                 <input type="number" max="100" min="0" class="form-control" id="ytxtSurecTamamlamaOran" aria-describedby="surecAd" placeholder="0-100" required>
+                                <div class="progress-bar progress-bar-green" style="width: 90%; margin-top:2px;">%90</div>
                             </div>
                         </div>
                     </div>
@@ -117,7 +118,15 @@
                     </div>
                 </form>
             </div>
+            
             <div class="box-footer clearfix no-border">
+                <div class="pull-left" id="atananKisiler">
+                    <label for="AtananKisiler">Atanan Kişiler:</label>
+                    <select>
+                        <option>Ahmet Urgancı</option>
+                        <option>Mahmut</option>
+                    </select>
+                </div>
                 <button type="button" class="btn btn-primary pull-right" style="margin-left:5px;" onclick="GuncelleSurec();">Güncelle</button>
                 <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#altSurecEkle" ><i class="fa fa-plus"></i> Alt Süreç Ekle</button>
             </div>
