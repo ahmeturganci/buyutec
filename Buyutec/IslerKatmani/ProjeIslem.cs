@@ -487,5 +487,25 @@ namespace Buyutec.IslerKatmani
                 return '?';
             }
         }
+
+        public static int ProjeKisi()
+        {
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var kl = (from kkk in db.tblKullanicis
+                              select kkk);// gelecek şart
+                    return 0;
+                }
+                
+            }
+            catch (Exception)
+            {
+                return 1;
+                throw;
+            }
+                    
+        }
     }
 }

@@ -107,7 +107,7 @@
                             <div class="form-group">
                                 <label for="tamamlanmaOran">Tamamlanma Oranı</label>
                                 <input type="number" max="100" min="0" class="form-control" id="ytxtSurecTamamlamaOran" aria-describedby="surecAd" placeholder="0-100" required>
-                                <div class="progress-bar progress-bar-green" style="width: 90%; margin-top:2px;">%90</div>
+                                <div class="progress-bar progress-bar-green" style="margin-top:2px;" id="oran"></div>
                             </div>
                         </div>
                     </div>
@@ -120,11 +120,10 @@
             </div>
             
             <div class="box-footer clearfix no-border">
-                <div class="pull-left" id="atananKisiler">
+                <div class="pull-left" >
                     <label for="AtananKisiler">Atanan Kişiler:</label>
-                    <select>
-                        <option>Ahmet Urgancı</option>
-                        <option>Mahmut</option>
+                    <select id="atananKisiler">
+                        
                     </select>
                 </div>
                 <button type="button" class="btn btn-primary pull-right" style="margin-left:5px;" onclick="GuncelleSurec();">Güncelle</button>
@@ -316,9 +315,6 @@
     </div><!-- /.modal -->
 </div>
     <script>
-
-
-
         function RolAdiCek(projeId) {
             var veri = {
                 projeId: projeId
@@ -330,31 +326,18 @@
                 });
             });
         }
-
         function ProjeCek() {
-
-
             $.post("/Proje/ProjeCek", function (data) {
-                //console.log(data);
-                //alert(veri.butce);
-                //if(veri.aktifMi==true)
-                //    $("#pDetay")
-                //if(veri.aktifMi==false)
-                //    $("#pDetay").append('<tr> <td>' + veri.projeAdi + '</td> <td>' + veri.olusturmaTarihi + '</td> <td>' + veri.baslangicTarihi + '</td> <td>' + veri.bitisTarihi + '</td><td>' + veri.butce + '</td> <td>ROL</td><td>' + veri.projeAciklama + '</td> <td><span class="label label-danger">Aktif</span></td></tr>');
                 $.each(data, function (i, item) {
                     RolAdiCek(item.projeId);
                     if (item.aktifMi == true)
                         $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
                     if (item.aktifMi == false)
                         $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
-
                 });
             });
-
-
         }
         function DurumCek() {
-
             $.post("/Proje/DurumCek", function (data) {
                 //console.log(data);
                 $("#durumlar").html("");
@@ -369,7 +352,6 @@
             });
         }
         function OncelikCek() {
-
             $.post("/Proje/OncelikListele", function (data) {
                 //console.log(data);
                 $("#oncelikler").html("");
@@ -384,7 +366,6 @@
             });
         }
         function KullaniciCek() {
-
             $.post("/Proje/KisiCek", function (data) {
                 //console.log(data);
                 $("#kullanicilar").html("");
@@ -515,6 +496,10 @@
                 $.each(sonuc, function (i, item) {
                     $("#ytxtSurecAdi").val(item.surecAdi);
                     $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
+                    $("#oran").text("%" + item.bitirmeOrani);
+                    console.log(item.bitirmeOrani);
+                    $("#oran").css("width", '%' + item.bitirmeOrani);
+                    //$("#oran").width(item.bitirmeOrani);
                     $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
                     $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
                     $("#ydurumlar").val(item.durumId);
@@ -586,7 +571,6 @@
                 //console.log(sonuc);
             });
         }
-    
         function GuncelleSurec() {
              
             var veri = {
@@ -615,5 +599,13 @@
             $.post("/Proje/AltSurecGuncelle", veri, function (sonuc) {
                 console.log(sonuc);
             });
+        }
+        function ProjeCalisanListe() {
+            $.post("/Proje/ProjeKisiListele", "", function (sonuc) {
+                $.each(sonuc, function (i, item) {
+                    $("#atananKisiler").append('<option>'+item.kullaniciAdi+' '+item.kullaniciSoyadi+'</option>')
+                });
+            });
+
         }
     </script>

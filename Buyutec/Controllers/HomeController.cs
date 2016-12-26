@@ -33,6 +33,11 @@ namespace Buyutec.Controllers
             return Json(c);
 
         }
+
+        public ActionResult SonHareketler()
+        {
+            return View();//log için
+        }
         //Çıkış
         public ActionResult Cikis()
         {

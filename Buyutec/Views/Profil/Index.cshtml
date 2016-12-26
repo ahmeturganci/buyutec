@@ -11,34 +11,24 @@
                  alt="User profile picture">
             <h3 class="profile-username text-center" id="kulAdSoyad"></h3>
             <p class="text-muted text-center" id="kulMail"></p>
-            <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                    <b>Toplam Projeler</b> <a class="pull-right">3</a>
-                </li>
-                <li class="list-group-item">
-                    <b>Kendi Projelerim</b> <a class="pull-right">2</a>
-                </li>
-                <li class="list-group-item">
-                    <b>Yer Aldığım Projeler</b> <a class="pull-right">1</a>
-                </li>
-            </ul>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><strong><i class="fa fa-book margin-r-5"></i> Hakkımda</strong></h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <p class="text-muted" id="kulHak">
+                        B.S. in Computer Science from the University of Tennessee at Knoxville
+                    </p>
+                </div>
+                <!-- /.box-body -->
+            </div>
             <button href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#profilDuzenle"><b>Profil Düzenle</b></button>
             <button href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#parolaDegistir"><b>Parola Değiştir</b></button>
         </div>
         <!-- /.box-body -->
     </div>
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title"><strong><i class="fa fa-book margin-r-5"></i> Hakkımda</strong></h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <p class="text-muted" id="kulHak">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
-            </p>
-        </div>
-        <!-- /.box-body -->
-    </div>
+    
 </div>
 
 <!-- Projeler -->
@@ -168,7 +158,8 @@
 <!-- BİTİŞ -->
 <script>
     $(function () {
-        $("body").load(ProfilBilgiCek()).load(KisiselProjeListele());
+        $("body").load(ProfilBilgiCek());
+        $("body").load(KisiselProjeListele());
     });
     function SifreGuncelle() {
         alert("asda");
@@ -209,8 +200,9 @@
     function ProfilBilgiCek() {
         $.post("/Profil/BilgiCek", "", function (sonuc) {
             $.each(sonuc, function (i, item) {
-                console.log(item);
+                
                 $("#kulAdSoyad").text(item.kullaniciAdi + ' ' + item.kullaniciSoyadi);
+                $("#kulMail").text(item.email);
                 $("#kulResim").attr("src", item.profilFoto);
                 $("#kulHak").text(item.hakkimda);
                 $("#txtAd").val(item.kullaniciAdi);
@@ -225,6 +217,7 @@
         var data = {
             projeId: projeId
         };
+
         $.post("/Proje/Rollerim", data, function (sonuc) {
             console.log(sonuc);
             $.each(sonuc, function (j, jtem) {

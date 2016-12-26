@@ -214,5 +214,14 @@ namespace Buyutec.Controllers
             else
                 return Json('-');
         }
+
+        public JsonResult ProjeKisiListele()
+        {
+            var sonuc = ProjeIslem.ProjeKisi();
+            if (sonuc == 0)
+                return Json("+");
+            else
+                return Json("-");
+        }
     }
 }

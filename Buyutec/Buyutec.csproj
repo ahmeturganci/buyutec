@@ -251,6 +251,7 @@
       <DependentUpon>BuyutecDBModel.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Proje\ProjeSurecDetay.cshtml" />
+    <Content Include="Views\Home\SonHareketler.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
