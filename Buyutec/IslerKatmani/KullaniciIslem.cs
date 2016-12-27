@@ -57,7 +57,7 @@ namespace Buyutec.IslerKatmani
                 BuyutecDBEntities db = new BuyutecDBEntities();
 
                 var kul = (from k in db.tblKullanicis
-                           where k.kullaniciAdi == kullanici.kullaniciAdi
+                           where k.email == kullanici.email
                            select k).SingleOrDefault();
 
                 if (kul == null)
