@@ -273,6 +273,7 @@ namespace Buyutec.IslerKatmani
                 return null;
             }
         }
+        //rol listeleme
         public static List<Rol> RolCek()
         {
             try
@@ -288,7 +289,7 @@ namespace Buyutec.IslerKatmani
                 return null;
             }
         }
-
+        // kişi atama
         public static int KullaniciProjeEkle(KullaniciProjeRol veri)
         {
             try
@@ -319,6 +320,7 @@ namespace Buyutec.IslerKatmani
                 return 1;
             }
         }
+        //kullanıcı rolleri çekmek
         public static List<string> RolAdiCek(int kullaniciId, int projeId)
         {
             try
@@ -340,6 +342,7 @@ namespace Buyutec.IslerKatmani
                 return null;
             }
         }
+        // süreç bilgileri
         public static List<Surec> SurecGetir(int sId)
         {
             try
@@ -358,6 +361,7 @@ namespace Buyutec.IslerKatmani
                 return null;
             }
         }
+        //altsüreç bilgileri
         public static List<AltSurec> AltSurecGetir(int surecId)
         {
             try
@@ -374,7 +378,7 @@ namespace Buyutec.IslerKatmani
                 return null;
             }
         }
-
+        //süreç güncelleme
         public static char SurecGuncelle(tblSurec surec, int surecId)
         {
             char sonuc = '*';
@@ -406,7 +410,7 @@ namespace Buyutec.IslerKatmani
             }
             return sonuc;
         }
-
+        //altsüreç güncelleme
         public static char AltSurecGuncelle(tblAltSurec altSurec, int altSurecId)
         {
             char sonuc = '*';
@@ -439,6 +443,7 @@ namespace Buyutec.IslerKatmani
             }
             return sonuc;
         }
+        // projede çalışan kişileri listelemej
         public static List<Kullanici> ProjeKisilerDoldur(int projeId)
         {
             try
@@ -455,6 +460,7 @@ namespace Buyutec.IslerKatmani
                 throw;
             }
         }
+        //süreçe kişi atamak
         public static char SureceKisiAta(KullaniciSurec ks, int projeId)
         {
             char res = '-';
@@ -487,7 +493,7 @@ namespace Buyutec.IslerKatmani
                 return '?';
             }
         }
-
+        //projede çalışan kişiler
         public static int ProjeKisi()
         {
             try

@@ -25,11 +25,14 @@
                 </table>
             </div>
         </div>
+        <hr  />
+            <div class="box-body">
+                <button id="Yazdır" class="btn btn-primary pull-right" onclick="window.print();"><i class="fa fa-print"></i> Yazdır</button>
+            </div>
+        
     </div>
 </div>
-<div class="box-body">
-    <button id="Yazdır" class="btn btn-primary pull-right" onclick=" window.print();" ><i class="fa fa-print"></i> Yazdır</button>
-</div>
+
 
 <script>
     $(function () {
@@ -44,7 +47,17 @@
             $.each(sonuc, function (i, item) {
                 //alert(item.altSurecId);
                 var sId = item.altSurecId;
-                $("#tr" + surecId).after('<tr style="background-color: #222d32;color: white;"><td><i class="fa fa-arrow-right"></i>' + item.altSurecAdi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td> <td id="altSurectekiKullanicilar"></td> <td>' + item.aciklama + '</td> <td><span class="label label-danger">' + item.durumId + '</span></td> <td>' + item.oncelikId + '</td> <td> <div class="progress progress-md progress-striped active"> <div class="progress-bar progress-bar-success" style="width:90%">' + item.bitirmeOrani + '</div> </div> </td> <td><span class="badge bg-green">' + item.bitirmeOrani + '%</span></td> </tr>')
+                var durumum = item.durumId;
+                var onceligim = item.oncelikId;
+                $("#tr" + surecId).after('<tr style="background-color: #222d32;color: white;"><td><i class="fa fa-arrow-down"></i>  ' + item.altSurecAdi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td> <td id="altSurectekiKullanicilar"></td> <td>' + item.aciklama + '</td> <td><p id="durumunMetininA' + sId + '"></p></td> <td><p id="oncelikMetinA'+sId+'"></td> <td> <div class="progress progress-md progress-striped active"> <div class="progress-bar progress-bar-success" style="width:' + item.bitirmeOrani + '%">' + item.bitirmeOrani + '%</div> </div> </td> </tr>')
+                if (onceligim == 1) $("#durumunMetininA" + sId).text("Düşük");
+                if (onceligim == 2) $("#durumunMetininA" + sId).text("Normal");
+                if (onceligim == 3) $("#durumunMetininA" + sId).text("Yüksek");
+                if (onceligim == 4) $("#durumunMetininA" + sId).text("Acil");
+
+                if (durumum == 1) $("#oncelikMetinA" + sId).text("Beklemede");
+                if (durumum == 2) $("#oncelikMetinA" + sId).text("Yapım Aşamasında");
+                if (durumum == 3) $("#oncelikMetinA" + sId).text("Tamamlandı");
             });
         });
     }
@@ -53,7 +66,21 @@
             $.each(sonuc, function (i, item) {
                 console.log(item);
                 var sId = item.surecId;
-                $("#pDetay").append('<tr id="tr'+item.surecId+'"><td>' + item.surecAdi + '</td><td>' + item.baslangicTarihi + '</td><td>' + item.bitisTarihi + '</td><td id="surectekiKullanicilar"></td><td>' + item.aciklama + '</td><td><span class="label label-danger">' + item.durumId + '</span></td><td>' + item.oncelikId + '</td><td><div class="progress progress-md progress-striped active"><div class="progress-bar progress-bar-success" style="width:90%">' + item.bitirmeOrani + '</div></div></td><td><span class="badge bg-green">' + item.bitirmeOrani + '%</span></td></tr><br>');
+                console.log(item.bitirmeOrani);
+                //$("#"+sId).css("width", "'" + item.bitirmeOrani + "'%");
+                var durumum = item.durumId;
+                var onceligim =item.oncelikId;
+                $("#pDetay").append('<tr id="tr' + item.surecId + '"><td>' + item.surecAdi + '</td><td>' + item.baslangicTarihi + '</td><td>' + item.bitisTarihi + '</td><td id="surectekiKullanicilar"></td><td>' + item.aciklama + '</td><td><b id="durumunMetinin' + sId + '"></b></td><td><p id="oncelikMetin'+sId+'"></p></td><td><div class="progress progress-md progress-striped active"><div class="progress-bar progress-bar-success" id="qqq' + sId + '" style="width:' + item.bitirmeOrani + '%">' + item.bitirmeOrani + '%</div></div></td></tr><br>');
+                if (onceligim == 1) $("#durumunMetinin" + sId).text("Düşük");
+                if (onceligim == 2) $("#durumunMetinin" + sId).text("Normal");
+                if (onceligim == 3) $("#durumunMetinin" + sId).text("Yüksek");
+                if (onceligim == 4) $("#durumunMetinin" + sId).text("Acil");
+                
+                if (durumum == 1) $("#oncelikMetin" + sId).text("Beklemede");
+                if (durumum == 2) $("#oncelikMetin" + sId).text("Yapım Aşamasında");
+                if (durumum == 3) $("#oncelikMetin" + sId).text("Tamamlandı");
+                
+                
                 
                 AltSurecCek(sId);
                 

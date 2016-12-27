@@ -137,6 +137,7 @@
     <Content Include="Content\skin-blue.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\alts.png" />
     <Content Include="Images\giris.jpg" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\arkaplan.jpg" />
@@ -161,6 +162,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfilController.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="Models\DataViewModel\AltSurec.cs" />
     <Compile Include="Models\DataViewModel\Durum.cs" />
     <Compile Include="Models\DataViewModel\Kullanici.cs" />
+    <Compile Include="Models\DataViewModel\Log.cs" />
     <Compile Include="Models\DataViewModel\Oncelik.cs" />
     <Compile Include="Models\DataViewModel\Proje.cs" />
     <Compile Include="Models\DataViewModel\Rol.cs" />
@@ -252,6 +255,7 @@
     </Content>
     <Content Include="Views\Proje\ProjeSurecDetay.cshtml" />
     <Content Include="Views\Home\SonHareketler.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

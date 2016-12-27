@@ -16,6 +16,7 @@ namespace Buyutec.Controllers
                 Response.Redirect("/Home/Index");
             return View();
         }
+        //Profil Güncelleme 
         public JsonResult ProfilGuncelle(tblKullanici kul)
         {
             int kId = int.Parse(Session["kulId"].ToString());
@@ -26,13 +27,14 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-        
+        //Şifre Değiştirme
         public JsonResult SifreGuncelle(string eski,string yeni)
         {
             int kId = int.Parse(Session["kulId"].ToString());
             var sonuc = KullaniciIslem.SifreGuncelle(eski, yeni, kId);
             return Json(sonuc);
         }
+        //Kullanıcı Profil Bilgisi Çekme
         public JsonResult BilgiCek()
         {
             int kId = int.Parse(Session["kulId"].ToString());

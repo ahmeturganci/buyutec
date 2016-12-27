@@ -499,7 +499,7 @@
                     $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
                     $("#oran").text("%" + item.bitirmeOrani);
                     
-                    $("#oran").css("width", item.bitirmeOrani + '%');
+                    $("#oran").css("width:", "'" + item.bitirmeOrani + "'%");
                     //$("#oran").width(item.bitirmeOrani);
                     $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
                     $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
@@ -583,7 +583,7 @@
                 oncelikId: parseInt($("#yoncelikler option:selected").val()),
                 sId:$("#ssID").text()
             };
-            //console.log(veri);
+            console.log(veri);
             $.post("/Proje/SGuncelle", veri, function (sonuc) {
                 console.log(sonuc);
             });

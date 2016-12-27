@@ -33,7 +33,7 @@ namespace Buyutec.Controllers
         {
             return View();
         }
-
+        //Proje oluşturma
         public JsonResult ProjeEkle(tblProje proje)
         {
             proje.aktifMi = true;
@@ -43,7 +43,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-
+        //Proje listeleme
         public JsonResult ProjeListele()
         {
             int kulId = int.Parse(Session["kulId"].ToString());
@@ -53,7 +53,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-
+        //çalışılan projelerin listelenmesi
         public JsonResult CalisilanProjeListele()
         {
             int kulId = int.Parse(Session["kulID"].ToString());
@@ -63,7 +63,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-
+        //proje arama işlemi !oluştudukları projede
         public JsonResult ProjeAra(string baslik)
         {
             var bList = ProjeIslem.ProjeAra(baslik);
@@ -72,13 +72,13 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-
+        //proje verileri getirme
         public JsonResult ProjeCek()
         {
             var sonuc = ProjeIslem.ProjeCek(projeDetayId);
             return Json(sonuc.ToList());
         }
-
+        //durumların listelenmesi
         public JsonResult DurumCek()
         {
             var sonuc = ProjeIslem.DurumListele();
@@ -87,7 +87,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-
+        //önceliklerin listelenmesi
         public JsonResult OncelikListele()
         {
             var sonuc = ProjeIslem.OncelikListele();
@@ -96,7 +96,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-
+        //kişi bilgilerinin listelenmesi
         public JsonResult KisiCek()
         {
             var sonuc = ProjeIslem.KisiCek();
@@ -105,7 +105,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
-
+        //süreç ekleme
         public JsonResult SurecEkle(tblSurec veri)
         {
             veri.projeId = projeDetayId;
@@ -121,6 +121,7 @@ namespace Buyutec.Controllers
                 return Json("-");
 
         }
+        //rollerin listelenmesi
         public JsonResult RolCek()
         {
             var rol = ProjeIslem.RolCek();
@@ -129,6 +130,7 @@ namespace Buyutec.Controllers
             else
                 return Json('-');
         }
+        //kullanıcıları projeye eklemek.
         public JsonResult KullaniciProjeEkle(KullaniciProjeRol veri)
         {
             veri.projeId = projeDetayId;
@@ -137,6 +139,7 @@ namespace Buyutec.Controllers
                 return Json(kpEkle);
             return Json('-');
         }
+        //kullanıcı rollerini listeleme
         public JsonResult Rollerim(int projeId)
         {
             int kullaniciId = int.Parse(Session["kulId"].ToString());
@@ -145,7 +148,7 @@ namespace Buyutec.Controllers
                 return Json(rol);
             return Json('-');
         }
-
+        //süreç listeleme
         public JsonResult SurecListele()
         {
             var sonuc = ProjeIslem.SurecListele(projeDetayId);
@@ -154,6 +157,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
+        //altsüreç listeleme
         public JsonResult AltSurecListele(int surecId)
         {
             var sonuc = ProjeIslem.AltSurecList(surecId);
@@ -163,7 +167,7 @@ namespace Buyutec.Controllers
                 return Json("-");
 
         }
-
+        //süreç bilgileri 
         public JsonResult SurecCek(int sId)
         {
             var sonuc = ProjeIslem.SurecGetir(sId);
@@ -172,6 +176,7 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
+        //altsüreç bilgileri
         public JsonResult AltSurecCek(int surecId)
         {
             var s = ProjeIslem.AltSurecGetir(surecId);
@@ -181,6 +186,7 @@ namespace Buyutec.Controllers
                 return Json('-');
         }
         //public JsonResult SureceKisiEkle(int kisiId, int )
+        //altsüreç ekleme
         public JsonResult AltSurecEkle(tblAltSurec alt)
         {
             var s = ProjeIslem.AltSurecEkle(alt);
@@ -189,15 +195,18 @@ namespace Buyutec.Controllers
             else
                 return Json("-");
         }
+        //süreç güncelleme 
         public JsonResult SGuncelle(tblSurec ss, int sId)
         {
             var s = ProjeIslem.SurecGuncelle(ss, sId);
             return Json("+");
         }
+        //alt süreç güncelleme
         public JsonResult AltSurecGuncelle(tblAltSurec alts)
         {
             return Json("+");
         }
+        //
         public JsonResult ProjeKisiDoldur()//new { k.kullaniciId, k.kullaniciAdi, k.kullaniciSoyadi, p.projeId }
         {
             var sonuc = ProjeIslem.ProjeKisilerDoldur(projeDetayId);
@@ -206,6 +215,7 @@ namespace Buyutec.Controllers
             else
                 return Json('-');
         }
+        //süreçe kişi atama
         public JsonResult SureceKisiAta(KullaniciSurec ks)
         {
             var sonuc = ProjeIslem.SureceKisiAta(ks,projeDetayId);
@@ -214,7 +224,7 @@ namespace Buyutec.Controllers
             else
                 return Json('-');
         }
-
+        //projedeki çalışan kişileri listeleme
         public JsonResult ProjeKisiListele()
         {
             var sonuc = ProjeIslem.ProjeKisi();

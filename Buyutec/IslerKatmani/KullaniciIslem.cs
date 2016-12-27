@@ -10,6 +10,7 @@ namespace Buyutec.IslerKatmani
 {
     public class KullaniciIslem
     {
+        //MD5 şifreleme
         public static string MD5Sifrele(string metin)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
@@ -22,6 +23,7 @@ namespace Buyutec.IslerKatmani
             }
             return sb.ToString();
         }
+        //kullanıcı giriş 
         public static char KullaniciGiris(string kulMail, string sifre)
         {
             try
@@ -47,6 +49,7 @@ namespace Buyutec.IslerKatmani
                 return '?';
             }
         }
+        //kullanıcı kayıt
         public static int KullaniciKayit(tblKullanici kullanici)
         {
             try
@@ -75,6 +78,7 @@ namespace Buyutec.IslerKatmani
                 return 2; // işlem başarısız
             }
         }
+        //profil güncelleme
         public static char ProfilGuncelle(tblKullanici kul,int kId)
         {
             try
@@ -107,6 +111,7 @@ namespace Buyutec.IslerKatmani
                 return '?';
             }
         }
+        //istenilen kullanıcı getirme
         public static tblKullanici KullaniciVer(string mail)
         {
 
@@ -135,6 +140,7 @@ namespace Buyutec.IslerKatmani
                 return null;
             }
         }
+        //şifre güncelleme
         public static char SifreGuncelle(string eski, string yeni, int kId)
         {
             char sonuc = '*';
@@ -163,6 +169,7 @@ namespace Buyutec.IslerKatmani
             }
             return sonuc;
         }
+        //kullanıcı bilgileri listeleme
         public static List<Kullanici> BilgiCek(int kId)
         {
             try
@@ -178,6 +185,43 @@ namespace Buyutec.IslerKatmani
             catch
             {
                 return null;
+            }
+        }
+        //kullanıcı hareketleri /loglama işlemi için
+        public static char HareketEkle(tblLog log)
+        {
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    db.tblLogs.Add(log);
+                    db.SaveChanges();
+                    return '+';
+                }
+                
+            }
+            catch 
+            {
+
+                return '-';
+            }
+        }
+        //hareketleri listelemek
+        public static List<Log> HareketListele()
+        {
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var liste = (from l in db.tblLogs select l);
+                    return Log.MapData(liste.ToList());
+                }
+
+            }
+            catch 
+            {
+
+                throw;
             }
         }
     }

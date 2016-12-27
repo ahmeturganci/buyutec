@@ -4,6 +4,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>SonHareketler</h2>
-<h1>log tablosu gelecek</h1>
+<div class="box box-danger">
+    <div class="box-header">
+        <i class="ion ion-clipboard"></i>
+        <h3 class="box-title">Son Hareketler</h3>
+        <div class="box-body">
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Kullanıcı ID</th>
+                        <th>Eylem</th>
+                    </tr>
+                    <tbody id="pHareketDetay"></tbody>
+                </table>
+            </div>
+        </div>
 
+    </div>
+</div>
+<script>
+    $(function () {
+        $("body").load(SonHareketListele());
+    });
+  
+    function SonHareketListele() {
+        $.post("/Home/HareketListele", "", function (sonuc) {
+            $.each(sonuc, function (i, item) {
+
+                $("#pHareketDetay").append('<tr><td>' + item.kullaniciId + '</td><td>' + item.logBilgisi + '</td></tr>');
+            });
+        });
+    }
+</script>

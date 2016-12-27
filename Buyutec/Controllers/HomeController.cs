@@ -29,14 +29,28 @@ namespace Buyutec.Controllers
                 Session.Add("kulId", sessionKulId.kullaniciId);
                 Session.Add("kulAd", sessionKulId.kullaniciAdi);
                 Session.Add("kulMail", sessionKulId.email);
+                tblLog logDegerler = new tblLog();
+                logDegerler.kullaniciId = sessionKulId.kullaniciId;
+                logDegerler.logBilgisi = "Kullanıcı"+DateTime.Now+"Tarihte Giriş Yaptı";
+                KullaniciIslem.HareketEkle(logDegerler);
             }
+
+
+
+            
             return Json(c);
 
         }
-
+        //Son sistemde ki hareketleri 
         public ActionResult SonHareketler()
         {
             return View();//log için
+        }
+        //sistem hareketleri çekmek
+        public JsonResult HareketListele()
+        {
+            var liste = KullaniciIslem.HareketListele();
+            return Json(liste);
         }
         //Çıkış
         public ActionResult Cikis()
