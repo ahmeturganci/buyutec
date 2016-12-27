@@ -36,7 +36,7 @@
                     <!--başlama tarih-->
                     <div class="form-group">
                         <label for="BaslamaTarih">Proje Başlama Tarihi</label>
-                        <input type="date" class="form-control" id="txtBaslamaTarih" aria-describedby="projeBaslamaTarih" placeholder="Proje başlama tarihi giriniz." required>
+                        <input type="date" min="@DateTime.Now.ToShortDateString()" class="form-control" id="txtBaslamaTarih" aria-describedby="projeBaslamaTarih" placeholder="Proje başlama tarihi giriniz." required>
                         <small id="ProjeBaslamaTarih" class="form-text text-muted">Projenin başlangıç tarihi.</small>
                     </div>
                     <!--proje bitiş-->

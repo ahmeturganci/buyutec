@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="/Home/Index"><b>Buyuyeç</b>PYS</a>
+            <a href="/Home/Index"><b>BÜYÜTEÇ</b>PYS</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
@@ -31,33 +31,34 @@
 
                 <!--Email-->
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email" id="txtEmail">
+                    <input type="email" class="form-control" placeholder="Email" id="txtEmail" required>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <!--txtAd-->
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="Kulanıcı Ad" id="txtAd">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    <input type="text" class="form-control" placeholder="Kulanıcı Ad" id="txtAd" required>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
 
                 <!--txtSoyad-->
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="Kulanıcı Soyadı" id="txtSoyad">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    <input type="text" class="form-control" placeholder="Kulanıcı Soyadı" id="txtSoyad" required>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
                 <!--txtSifre-->
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Şifre" id="txtSifre">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    <input type="password" class="form-control" placeholder="Şifre" id="txtSifre" required>
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-4">
                         <button type="button" class="btn btn-primary btn-block btn-flat" onclick="KayitOl();">Kayıt Ol</button>
                     </div>
-                </div>
+                    <a href="/Home/Index" class="text-center" style="float:right; margin-right:20px;">Giriş</a>
+                    </div>
             </form>
-            <a href="/Home/Index" class="text-center">Giriş</a>
+            
         </div>
     </div>
     <script src="~/Scripts/jquery-2.2.3.min.js"></script>
