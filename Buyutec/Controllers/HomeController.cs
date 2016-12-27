@@ -15,8 +15,12 @@ namespace Buyutec.Controllers
             
             return View();
         }
+        public ActionResult Kayitol()
+        {
+            return View();
+        }
         //Giriş
-        public JsonResult Giris(string kulMail, string kulSifre)
+        public JsonResult GirisYapKullanici(string kulMail, string kulSifre)
         {
             if (kulMail == "" || kulSifre == "")
             {
@@ -60,7 +64,7 @@ namespace Buyutec.Controllers
             return View("Index");
         }
         //kayıt ol
-        public JsonResult KayitOl(tblKullanici kul)
+        public JsonResult KayitOlKullanici(tblKullanici kul)
         {
             int sonuc = KullaniciIslem.KullaniciKayit(kul);
             if (sonuc == 0)

@@ -1,139 +1,58 @@
 ﻿<!--Kayıt ve Giriş Ekranı-->
 @{
-    ViewBag.Title = "@";
+
+    ViewBag.Title = "Büyüteç";
     Layout = null;
 }
-<!DOCTYPE HTML>
-<html lang="tr">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Büyüteç PYS</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="~/Content/blue.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE.min.css" rel="stylesheet" />
 
-    <!-- Çekirdek CSS -->
-    <link href="~/Content/grid12.css" rel="stylesheet" />
-    <link href="~/Content/style.css" rel="stylesheet" />
-    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
-    <link href="~/Content/animate.css" rel="stylesheet" />
-    <!-- #Çekirdek CSS Bitiş -->
-    <!-- Dışarıdan Çağırılan Dosyalar Font ve Materyal İkonlar -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- #Dışarıdan Çağırılan Dosyalar Font ve Materyal İkonlar Bitiş -->
-    <!-- Çekirdek Js -->
-    <script src="~/Scripts/loginScript/jquery-3.1.1.min.js"></script>
-    <script src="~/Scripts/loginScript/jquery-ui.js"></script>
-    <script src="~/Scripts/loginScript/custom.js"></script>
-
-    <!-- # Çekirdek JS Bitiş -->
 </head>
-<body>
-    <div id="uyari"></div>
-    <!-- Kapsayıcı -->
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 login-card">
-
-
-        <!-- Login (giriş) Form Sayfası -->
-        <form id="login-form" class="col-lg-12">
-
-            <!-- Logo -->
-            <div class="col-lg-12 logo-kapsul">
-                <img width="100" class="logo" src="~/Images/logo.png" alt="logo" />
-            </div>
-            <!-- #Logo Bitiş -->
-
-            <div style="clear:both;"></div>
-
-            <!-- Kullanıcı Adı Giriş İnput -->
-            <div class="group">
-                @*<input type="email" name="email" id="txtGkulMail" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><i class="material-icons input-ikon">person_outline</i><span class="span-input">E-Mail</span></label>*@
-                <input type="email" name="email">
-            </div>
-            <!-- #Kullanıcı Adı Giriş İnput Bitiş -->
-            <!-- Şifre İnput Giriş-->
-            <div class="group">
-                <input type="password" id="txtGkulSifre" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><i class="material-icons input-sifre-ikon">lock</i><span class="span-input">Şifre</span></label>
-            </div>
-            <!-- Şifre İnput Giriş Bitiş-->
-            <!-- Giriş Yap Buton -->
-            <a href="#" class="giris-yap-buton" onclick="Giris();">Giriş Yap</a>
-            <!-- #Giriş Yap Buton Bitiş -->
-            <!-- Şifremi Unuttum ve Kaydol Linkleri -->
-            <div class="forgot-and-create tab-menu">
-                <a class="hesap-olustur-link" href="javascript:void('hesap-olustur-link');">Bir Hesabınız yok mu? Hesap Oluştur.</a>
-            </div>
-            <!-- Şifremi Unuttum ve Kaydol Linkleri Bitiş -->
-
-        </form>
-        <!-- #Login (giriş) Form Sayfası Bitiş -->
-        <!-- Kayıt Form Sayfası -->
-        <form id="kayit-form" class="col-lg-12">
-
-            <div class="col-lg-12 logo-kapsul">
-                <img width="100" class="logo" src="~/Images/logo.png" alt="logo" />
-            </div>
-
-            <div style="clear:both;"></div>
-
-            <!-- Kayıt Form Adı İnput -->
-            <div class="group">
-                <input type="text" id="txtAd" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><i class="material-icons input-ikon">person_outline</i><span class="span-input">Adınız</span></label>
-            </div>
-            <!-- #Kayıt Form Adı İnput Bitiş -->
-            <!-- Kayıt Form Soyadı İnput -->
-            <div class="group">
-                <input type="text" id="txtSoyad" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><i class="material-icons input-ikon">person_outline</i><span class="span-input">Soyadınız</span></label>
-            </div>
-            <!-- #Kayıt Form Soyadı İnput Bitiş -->
-            <!-- Kayıt Form Email İnput -->
-            <div class="group">
-                <input type="email" name="email" id="txtEmail" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><i class="material-icons input-ikon">mail_outline</i><span class="span-input">E-Mail</span></label>
-            </div>
-            <!-- #Kayıt Form Email İnput Bitiş -->
-            <!-- Kayıt Form Şifre İnput -->
-            <div class="group">
-                <input type="password" id="txtSifre" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><i class="material-icons input-sifre-ikon">lock</i><span class="span-input">Şifre</span></label>
-            </div>
-            <!-- #Kayıt Form Şifre İnput Bitiş -->
-            <!-- Kayıt Ol Buton -->
-            <a href="javascript:void(0);" class="kayit-ol-buton" onclick="KayitOl();">Kayıt Ol</a>
-            <!-- #Kayıt Ol Buton Bitiş -->
-            <!-- Zaten Hesap Var Link -->
-            <a class="zaten-hesap-var-link" href="javascript:void('zaten-hesap-var-link');">Zaten Bir Hesabınız Var mı ? , Giriş Yapın.</a>
-            <!--# Zaten Hesap Var Link Bitiş -->
-
-        </form>
-        <!-- ##Kayıt Form  Sayfası Bitis -->
-    </div>
-    <!-- #Kapsayıcı Bitiş -->
-    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 buyutec">
-        <div class="col-lg-12">
-            <h1>Büyüteç<br /> Proje Yönetim Sistemi</h1>
-            <p>Büyüteç ile büyüyen projeler...</p>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>Büyüteç</b>PYS</a>
         </div>
+        <div class="login-box-body">
+            <p class="login-box-msg">Büyüteç Proje Yönetim Sistemi</p>
+            <form action="#" method="post">
+
+                <div class="form-group has-feedback">
+                    <input type="email" class="form-control" placeholder="Email" id="txtGkulMail">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" placeholder="Parola" id="txtGkulSifre">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-primary btn-block btn-flat" onclick="Giris();">Giriş</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+            <a href="/Home/Kayitol" class="text-center">Kayıt Ol</a>
+        </div>
+        <!-- /.login-box-body -->
     </div>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script>
-       
         $("#txtAd,#txtSoyad").keyup(function () {
-            if (this.value.match(/[^a-züşğçöA-ZÜŞİĞÇÖ]/g)) {
-                this.value = this.value.replace(/[^a-züşğçöA-ZÜŞİĞÇÖ]/g, '');
+            if (this.value.match(/[^a-zA-Z]/g)) {
+                this.value = this.value.replace(/[^a-zA-Z]/g, '');
             }
         });//harf
 
@@ -141,16 +60,18 @@
 
             var sifre1 = $("#txtGkulSifre").val();
             var email = $("#txtGkulMail").val();
-            if (sifre1 == null || sifre1 == "" || sifre1.length < 6)
-                alert("Şifre boş ve 6 karakterden aşağı olamaz");
-            else if (email == null || email == "" || email.length < 8 )
-                alert("Lütfen E-mailinizi doğru giriniz");
+
+            if (sifre1 == null || sifre1 == "" || sifre1.lenght < 6)
+                alert("Şifreyi boş ve 6 karakterden aşağı olamaz");
+            else if (email == null || email == "")
+                alert("E-Posta boş Geçilemez");
             else {
                 var veri = {
                     kulMail: $("#txtGkulMail").val(),
                     kulSifre: $("#txtGkulSifre").val()
                 };
-                $.post("/Home/Giris", veri, function (sonuc) {
+                console.log(veri);
+                $.post("/Home/GirisYapKullanici", veri, function (sonuc) {
                     if (sonuc == '+')
                         location.href = "/Proje/Index";//değişecek
                     else
@@ -159,44 +80,11 @@
 
             }
         }
-
-        function KayitOl() {
-            var kadi = $("#txtAd").val();
-            var ksoyad = $("#txtSoyad").val();
-            var sifre1 = $("#txtSifre").val();
-            var email = $("#txtEmail").val();
-
-            if (kadi == null || kadi == "" || kadi.length < 2)
-                alert("Kullanıcı adı boş ve 2 karakterden az olamaz");
-            else if (ksoyad == null || ksoyad == "" || ksoyad.length < 2)
-                alert("Kullanıcı soyadı boş ve 2 karakterden az olamaz");
-            else if (sifre1 == null || sifre1 == "" || sifre1.length < 6)
-                alert("Şifre boş ve 6 karakterden aşağı olamaz");
-            else if (email == null || email == "" || email.length < 7)
-                alert("Lütfen E-mailinizi doğru giriniz");
-            else {
-
-
-                var veri = {
-                    kullaniciAdi: $("#txtAd").val(),
-                    kullaniciSoyadi: $("#txtSoyad").val(),
-                    email: $("#txtEmail").val(),
-                    sifre: $("#txtSifre").val()
-                };
-                var value = veri.sifre;
-                $.post("/Home/KayitOl", veri, function (sonuc) {
-                    if (sonuc == "+") {
-                        alert("Kayıt başarılı");//css verilecek.
-                        location.href = "/Home/Index";
-                    }
-                    else {
-                        alert("Değerleri kontrol ediniz.");
-                    }
-                });
-            }
-
-        }
-
     </script>
 </body>
 </html>
+
+
+
+
+

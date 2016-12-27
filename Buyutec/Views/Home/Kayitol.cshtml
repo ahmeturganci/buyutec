@@ -1,0 +1,100 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Kayıt Ol";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/AdminLTE.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link href="~/Content/blue.css" rel="stylesheet" />
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="/Home/Index"><b>Buyuyeç</b>PYS</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg"><strong>Büyüteç İle Büyüyen Projeler</strong></p>
+            <form action="/Home/Index" method="post">
+
+                <!--Email-->
+                <div class="form-group has-feedback">
+                    <input type="email" class="form-control" placeholder="Email" id="txtEmail">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <!--txtAd-->
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="Kulanıcı Ad" id="txtAd">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+
+                <!--txtSoyad-->
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="Kulanıcı Soyadı" id="txtSoyad">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <!--txtSifre-->
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" placeholder="Şifre" id="txtSifre">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-primary btn-block btn-flat" onclick="KayitOl();">Kayıt Ol</button>
+                    </div>
+                </div>
+            </form>
+            <a href="/Home/Index" class="text-center">Giriş</a>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+
+        function KayitOl() {
+            var veri = {
+                kullaniciAdi: $("#txtAd").val(),
+                kullaniciSoyadi: $("#txtSoyad").val(),
+                email: $("#txtEmail").val(),
+                sifre: $("#txtSifre").val()
+            };
+            if (veri.kullaniciAdi == null || veri.kullaniciAdi == "" || veri.kullaniciAdi.length < 3)
+                alert("Kullanıcı adı boş ve 4 karakterden az olamaz");
+            else if (veri.kullaniciSoyadi == null || veri.kullaniciSoyadi == "")
+                alert("Kullanıcı soyadı boş ve 4 karakterden az olamaz");
+            else if (veri.sifre == null || veri.sifre == "" || veri.sifre.lenght < 6)
+                alert("Şifreyi boş ve 6 karakterden aşağı olamaz");
+            else if (veri.email == null || veri.email == "")
+                alert("E-Posta boş Geçilemez");
+            else {
+                console.log(veri);
+                var value = veri.sifre;
+                $.post("/Home/KayitOlKullanici", veri, function (sonuc) {
+                    if (sonuc == "+") {
+                        alert("Kayıt başarılı");//css verilecek.
+                        location.href = "/Home/Index";
+                    }
+                    else {
+                        alert("Değerleri kontrol ediniz.");
+                    }
+                });
+            }
+
+        }
+
+    </script>
+</body>
+</html>
