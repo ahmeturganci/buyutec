@@ -23,11 +23,11 @@
     <script src="~/Scripts/loginScript/jquery-3.1.1.min.js"></script>
     <script src="~/Scripts/loginScript/jquery-ui.js"></script>
     <script src="~/Scripts/loginScript/custom.js"></script>
-    
+
     <!-- # Çekirdek JS Bitiş -->
 </head>
 <body>
-
+    <div id="uyari"></div>
     <!-- Kapsayıcı -->
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 login-card">
 
@@ -45,7 +45,7 @@
 
             <!-- Kullanıcı Adı Giriş İnput -->
             <div class="group">
-                <input type="email" id="txtGkulMail" required>
+                <input type="email" name="email" id="txtGkulMail" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><i class="material-icons input-ikon">person_outline</i><span class="span-input">E-Mail</span></label>
@@ -97,7 +97,7 @@
             <!-- #Kayıt Form Soyadı İnput Bitiş -->
             <!-- Kayıt Form Email İnput -->
             <div class="group">
-                <input type="email" id="txtEmail" required>
+                <input type="email" name="email" id="txtEmail" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><i class="material-icons input-ikon">mail_outline</i><span class="span-input">E-Mail</span></label>
@@ -125,56 +125,77 @@
     <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 buyutec">
         <div class="col-lg-12">
             <h1>Büyüteç<br /> Proje Yönetim Sistemi</h1>
-            <p >Büyüteç ile büyüyen projeler...</p>
+            <p>Büyüteç ile büyüyen projeler...</p>
         </div>
     </div>
     <script>
+        $("#txtAd,#txtSoyad").keyup(function () {
+            if (this.value.match(/[^a-zA-Z]/g)) {
+                this.value = this.value.replace(/[^a-zA-Z]/g, '');
+            }
+        });//harf
+
         function Giris() {
-            var veri = {
-                kulMail: $("#txtGkulMail").val(),
-                kulSifre: $("#txtGkulSifre").val()
-            };
-            console.log(veri);
-            if (veri.kulMail == "" || veri.kulSifre == "")
-                alert("Boş Değer Geçersiz.");
-                //css le alert şekil yapıla bilir.
+
+            var sifre1 = $("#txtGkulSifre").val();
+            var email = $("#txtGkulMail").val();
+            
+            if (sifre1 == null || sifre1 == "" || sifre1.lenght < 6)
+                alert("Şifreyi boş ve 6 karakterden aşağı olamaz");
+            else if (email == null || email == "")
+                alert("E-Posta boş Geçilemez");
             else {
+                var veri = {
+                    kulMail: $("#txtGkulMail").val(),
+                    kulSifre: $("#txtGkulSifre").val()
+                };
                 $.post("/Home/Giris", veri, function (sonuc) {
                     if (sonuc == '+')
                         location.href = "/Proje/Index";//değişecek
                     else
                         window.location.reload(true);
                 });
+
             }
         }
-        
+
         function KayitOl() {
-            var veri = {
-                kullaniciAdi: $("#txtAd").val(),
-                kullaniciSoyadi: $("#txtSoyad").val(),
-                email: $("#txtEmail").val(), 
-                sifre:$("#txtSifre").val()
-            };
-            console.log(veri);
-            if (veri.Ad == " " || veri.Soyad == " " || veri.Email == " " || veri.Sifre == " ")// değerler
-            {
-                //css ile sekillenecek
-                alert("Boş değer geçilemez.");
-            }
-            else//post ve yönlendirme.
-            {
+            var kadi = $("#txtAd").val();
+            var ksoyad = $("#txtSoyad").val();
+            var sifre1 = $("#txtSifre").val();
+            var email = $("#txtEmail").val();
+
+            if (kadi == null || kadi == "" || kadi.length < 3)
+                alert("Kullanıcı adı boş ve 4 karakterden az olamaz");
+            else if (ksoyad == null || ksoyad == "")
+                alert("Kullanıcı soyadı boş ve 4 karakterden az olamaz");
+            else if (sifre1 == null || sifre1 == "" || sifre1.lenght < 6)
+                alert("Şifreyi boş ve 6 karakterden aşağı olamaz");
+            else if (email == null || email == "")
+                alert("E-Posta boş Geçilemez");
+            else {
+
+
+                var veri = {
+                    kullaniciAdi: $("#txtAd").val(),
+                    kullaniciSoyadi: $("#txtSoyad").val(),
+                    email: $("#txtEmail").val(),
+                    sifre: $("#txtSifre").val()
+                };
+                var value = veri.sifre;
                 $.post("/Home/KayitOl", veri, function (sonuc) {
-                    if (sonuc == "+")
-                    {
+                    if (sonuc == "+") {
                         alert("Kayıt başarılı");//css verilecek.
-                        location.href="/Home/Index";
+                        location.href = "/Home/Index";
                     }
                     else {
                         alert("Değerleri kontrol ediniz.");
-                        }
+                    }
                 });
             }
+
         }
+
     </script>
 </body>
 </html>

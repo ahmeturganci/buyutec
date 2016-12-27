@@ -28,7 +28,7 @@
         </div>
         <!-- /.box-body -->
     </div>
-    
+
 </div>
 
 <!-- Projeler -->
@@ -106,10 +106,10 @@
                         <textarea class="form-control" id="txtHakkimda" rows="4" placeholder="Hakkınızda birşeyler yazın." required></textarea>
                     </div>
                 </form>
-                
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" >Vazgeç</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
                 <button type="button" class="btn btn-primary" onclick="ProfilGuncelle();">Kaydet</button>
             </div>
         </div>
@@ -162,28 +162,32 @@
         $("body").load(KisiselProjeListele());
     });
     function SifreGuncelle() {
-        alert("asda");
+
         var eski = $("#txtEskiSifre").val();
         var yeni = $("#txtYeniSifre").val();
         var yeniT = $("#txtYeniSifreT").val();
+        if (eski == "" || eski == null || eski.length < 6)
+            alert("Şifre boş ve 6 karakterden aşağı olamaz");
+        else if (yeni == "" || yeni == null || yeni.length < 6)
+            alert("Şifre boş ve 6 karakterden aşağı olamaz");
+        else if (yeniT == "" || yeniT == null || yeniT.length < 6)
+            alert("Şifre boş ve 6 karakterden aşağı olamaz");
         if (yeni == yeniT) {
             $.post("/Profil/SifreGuncelle", { yeni: yeni, eski: eski }, function (sonuc) {
                 if (sonuc == '+') {
                     $("input").val("");
                     $("#kapat").click();
                     alert("Şifre başarı ile değiştirildi.");
+                    //window.location.reload(true);
                 }
                 else if (sonuc == '-')
-                    alert("Sifre değiştirilenedi ");
+                    alert("Sifre değiştirilenedi. Değerlerinizi kontrol ediniz. ");
                 else
                     alert("Db den kaynaklı bir sorun var");
             });
         }
         else
-            alert("Yanlış");
-        
-        
-        
+            alert("Yanlış Bişeyler Var");
     }
 
     function ProfilGuncelle() {
@@ -193,14 +197,22 @@
             profilFoto: $("#txtAvatar").val(),
             hakkimda: $("#txtHakkimda").val()
         };
+        if (data.kullaniciAdi == "" || data.kullaniciAdi == null)
+            alert("Kullanıcı adı boş olamaz.");
+        else if (data.kullaniciSoyadi == "" || data.kullaniciSoyadi == null)
+            alert("Kullanıcı soyadı boş olamaz.");
+
         $.post("/Profil/ProfilGuncelle", data, function (sonuc) {
-            console.log(sonuc);
+            if (sonuc != '-')
+                window.location.reload(true);
+            else
+                alert("Hata Oluştu. Güncelleme işlemi Başarısız.");
         });
     }
     function ProfilBilgiCek() {
         $.post("/Profil/BilgiCek", "", function (sonuc) {
             $.each(sonuc, function (i, item) {
-                
+
                 $("#kulAdSoyad").text(item.kullaniciAdi + ' ' + item.kullaniciSoyadi);
                 $("#kulMail").text(item.email);
                 $("#kulResim").attr("src", item.profilFoto);

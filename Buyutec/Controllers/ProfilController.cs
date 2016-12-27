@@ -39,7 +39,10 @@ namespace Buyutec.Controllers
         {
             int kId = int.Parse(Session["kulId"].ToString());
             var sonuc = KullaniciIslem.BilgiCek(kId);
-            return Json(sonuc);
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json("-");
         }
 
 
