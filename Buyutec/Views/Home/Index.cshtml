@@ -1,10 +1,10 @@
 ﻿<!--Kayıt ve Giriş Ekranı-->
 @{
-    ViewBag.Title = "Büyüteç";
+    ViewBag.Title = "@";
     Layout = null;
 }
 <!DOCTYPE HTML>
-<html lang="en-US">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <title>Büyüteç PYS</title>
@@ -45,10 +45,11 @@
 
             <!-- Kullanıcı Adı Giriş İnput -->
             <div class="group">
-                <input type="email" name="email" id="txtGkulMail" required>
+                @*<input type="email" name="email" id="txtGkulMail" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label><i class="material-icons input-ikon">person_outline</i><span class="span-input">E-Mail</span></label>
+                <label><i class="material-icons input-ikon">person_outline</i><span class="span-input">E-Mail</span></label>*@
+                <input type="email" name="email">
             </div>
             <!-- #Kullanıcı Adı Giriş İnput Bitiş -->
             <!-- Şifre İnput Giriş-->
@@ -129,9 +130,10 @@
         </div>
     </div>
     <script>
+       
         $("#txtAd,#txtSoyad").keyup(function () {
-            if (this.value.match(/[^a-zA-Z]/g)) {
-                this.value = this.value.replace(/[^a-zA-Z]/g, '');
+            if (this.value.match(/[^a-züşğçöA-ZÜŞİĞÇÖ]/g)) {
+                this.value = this.value.replace(/[^a-züşğçöA-ZÜŞİĞÇÖ]/g, '');
             }
         });//harf
 
@@ -139,11 +141,10 @@
 
             var sifre1 = $("#txtGkulSifre").val();
             var email = $("#txtGkulMail").val();
-            
-            if (sifre1 == null || sifre1 == "" || sifre1.lenght < 6)
-                alert("Şifreyi boş ve 6 karakterden aşağı olamaz");
-            else if (email == null || email == "")
-                alert("E-Posta boş Geçilemez");
+            if (sifre1 == null || sifre1 == "" || sifre1.length < 6)
+                alert("Şifre boş ve 6 karakterden aşağı olamaz");
+            else if (email == null || email == "" || email.length < 8 )
+                alert("Lütfen E-mailinizi doğru giriniz");
             else {
                 var veri = {
                     kulMail: $("#txtGkulMail").val(),
@@ -165,14 +166,14 @@
             var sifre1 = $("#txtSifre").val();
             var email = $("#txtEmail").val();
 
-            if (kadi == null || kadi == "" || kadi.length < 3)
-                alert("Kullanıcı adı boş ve 4 karakterden az olamaz");
-            else if (ksoyad == null || ksoyad == "")
-                alert("Kullanıcı soyadı boş ve 4 karakterden az olamaz");
-            else if (sifre1 == null || sifre1 == "" || sifre1.lenght < 6)
-                alert("Şifreyi boş ve 6 karakterden aşağı olamaz");
-            else if (email == null || email == "")
-                alert("E-Posta boş Geçilemez");
+            if (kadi == null || kadi == "" || kadi.length < 2)
+                alert("Kullanıcı adı boş ve 2 karakterden az olamaz");
+            else if (ksoyad == null || ksoyad == "" || ksoyad.length < 2)
+                alert("Kullanıcı soyadı boş ve 2 karakterden az olamaz");
+            else if (sifre1 == null || sifre1 == "" || sifre1.length < 6)
+                alert("Şifre boş ve 6 karakterden aşağı olamaz");
+            else if (email == null || email == "" || email.length < 7)
+                alert("Lütfen E-mailinizi doğru giriniz");
             else {
 
 
