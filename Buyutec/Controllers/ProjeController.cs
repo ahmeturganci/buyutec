@@ -39,7 +39,16 @@ namespace Buyutec.Controllers
             proje.aktifMi = true;
             int s = ProjeIslem.ProjeEkle(proje);
             if (s == 0)
+            {
+                KullaniciProjeRol kpr = new KullaniciProjeRol
+                {
+                    projeId = proje.projeId,
+                    kullaniciId = int.Parse(Session["kulId"].ToString()),
+                    rolId = 1
+                };
+                KullaniciProjeEkle(kpr);
                 return Json("+");
+            }
             else
                 return Json("-");
         }
@@ -73,10 +82,25 @@ namespace Buyutec.Controllers
                 return Json("-");
         }
         //proje verileri getirme
+        public ActionResult error()
+        {
+            return View();
+        }
         public JsonResult ProjeCek()
         {
-            var sonuc = ProjeIslem.ProjeCek(projeDetayId);
-            return Json(sonuc.ToList());
+            JsonResult jr = null;
+            int kulId = int.Parse(Session["kulID"].ToString());
+            var sonuc = ProjeIslem.ProjeCek(projeDetayId, kulId);
+            if (sonuc == null)
+            {
+                jr = Json("null");
+            }
+            else
+            {
+                jr = Json(sonuc.ToList());
+            }
+            return jr;
+            
         }
         //durumların listelenmesi
         public JsonResult DurumCek()
@@ -202,9 +226,13 @@ namespace Buyutec.Controllers
             return Json("+");
         }
         //alt süreç güncelleme
-        public JsonResult AltSurecGuncelle(tblAltSurec alts)
+        public JsonResult AltSurecGuncelle(tblAltSurec alts, int aSId)
         {
-            return Json("+");
+            var sonuc = ProjeIslem.AltSurecGuncelle(alts, aSId);
+            if (sonuc == '+')
+                return Json('+');
+            else
+                return Json('-');
         }
         //
         public JsonResult ProjeKisiDoldur()//new { k.kullaniciId, k.kullaniciAdi, k.kullaniciSoyadi, p.projeId }
@@ -225,11 +253,27 @@ namespace Buyutec.Controllers
                 return Json('-');
         }
         //projedeki çalışan kişileri listeleme
-        public JsonResult ProjeKisiListele()
+        //public JsonResult ProjeKisiListele()
+        //{
+        //    var sonuc = ProjeIslem.ProjeKisi();
+        //    if (sonuc == 0)
+        //        return Json("+");
+        //    else
+        //        return Json("-");
+        //}
+        public JsonResult SureceAtananKisileriCek(SureceAtananKisi sak)
         {
-            var sonuc = ProjeIslem.ProjeKisi();
-            if (sonuc == 0)
-                return Json("+");
+            var sonuc = ProjeIslem.SureceAtananKisileriCek(sak, projeDetayId);
+            if (sonuc != null)
+                return Json(sonuc);
+            else
+                return Json("-");
+        }
+        public JsonResult AltSureceKisiAta(KullaniciSurec ks)
+        {
+            var sonuc = ProjeIslem.AltSureceKisiAta(ks, projeDetayId);
+            if (sonuc == '+')
+                return Json(sonuc);
             else
                 return Json("-");
         }

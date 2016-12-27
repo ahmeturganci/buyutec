@@ -22,7 +22,7 @@ namespace Buyutec.IslerKatmani
                              select k).SingleOrDefault();
 
                     if (p == null)
-                    {
+                    { 
                         db.tblProjes.Add(proje);
                         db.SaveChanges();
                         return 0; // proje ekleme başarılı
@@ -39,6 +39,7 @@ namespace Buyutec.IslerKatmani
         //Proje oluşturulan listeleme
         public static List<Proje> ProjeListele(int kulId)
         {
+            var pp = (dynamic)null;
             try
             {
                 using (BuyutecDBEntities db = new BuyutecDBEntities())
@@ -47,8 +48,9 @@ namespace Buyutec.IslerKatmani
                                       orderby k.olusturmaTarihi
                                       where k.olusturanKullaniciId == kulId
                                       select k);
-                    return Proje.MapData(projeListe.ToList());
+                    pp= Proje.MapData(projeListe.ToList());
                 }
+                return pp;
             }
             catch
             {
@@ -67,7 +69,7 @@ namespace Buyutec.IslerKatmani
                     var cListe = (from k in db.tblProjes
                                   join c in db.tblKullaniciProjeRols on k.projeId equals c.projeId
                                   orderby k.olusturmaTarihi
-                                  where c.kullaniciId == kulId
+                                  where c.kullaniciId == kulId && c.kullaniciId==kulId
                                   select k);
 
                     return Proje.MapData(cListe.ToList());
@@ -236,23 +238,30 @@ namespace Buyutec.IslerKatmani
             }
         }
         //proje getir
-        public static List<Proje> ProjeCek(int projeId)
+        public static List<Proje> ProjeCek(int projeId,int kullaniciId)
         {
+            var pp = (dynamic)null;
             try
             {
                 using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
-                    var p = (from pc in db.tblProjes
-                             where pc.projeId == projeId
-                             select pc);
-                    return Proje.MapData(p.ToList());
+                    //var projeOlusturanmisin = (from p in db.tblProjes where p.olusturanKullaniciId == kullaniciId select p).SingleOrDefault();
+                    var projedemisin = (from p in db.tblKullaniciProjeRols where p.projeId == projeId && p.kullaniciId == kullaniciId select p).SingleOrDefault();
+                    if (projedemisin != null)
+                    {
+                        var p = (from pc in db.tblProjes
+                                 where pc.projeId == projeId
+                                 select pc);
+                        pp = Proje.MapData(p.ToList());
+                    }
                 }
             }
-            catch
+            catch(Exception ex)
             {
 
-                return null;
+                pp = null;
             }
+            return pp;
         }
         //KullaniciListele
         public static List<Kullanici> KisiCek()
@@ -296,9 +305,10 @@ namespace Buyutec.IslerKatmani
             {
                 using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
-                    var sonuc = (from p in db.tblKullaniciProjeRols where p.projeId == veri.projeId && p.kullaniciId == veri.kullaniciId && p.rolId != veri.rolId select p).SingleOrDefault();
+                    var sonuc = (from p in db.tblKullaniciProjeRols where p.projeId == veri.projeId && p.kullaniciId == veri.kullaniciId && p.rolId == veri.rolId select p).SingleOrDefault();
                     if (sonuc == null)
                     {
+                        //var rolvarmi=(from p in db.tblKullaniciProjeRols where )
                         tblKullaniciProjeRol kp = new tblKullaniciProjeRol
                         {
                             projeId = veri.projeId,
@@ -494,24 +504,108 @@ namespace Buyutec.IslerKatmani
             }
         }
         //projede çalışan kişiler
-        public static int ProjeKisi()
+        //public static int ProjeKisi()
+        //{
+        //    try
+        //    {
+        //        using (BuyutecDBEntities db = new BuyutecDBEntities())
+        //        {
+        //            var kl = (from kkk in db.tblKullanicis
+        //                      select kkk);// gelecek şart
+        //            return 0;
+        //        }
+                
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return 1;
+        //        throw;
+        //    }
+                    
+        //}
+        public static List<Kullanici> SureceAtananKisileriCek(SureceAtananKisi sak, int projeId)
         {
+            var kullanicilar = (dynamic)null;
             try
             {
                 using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
-                    var kl = (from kkk in db.tblKullanicis
-                              select kkk);// gelecek şart
-                    return 0;
+                    if (sak.surec == 1) {
+                        var projeSurecKontrol = (from p in db.tblSurecs where p.projeId == projeId && p.surecId == sak.Id select p).SingleOrDefault();
+                        if (projeSurecKontrol != null)
+                        {
+                            var surecSonuc = (from p in db.tblKullaniciSurecs join k in db.tblKullanicis on p.kullaniciId equals k.kullaniciId where p.surecId == sak.Id select k);
+                            if (surecSonuc != null)
+                                kullanicilar = Kullanici.MapData(surecSonuc.ToList());
+                        }
+                    }
+                    else if(sak.surec == 2)
+                    {
+                        var projeAltSurecKontrol = (from p in db.tblAltSurecs where p.altSurecId == sak.Id select new { p.surecId }).SingleOrDefault();
+                        if(projeAltSurecKontrol != null)
+                        {
+                            var projeSurecKontrol = (from p in db.tblSurecs where p.projeId == projeId && p.surecId == projeAltSurecKontrol.surecId select p).SingleOrDefault();
+                            if(projeSurecKontrol != null)
+                            {
+                                var altsurecSonuc = (from p in db.tblKullaniciAltSurecs join k in db.tblKullanicis on p.kullaniciId equals k.kullaniciId where p.altSurecId == sak.Id select k);
+                                if (altsurecSonuc != null)
+                                    kullanicilar = Kullanici.MapData(altsurecSonuc.ToList());
+
+                            }
+                        }
+                    }
                 }
-                
+                return kullanicilar;
             }
             catch (Exception)
             {
-                return 1;
-                throw;
+                return null;
             }
-                    
+        }
+        public static char AltSureceKisiAta(KullaniciSurec ks , int projeId)
+        {
+            char result = '-';
+            try
+            {
+                using (BuyutecDBEntities db = new BuyutecDBEntities())
+                {
+                    var altSurecKontrol = (from p in db.tblAltSurecs where p.altSurecId == ks.surecId select new { p.surecId }).SingleOrDefault();
+                    if (altSurecKontrol != null)
+                    {
+                        var surecProjeKontrol = (from p in db.tblSurecs where p.surecId == altSurecKontrol.surecId && p.projeId == projeId select p).SingleOrDefault();
+                        if (surecProjeKontrol != null)
+                        {
+                            var kullaniciSurectevarmi = (from p in db.tblKullaniciSurecs where p.surecId == altSurecKontrol.surecId && p.kullaniciId == ks.kullaniciId select p).SingleOrDefault();
+                            if (kullaniciSurectevarmi == null)
+                            {
+                                tblKullaniciSurec kss = new tblKullaniciSurec
+                                {
+                                    surecId = (int)altSurecKontrol.surecId,
+                                    kullaniciId = ks.kullaniciId
+                                };
+                                db.tblKullaniciSurecs.Add(kss);
+                            }
+                            var kullanicivarmi = (from p in db.tblKullaniciAltSurecs where p.altSurecId == ks.surecId && p.kullaniciId == ks.kullaniciId select p).SingleOrDefault();
+                            if (kullanicivarmi == null)
+                            {
+                                tblKullaniciAltSurec kas = new tblKullaniciAltSurec
+                                {
+                                    altSurecId = ks.surecId,
+                                    kullaniciId = ks.kullaniciId
+                                };
+                                db.tblKullaniciAltSurecs.Add(kas);
+                                db.SaveChanges();
+                                result = '+';
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result = '?';
+            }
+            return result;
         }
     }
 }

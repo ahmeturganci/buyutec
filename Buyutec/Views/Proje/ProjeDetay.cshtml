@@ -126,7 +126,7 @@
                         
                     </select>
                 </div>
-                <button type="button" class="btn btn-primary pull-right" style="margin-left:5px;" onclick="GuncelleSurec();">Güncelle</button>
+                <button type="button" class="btn btn-primary pull-right" style="margin-left:5px;" id="surecAltSurecGuncelle" sureckontrol="abc">Güncelle</button>
                 <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#altSurecEkle" ><i class="fa fa-plus"></i> Alt Süreç Ekle</button>
             </div>
         </div>
@@ -328,13 +328,17 @@
         }
         function ProjeCek() {
             $.post("/Proje/ProjeCek", function (data) {
-                $.each(data, function (i, item) {
-                    RolAdiCek(item.projeId);
-                    if (item.aktifMi == true)
-                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
-                    if (item.aktifMi == false)
-                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
-                });
+                if (data != "null") {
+                    $.each(data, function (i, item) {
+                        RolAdiCek(item.projeId);
+                        if (item.aktifMi == true)
+                            $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
+                        if (item.aktifMi == false)
+                            $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
+                    });
+                }
+                else
+                    window.location.href = "/Proje/Index";
             });
         }
         function DurumCek() {
@@ -476,15 +480,20 @@
             $(document.body).on("click", "li.surec", function () {
                 $("#surecDetay").show(300);
                 var id = parseInt($(this).text());
-                
+                $("#surecAltSurecGuncelle").attr("sureckontrol", "Surec");
                 SurecGetir(id);
+                SureceAtananKisileriCek(id);
+                $("#ssID").text(id);
             });
 
             $(document.body).on("click", "li.altsurec", function () {
                 $("#surecDetay").show(300);
                 var id = parseInt($(this).text());
+                $("#surecAltSurecGuncelle").attr("sureckontrol", "AltSurec");
+                SureceAtananKisileriCek(id);
                 //alert(id);
                 AltSurecGetir(id);
+                $("#ssID").text(id);
             });
         });
         function SurecGetir(sId) {
@@ -547,14 +556,26 @@
             });
         });
         function KisiAta() {
+            var kontrol = $("#surecAltSurecGuncelle").attr("sureckontrol");
+            //alert(kontrol);
             var veri = {
                 kullaniciId: parseInt($("#projeKisiler option:selected").val()),
                 surecId: parseInt($("#ssID").text())
             };
             alert(veri.kullaniciId + ' ' + veri.surecId);
-            $.post("/Proje/SureceKisiAta", veri, function (sonuc) {
-                console.log(sonuc);
-            });
+            if (kontrol == "Surec") {
+                $.post("/Proje/SureceKisiAta", veri, function (sonuc) {
+                    console.log(sonuc);
+                });
+            }
+            else if (kontrol == "AltSurec") {
+                $.post("/Proje/AltSureceKisiAta", veri, function (sonuc) {
+                    console.log(sonuc);
+                });
+            }
+            else {
+                alert("Kişi atama sorunu");
+            }
             
         }
         function AltSurecEkle() {
@@ -572,6 +593,47 @@
                 //console.log(sonuc);
             });
         }
+
+        $("#surecAltSurecGuncelle").click(function () {
+            var veri = $("#surecAltSurecGuncelle").attr("sureckontrol");
+            if (veri == "Surec") {
+                GuncelleSurec();
+            }
+            else if (veri == "AltSurec") {
+                //alert(veri);
+                AltSurecGuncelle();
+            }
+            else {
+                alert("Güncelleme belirsiz !");
+            }
+
+        });
+        function SureceAtananKisileriCek(Id) {
+            var veri = $("#surecAltSurecGuncelle").attr("sureckontrol");
+            var data = {};
+            if (veri == "Surec") {
+                data = {
+                    Id: Id,
+                    surec: 1
+                };
+                alert(data);
+            }
+            else if (veri == "AltSurec") {
+                data = {
+                    Id: Id,
+                    surec: 2
+                };
+                alert(data);
+            }
+            $.post("/Proje/SureceAtananKisileriCek", data, function (sonuc) {
+                $("#atananKisiler").html("");
+                $.each(sonuc, function (i, item) {
+                    $("#atananKisiler").append('<option>' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
+                });
+            });
+         
+        }
+
         function GuncelleSurec() {
              
             var veri = {
@@ -579,6 +641,7 @@
                 aciklama: $("#ytxtSurecAciklama").val(),
                 baslangicTarihi: $("#ytxtSurecBaslamaTarih").val(),
                 bitisTarihi: $("#ytxtSurecBitisTarih").val(),
+                bitirmeOrani:$("#ytxtSurecTamamlamaOran").val(),
                 durumId: parseInt($("#ydurumlar option:selected").val()),
                 oncelikId: parseInt($("#yoncelikler option:selected").val()),
                 sId:$("#ssID").text()
@@ -590,23 +653,25 @@
         }
         function AltSurecGuncelle() {
             var data = {
-                surecAdi: $("#txtSurecAdi").val(),
-                aciklama: $("#txtSurecAciklama").val(),
-                baslangicTarihi: $("#txtSurecBaslamaTarih").val(),
-                bitisTarihi: $("#txtSurecBitisTarih").val(),
-                durumId: parseInt($("#durumlar option:selected").val()),
-                oncelikId: parseInt($("#oncelikler option:selected").val())
+                altSurecAdi: $("#ytxtSurecAdi").val(),
+                aciklama: $("#ytxtSurecAciklama").val(),
+                baslangicTarihi: $("#ytxtSurecBaslamaTarih").val(),
+                bitisTarihi: $("#ytxtSurecBitisTarih").val(),
+                bitirmeOrani: $("#ytxtSurecTamamlamaOran").val(),
+                durumId: parseInt($("#ydurumlar option:selected").val()),
+                oncelikId: parseInt($("#yoncelikler option:selected").val()),
+                aSId:$("#ssID").text()
             };
-            $.post("/Proje/AltSurecGuncelle", veri, function (sonuc) {
+            $.post("/Proje/AltSurecGuncelle", data, function (sonuc) {
                 console.log(sonuc);
             });
         }
-        function ProjeCalisanListe() {
-            $.post("/Proje/ProjeKisiListele", "", function (sonuc) {
-                $.each(sonuc, function (i, item) {
-                    $("#atananKisiler").append('<option>'+item.kullaniciAdi+' '+item.kullaniciSoyadi+'</option>')
-                });
-            });
+        //function ProjeCalisanListe() {
+        //    $.post("/Proje/ProjeKisiListele", "", function (sonuc) {
+        //        $.each(sonuc, function (i, item) {
+        //            $("#atananKisiler").append('<option>'+item.kullaniciAdi+' '+item.kullaniciSoyadi+'</option>')
+        //        });
+        //    });
 
-        }
+        //}
     </script>
