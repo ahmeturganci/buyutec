@@ -118,16 +118,14 @@
                     </div>
                 </form>
             </div>
-            
+
             <div class="box-footer clearfix no-border">
-                <div class="pull-left" >
+                <div class="pull-left">
                     <label for="AtananKisiler">Atanan Kişiler:</label>
-                    <select id="atananKisiler">
-                        
-                    </select>
+                    <select id="atananKisiler"></select>
                 </div>
                 <button type="button" class="btn btn-primary pull-right" style="margin-left:5px;" id="surecAltSurecGuncelle" sureckontrol="abc">Güncelle</button>
-                <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#altSurecEkle" ><i class="fa fa-plus"></i> Alt Süreç Ekle</button>
+                <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#altSurecEkle"><i class="fa fa-plus"></i> Alt Süreç Ekle</button>
             </div>
         </div>
     </div>
@@ -137,7 +135,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="ion ion-clipboard" ></i> Alt Süreç Ekle</h4>
+                    <h4 class="modal-title"><i class="ion ion-clipboard"></i> Alt Süreç Ekle</h4>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -326,401 +324,404 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </div>
-    <script>
-        function RolAdiCek(projeId) {
-            var veri = {
-                projeId: projeId
-            };
-            $.post("/Proje/Rollerim", veri, function (sonuc) {
-                // console.log(sonuc);
-                $.each(sonuc, function (j, jtem) {
-                    $("#rollu" + projeId).append(jtem);
-                });
+<script>
+    function RolAdiCek(projeId) {
+        var veri = {
+            projeId: projeId
+        };
+        $.post("/Proje/Rollerim", veri, function (sonuc) {
+            // console.log(sonuc);
+            $.each(sonuc, function (j, jtem) {
+                $("#rollu" + projeId).append(jtem);
             });
-        }
-        function ProjeCek() {
-            $.post("/Proje/ProjeCek", function (data) {
-                if (data != "null") {
-                    $.each(data, function (i, item) {
-                        RolAdiCek(item.projeId);
-                        if (item.aktifMi == true)
-                            $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
-                        if (item.aktifMi == false)
-                            $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
-                    });
+        });
+    }
+    function ProjeCek() {
+        $.post("/Proje/ProjeCek", function (data) {
+            if (data != "null") {
+                $.each(data, function (i, item) {
+                    RolAdiCek(item.projeId);
+                    if (item.aktifMi == true)
+                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-success">Aktif</span></td></tr>');
+                    if (item.aktifMi == false)
+                        $("#pDetay").append('<tr> <td>' + item.projeAdi + '</td> <td>' + item.olusturmaTarihi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td><td>' + item.butce + '</td> <td id="rollu' + item.projeId + '"></td><td>' + item.projeAciklama + '</td> <td><span class="label label-danger">Pasif</span></td></tr>');
+                });
+            }
+            else
+                window.location.href = "/Proje/Index";
+        });
+    }
+    function DurumCek() {
+        $.post("/Proje/DurumCek", function (data) {
+            //console.log(data);
+            $("#durumlar").html("");
+            $("#ydurumlar").html("");
+            $("#adurumlar").html("");
+            $.each(data, function (i, item) {
+                //console.log(data);
+                $("#durumlar").append('<option value="' + item.durumId + '">' + item.durumId + ' ' + item.durumAdi + '</option>');
+                $("#ydurumlar").append('<option value="' + item.durumId + '">' + item.durumId + ' ' + item.durumAdi + '</option>');
+                $("#adurumlar").append('<option value="' + item.durumId + '">' + item.durumId + ' ' + item.durumAdi + '</option>');
+            });
+        });
+    }
+    function OncelikCek() {
+        $.post("/Proje/OncelikListele", function (data) {
+            //console.log(data);
+            $("#oncelikler").html("");
+            $("#yoncelikler").html("");
+            $("#aoncelikler").html("");
+            $.each(data, function (i, item) {
+                //console.log(data);
+                $("#oncelikler").append('<option value="' + item.oncelikId + '">' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
+                $("#yoncelikler").append('<option value="' + item.oncelikId + '">' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
+                $("#aoncelikler").append('<option value="' + item.oncelikId + '">' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
+            });
+        });
+    }
+    function KullaniciCek() {
+        $.post("/Proje/KisiCek", function (data) {
+            //console.log(data);
+            $("#kullanicilar").html("");
+            $.each(data, function (i, item) {
+                $("#kullanicilar").append('<option>' + item.kullaniciId + ' ' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
+            });
+        });
+    }
+    function RolCek() {
+        $.post("/Proje/RolCek", function (sonuc) {
+            //console.log(sonuc);
+            $("#kullaniciRoller").html("");
+            $.each(sonuc, function (i, item) {
+                $("#kullaniciRoller").append('<option>' + item.rolId + ' ' + item.rolAdi + '</option>')
+            });
+        });
+
+    }
+    function SurecEkle() {
+        //var kullaniciId = parseInt($("#kisiler option:selected").val())
+        //alert(kullaniciId);
+        var veri = {
+            surecAdi: $("#txtSurecAdi").val(),
+            aciklama: $("#txtSurecAciklama").val(),
+            baslangicTarihi: $("#txtSurecBaslamaTarih").val(),
+            bitisTarihi: $("#txtSurecBitisTarih").val(),
+            durumId: parseInt($("#durumlar option:selected").val()),
+            oncelikId: parseInt($("#oncelikler option:selected").val()),
+        };
+        if (veri.surecAdi == null || veri.aciklama == null || veri.baslangicTarihi == null || veri.bitisTarihi == null || veri.durumId == null || veri.oncelikId == null)
+            alert("Değerleri kontrol ediniz");
+        else {
+            //console.log(veri);
+            //$.post("/Proje/SurecEkle", { veri: veri, kullaniciId: kullaniciId }, function (sonuc) {
+            $.post("/Proje/SurecEkle", veri, function (sonuc) {
+                if (sonuc == 0) {
+                    alert("Eklendi");//css li alert
+                    window.location.reload(true);
+                }
+                else if (sonuc == '_') {
+                    alert("Bitiş tarihi başlangıç tarihinden büyük olmalı");
+                }
+                else if (sonuc == '/') {
+                    alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
+                }
+                else if (sonuc == 't') {
+                    alert("Girmiş olduğunuz tarihler 2000 yılından büyük olmalı");
                 }
                 else
-                    window.location.href = "/Proje/Index";
+                    alert("Değerlerinizi kontrol ediniz.");
             });
         }
-        function DurumCek() {
-            $.post("/Proje/DurumCek", function (data) {
-                //console.log(data);
-                $("#durumlar").html("");
-                $("#ydurumlar").html("");
-                $("#adurumlar").html("");
-                $.each(data, function (i, item) {
-                    //console.log(data);
-                    $("#durumlar").append('<option value="' + item.durumId + '">' + item.durumId + ' ' + item.durumAdi + '</option>');
-                    $("#ydurumlar").append('<option value="' + item.durumId + '">' + item.durumId + ' ' + item.durumAdi + '</option>');
-                    $("#adurumlar").append('<option value="' + item.durumId + '">' + item.durumId + ' ' + item.durumAdi + '</option>');
-                });
-            });
-        }
-        function OncelikCek() {
-            $.post("/Proje/OncelikListele", function (data) {
-                //console.log(data);
-                $("#oncelikler").html("");
-                $("#yoncelikler").html("");
-                $("#aoncelikler").html("");
-                $.each(data, function (i, item) {
-                    //console.log(data);
-                    $("#oncelikler").append('<option value="' + item.oncelikId + '">' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
-                    $("#yoncelikler").append('<option value="' + item.oncelikId + '">' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
-                    $("#aoncelikler").append('<option value="' + item.oncelikId + '">' + item.oncelikId + ' ' + item.oncelikAdi + '</option>');
-                });
-            });
-        }
-        function KullaniciCek() {
-            $.post("/Proje/KisiCek", function (data) {
-                //console.log(data);
-                $("#kullanicilar").html("");
-                $.each(data, function (i, item) {
-                    $("#kullanicilar").append('<option>' + item.kullaniciId + ' ' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
-                });
-            });
-        }
-        function RolCek() {
-            $.post("/Proje/RolCek", function (sonuc) {
-                //console.log(sonuc);
-                $("#kullaniciRoller").html("");
-                $.each(sonuc, function (i, item) {
-                    $("#kullaniciRoller").append('<option>' + item.rolId + ' ' + item.rolAdi + '</option>')
-                });
-            });
+    }
+    function KisiEkle() {
+        var veri = {
+            kullaniciId: parseInt($("#kullanicilar option:selected").val()),
+            rolId: parseInt($("#kullaniciRoller option:selected").val()),
+        };
+        //alert(veri.rolId);
+        //console.log(veri);
+        $.post("/Proje/KullaniciProjeEkle", veri, function (sonuc) {
+            console.log(sonuc);
+        });
 
-        }
-        function SurecEkle() {
-            //var kullaniciId = parseInt($("#kisiler option:selected").val())
-            //alert(kullaniciId);
-            var veri = {
-                surecAdi: $("#txtSurecAdi").val(),
-                aciklama: $("#txtSurecAciklama").val(),
-                baslangicTarihi: $("#txtSurecBaslamaTarih").val(),
-                bitisTarihi: $("#txtSurecBitisTarih").val(),
-                durumId: parseInt($("#durumlar option:selected").val()),
-                oncelikId: parseInt($("#oncelikler option:selected").val()),
-            };
-            if (veri.surecAdi == null || veri.aciklama == null || veri.baslangicTarihi == null || veri.bitisTarihi==null || veri.durumId == null || veri.oncelikId==null)
-                alert("Değerleri kontrol ediniz");
-            else {
-                //console.log(veri);
-                //$.post("/Proje/SurecEkle", { veri: veri, kullaniciId: kullaniciId }, function (sonuc) {
-                $.post("/Proje/SurecEkle", veri, function (sonuc) {
-                    if (sonuc == 0) {
-                        alert("Eklendi");//css li alert
-                        window.location.reload(true);
-                    }
-                    else if (sonuc == '_') {
-                        alert("Bitiş tarihi başlangıç tarihinden büyük olmalı");
-                    }
-                    else if (sonuc == '/') {
-                        alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
-                    }
-                    else if (sonuc == 't') {
-                        alert("Girmiş olduğunuz tarihler 2000 yılından büyük olmalı");
-                    }
-                    else
-                        alert("Değerlerinizi kontrol ediniz.");
-                });
-            }
-        }
-        function KisiEkle() {
-            var veri = {
-                kullaniciId: parseInt($("#kullanicilar option:selected").val()),
-                rolId: parseInt($("#kullaniciRoller option:selected").val()),
-            };
-            //alert(veri.rolId);
-            //console.log(veri);
-            $.post("/Proje/KullaniciProjeEkle", veri, function (sonuc) {
-                  console.log(sonuc);
-            });
+    }
+    function AltSurecCek(surecId) {
+        var data = {
+            surecId: surecId
+        };
+        //console.log("alt surec");
+        $.post("/Proje/AltSurecListele", data, function (sonuc) {
+            $("#altSurecListe" + surecId).append('<div id="altSurec"  style="margin-left:20px; margin-bottom:2px;"> <ul id="alts' + surecId + '" class="todo-list"></ul> </div>');
+            $.each(sonuc, function (i, item) {
+                //alert(item.altSurecId);
+                var sId = item.altSurecId;
+                if (item.oncelikId == 1)//düşük
+                    $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-info"><i class="fa fa-clock-o"></i>Düşük</small> </li>');
+                if (item.oncelikId == 2)//orta
+                    $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-success"><i class="fa fa-clock-o"></i>Orta</small> </li>');
+                if (item.oncelikId == 3)//yüksek
+                    $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-warning"><i class="fa fa-clock-o"></i>Yüksek</small> </li>');
+                if (item.oncelikId == 4)//acil
+                    $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-danger"><i class="fa fa-clock-o"></i>Acil</small> </li>');
 
-        }
-        function AltSurecCek(surecId) {
-            var data = {
-                surecId: surecId
-            };
-            //console.log("alt surec");
-            $.post("/Proje/AltSurecListele", data, function (sonuc) {
-                $("#altSurecListe" + surecId).append('<div id="altSurec"  style="margin-left:20px; margin-bottom:2px;"> <ul id="alts'+surecId+'" class="todo-list"></ul> </div>');
-                $.each(sonuc, function (i, item) {
-                    //alert(item.altSurecId);
-                    var sId = item.altSurecId;
-                    if (item.oncelikId == 1)//düşük
-                        $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-info"><i class="fa fa-clock-o"></i>Düşük</small> </li>');
-                    if (item.oncelikId == 2)//orta
-                        $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-success"><i class="fa fa-clock-o"></i>Orta</small> </li>');
-                    if (item.oncelikId == 3)//yüksek
-                        $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-warning"><i class="fa fa-clock-o"></i>Yüksek</small> </li>');
-                    if (item.oncelikId == 4)//acil
-                        $("#alts" + surecId).append('<li class="altsurec" id="altsurec"><b id="altsurecID">' + sId + '</b> <span class="text">' + item.altSurecAdi + '</span> <small class="label label-danger"><i class="fa fa-clock-o"></i>Acil</small> </li>');
-
-                });
-            });
-        }
-        function SurecCek() {
-            $.post("/Proje/SurecListele", function (sonuc) {
-                $.each(sonuc, function (i, item) {
-                    console.log(item);
-                    var sId = item.surecId;
-                    if (item.oncelikId == 1)//düşük
-                        $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b><span class="text">' + item.surecAdi + '</span> <small class="label label-info">Düşük</small></li><div id="altSurecListe' + sId + '"></div>');
-                    if (item.oncelikId == 2)//orta
-                        $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b><span class="text">' + item.surecAdi + '</span> <small class="label label-success">Orta</small> </li><div id="altSurecListe' + sId + '"></div>');
-                    if (item.oncelikId == 3)//yüksek
-                        $("#SurecAltSurec").append('<li id="surec"class="surec"><b id="surecID">' + sId + '</b> <span class="text">' + item.surecAdi + '</span> <small class="label label-warning">Yüksek</small> </li><div id="altSurecListe' + sId + '"></div>');
-                    if (item.oncelikId == 4)//acil
-                        $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b> <span class="text">' + item.surecAdi + '</span> <small class="label label-danger">Acil</small> </li><div id="altSurecListe' + sId + '"></div>');
-                    SurecGetir(sId);
-                    AltSurecCek(sId);
-
-
-                });
-            });
-        }
-        $(document).ready(function () {
-            $("body").load(ProjeCek()).load(DurumCek()).load(OncelikCek()).load(KullaniciCek()).load(RolCek()).load(SurecCek());
-            $("#altSurec1").hide();
-            $("#surecDetay").hide();
-            $("#ssID").hide();
-            //$("#surec1").on("click",function () {
-            //    alert("asdasdasd");
-            //    $(".altSurec").toggle(500);
-            //    $("#surecDetay").show();
-            //});
-            $("#asd").hide(500);
-            $("#asd").click(function () {
-                console.log("hop");
-            });
-            /* $(document.body).on("load", function () {
-                 $(".altsurec").hide();
-             });*/
-            
-            $(document.body).on("click", "li.surec", function () {
-                $("#surecDetay").show(300);
-                var id = parseInt($(this).text());
-                $("#surecAltSurecGuncelle").attr("sureckontrol", "Surec");
-                SurecGetir(id);
-                SureceAtananKisileriCek(id);
-                $("#ssID").text(id);
-            });
-
-            $(document.body).on("click", "li.altsurec", function () {
-                $("#surecDetay").show(300);
-                var id = parseInt($(this).text());
-                $("#surecAltSurecGuncelle").attr("sureckontrol", "AltSurec");
-                SureceAtananKisileriCek(id);
-                //alert(id);
-                AltSurecGetir(id);
-                $("#ssID").text(id);
             });
         });
-        function SurecGetir(sId) {
-            var data = {
-                sId: sId
-            };
-            $.post("/Proje/SurecCek", data, function (sonuc) {
-                //alert("asd");
-                console.log(sonuc);
-                $.each(sonuc, function (i, item) {
-                    $("#ytxtSurecAdi").val(item.surecAdi);
-                    $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
-                    $("#oran").text("%" + item.bitirmeOrani);
-                    //$("#oran").css("width:", "'" + item.bitirmeOrani + "'%");
-                    $("#oran").css({ "width": item.bitirmeOrani+"%" });
-                    console.log(oran);
-                    //$("#oran").width(item.bitirmeOrani);
-                    $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
-                    $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
-                    $("#ydurumlar").val(item.durumId);
-                    console.log("durumId :" + item.durumId);
-                    $("#yoncelikler").val(item.oncelikId);
-                    console.log("oncelikId :" + item.oncelikId);
-                    $("#ytxtSurecAciklama").val(item.aciklama);
-                    $("#ssID").text(item.surecId);
-                });
-            });
-        }
-        function AltSurecGetir(surecId) {
-            var durumId,oncelikId;
-            var veri = { surecId: surecId };
-            $.post("/Proje/AltSurecCek", veri, function (sonuc) {
-                //console.log(sonuc);
-                $.each(sonuc, function (i, item) {
-                    durumId = item.durumId;
-                    oncelikId = item.oncelikId;
-                    $("#ytxtSurecAdi").val(item.altSurecAdi);
-                    $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
-                    $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
-                    $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
-                    //$("#ydurumlar option:selected").val();
-                    //$("#yoncelikler option:selected").val();
-                    $('#ydurumlar option[value=' + durumId + ']').prop('selected', true);
-                    $('#yoncelikler option[value=' + oncelikId + ']').prop('selected', true);
-                    $("#ytxtSurecAciklama").val(item.aciklama);
-                });
-            });
-        }
-        function ProjeKullaniciDoldur() {
-            //$.post("/Proje", veri, function (sonuc) {
-            //    console.log(sonuc);
-            //});
-        }
-        $("#projeKisilerDoldur").click(function () {
-            $.post("/Proje/ProjeKisiDoldur", "", function (data) {
-                console.log(data);
-                $("#projeKisiler").html("");
-                $.each(data, function (i, item) {
-                    $("#projeKisiler").append('<option>' + item.kullaniciId + ' ' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
-                });
+    }
+    function SurecCek() {
+        $.post("/Proje/SurecListele", function (sonuc) {
+            $.each(sonuc, function (i, item) {
+                console.log(item);
+                var sId = item.surecId;
+                if (item.oncelikId == 1)//düşük
+                    $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b><span class="text">' + item.surecAdi + '</span> <small class="label label-info">Düşük</small></li><div id="altSurecListe' + sId + '"></div>');
+                if (item.oncelikId == 2)//orta
+                    $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b><span class="text">' + item.surecAdi + '</span> <small class="label label-success">Orta</small> </li><div id="altSurecListe' + sId + '"></div>');
+                if (item.oncelikId == 3)//yüksek
+                    $("#SurecAltSurec").append('<li id="surec"class="surec"><b id="surecID">' + sId + '</b> <span class="text">' + item.surecAdi + '</span> <small class="label label-warning">Yüksek</small> </li><div id="altSurecListe' + sId + '"></div>');
+                if (item.oncelikId == 4)//acil
+                    $("#SurecAltSurec").append('<li id="surec" class="surec"><b id="surecID">' + sId + '</b> <span class="text">' + item.surecAdi + '</span> <small class="label label-danger">Acil</small> </li><div id="altSurecListe' + sId + '"></div>');
+                SurecGetir(sId);
+                AltSurecCek(sId);
+
+
             });
         });
-        function KisiAta() {
-            var kontrol = $("#surecAltSurecGuncelle").attr("sureckontrol");
-            //alert(kontrol);
-            var veri = {
-                kullaniciId: parseInt($("#projeKisiler option:selected").val()),
-                surecId: parseInt($("#ssID").text())
-            };
-            alert(veri.kullaniciId + ' ' + veri.surecId);
-            if (kontrol == "Surec") {
-                $.post("/Proje/SureceKisiAta", veri, function (sonuc) {
-                    console.log(sonuc);
-                });
-            }
-            else if (kontrol == "AltSurec") {
-                $.post("/Proje/AltSureceKisiAta", veri, function (sonuc) {
-                    console.log(sonuc);
-                });
-            }
-            else {
-                alert("Kişi atama sorunu");
-            }
-            
-        }
-        function AltSurecEkle() {
-            var data = {
-                altSurecAdi: $("#txtaSurecAdi").val(),
-                aciklama: $("#txtaSurecAciklama").val(),
-                baslangicTarihi: $("#txtaSurecBaslamaTarih").val(),
-                bitisTarihi: $("#txtaSurecBitisTarih").val(),
-                durumId: parseInt($("#adurumlar option:selected").val()),
-                oncelikId: parseInt($("#aoncelikler option:selected").val()),
-                surecId: $("#ssID").text()
-            };
-            if (data.altSurecAdi == null || data.aciklama == null || data.baslangicTarihi == null || data.bitisTarihi == null || data.durumId == null || data.oncelikId == null)
-                alert("Değerleri kontrol ediniz");
-            else {
-                //console.log(data);
-                $.post("/Proje/AltSurecEkle", data, function () {
-                    if (sonuc == '+') {
-                        alert("Eklendi");//css li alert
-                        window.location.reload(true);
-                    }
-                    else if (sonuc == '_') {
-                        alert("Bitiş tarihi başlangıç tarihinden büyük olmalı");
-                    }
-                    else if (sonuc == '/') {
-                        alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
-                    }
-                    else if (sonuc == 't') {
-                        alert("Girmiş olduğunuz tarihler 2000 yılından büyük olmalı");
-                    }
-                    else
-                        alert("Değerlerinizi kontrol ediniz.");
-                });
-            }
-        }
-
-        $("#surecAltSurecGuncelle").click(function () {
-            var veri = $("#surecAltSurecGuncelle").attr("sureckontrol");
-            if (veri == "Surec") {
-                GuncelleSurec();
-            }
-            else if (veri == "AltSurec") {
-                //alert(veri);
-                AltSurecGuncelle();
-            }
-            else {
-                alert("Güncelleme belirsiz !");
-            }
-
+    }
+    $(document).ready(function () {
+        $("body").load(ProjeCek()).load(DurumCek()).load(OncelikCek()).load(KullaniciCek()).load(RolCek()).load(SurecCek());
+        $("#altSurec1").hide();
+        $("#surecDetay").hide();
+        $("#ssID").hide();
+        //$("#surec1").on("click",function () {
+        //    alert("asdasdasd");
+        //    $(".altSurec").toggle(500);
+        //    $("#surecDetay").show();
+        //});
+        $("#asd").hide(500);
+        $("#asd").click(function () {
+            console.log("hop");
         });
-        function SureceAtananKisileriCek(Id) {
-            var veri = $("#surecAltSurecGuncelle").attr("sureckontrol");
-            var data = {};
-            if (veri == "Surec") {
-                data = {
-                    Id: Id,
-                    surec: 1
-                };
-                alert(data);
-            }
-            else if (veri == "AltSurec") {
-                data = {
-                    Id: Id,
-                    surec: 2
-                };
-                alert(data);
-            }
-            $.post("/Proje/SureceAtananKisileriCek", data, function (sonuc) {
-                $("#atananKisiler").html("");
-                $.each(sonuc, function (i, item) {
-                    $("#atananKisiler").append('<option>' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
-                });
-            });
-         
-        }
+        /* $(document.body).on("load", function () {
+             $(".altsurec").hide();
+         });*/
 
-        function GuncelleSurec() {
-             
-            var veri = {
-                surecAdi: $("#ytxtSurecAdi").val(),
-                aciklama: $("#ytxtSurecAciklama").val(),
-                baslangicTarihi: $("#ytxtSurecBaslamaTarih").val(),
-                bitisTarihi: $("#ytxtSurecBitisTarih").val(),
-                bitirmeOrani:$("#ytxtSurecTamamlamaOran").val(),
-                durumId: parseInt($("#ydurumlar option:selected").val()),
-                oncelikId: parseInt($("#yoncelikler option:selected").val()),
-                sId:$("#ssID").text()
-            };
-            console.log(veri);
-            $.post("/Proje/SGuncelle", veri, function (sonuc) {
+        $(document.body).on("click", "li.surec", function () {
+            $("#surecDetay").show(300);
+            var id = parseInt($(this).text());
+            $("#surecAltSurecGuncelle").attr("sureckontrol", "Surec");
+            SurecGetir(id);
+            SureceAtananKisileriCek(id);
+            $("#ssID").text(id);
+        });
+
+        $(document.body).on("click", "li.altsurec", function () {
+            $("#surecDetay").show(300);
+            var id = parseInt($(this).text());
+            $("#surecAltSurecGuncelle").attr("sureckontrol", "AltSurec");
+            SureceAtananKisileriCek(id);
+            //alert(id);
+            AltSurecGetir(id);
+            $("#ssID").text(id);
+        });
+    });
+    function SurecGetir(sId) {
+        var data = {
+            sId: sId
+        };
+        $.post("/Proje/SurecCek", data, function (sonuc) {
+            //alert("asd");
+            console.log(sonuc);
+            $.each(sonuc, function (i, item) {
+                $("#ytxtSurecAdi").val(item.surecAdi);
+                $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
+                $("#oran").text("%" + item.bitirmeOrani);
+                //$("#oran").css("width:", "'" + item.bitirmeOrani + "'%");
+                $("#oran").css({ "width": item.bitirmeOrani + "%" });
+                console.log(oran);
+                //$("#oran").width(item.bitirmeOrani);
+                $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
+                $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
+                $("#ydurumlar").val(item.durumId);
+                console.log("durumId :" + item.durumId);
+                $("#yoncelikler").val(item.oncelikId);
+                console.log("oncelikId :" + item.oncelikId);
+                $("#ytxtSurecAciklama").val(item.aciklama);
+                $("#ssID").text(item.surecId);
+            });
+        });
+    }
+    function AltSurecGetir(surecId) {
+        var durumId, oncelikId;
+        var veri = { surecId: surecId };
+        $.post("/Proje/AltSurecCek", veri, function (sonuc) {
+            //console.log(sonuc);
+            $.each(sonuc, function (i, item) {
+                durumId = item.durumId;
+                oncelikId = item.oncelikId;
+                $("#ytxtSurecAdi").val(item.altSurecAdi);
+                $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
+                $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
+                $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
+                //$("#ydurumlar option:selected").val();
+                //$("#yoncelikler option:selected").val();
+                $('#ydurumlar option[value=' + durumId + ']').prop('selected', true);
+                $('#yoncelikler option[value=' + oncelikId + ']').prop('selected', true);
+                $("#ytxtSurecAciklama").val(item.aciklama);
+            });
+        });
+    }
+    function ProjeKullaniciDoldur() {
+        //$.post("/Proje", veri, function (sonuc) {
+        //    console.log(sonuc);
+        //});
+    }
+    $("#projeKisilerDoldur").click(function () {
+        $.post("/Proje/ProjeKisiDoldur", "", function (data) {
+            console.log(data);
+            $("#projeKisiler").html("");
+            $.each(data, function (i, item) {
+                $("#projeKisiler").append('<option>' + item.kullaniciId + ' ' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
+            });
+        });
+    });
+    function KisiAta() {
+        var kontrol = $("#surecAltSurecGuncelle").attr("sureckontrol");
+        //alert(kontrol);
+        var veri = {
+            kullaniciId: parseInt($("#projeKisiler option:selected").val()),
+            surecId: parseInt($("#ssID").text())
+        };
+        alert(veri.kullaniciId + ' ' + veri.surecId);
+        if (kontrol == "Surec") {
+            $.post("/Proje/SureceKisiAta", veri, function (sonuc) {
                 console.log(sonuc);
             });
         }
-        function AltSurecGuncelle() {
-            var data = {
-                altSurecAdi: $("#ytxtSurecAdi").val(),
-                aciklama: $("#ytxtSurecAciklama").val(),
-                baslangicTarihi: $("#ytxtSurecBaslamaTarih").val(),
-                bitisTarihi: $("#ytxtSurecBitisTarih").val(),
-                bitirmeOrani: $("#ytxtSurecTamamlamaOran").val(),
-                durumId: parseInt($("#ydurumlar option:selected").val()),
-                oncelikId: parseInt($("#yoncelikler option:selected").val()),
-                aSId:$("#ssID").text()
-            };
-            $.post("/Proje/AltSurecGuncelle", data, function (sonuc) {
+        else if (kontrol == "AltSurec") {
+            $.post("/Proje/AltSureceKisiAta", veri, function (sonuc) {
                 console.log(sonuc);
             });
         }
-        //function ProjeCalisanListe() {
-        //    $.post("/Proje/ProjeKisiListele", "", function (sonuc) {
-        //        $.each(sonuc, function (i, item) {
-        //            $("#atananKisiler").append('<option>'+item.kullaniciAdi+' '+item.kullaniciSoyadi+'</option>')
-        //        });
-        //    });
+        else {
+            alert("Kişi atama sorunu");
+        }
 
-        //}
-    </script>
+    }
+    function AltSurecEkle() {
+        var data = {
+            altSurecAdi: $("#txtaSurecAdi").val(),
+            aciklama: $("#txtaSurecAciklama").val(),
+            baslangicTarihi: $("#txtaSurecBaslamaTarih").val(),
+            bitisTarihi: $("#txtaSurecBitisTarih").val(),
+            durumId: parseInt($("#adurumlar option:selected").val()),
+            oncelikId: parseInt($("#aoncelikler option:selected").val()),
+            surecId: $("#ssID").text()
+        };
+        if (data.altSurecAdi == null || data.aciklama == null || data.baslangicTarihi == null || data.bitisTarihi == null || data.durumId == null || data.oncelikId == null)
+            alert("Değerleri kontrol ediniz");
+        else {
+            //console.log(data);
+            $.post("/Proje/AltSurecEkle", data, function () {
+                if (sonuc == '+') {
+                    alert("Eklendi");//css li alert
+                    window.location.reload(true);
+                }
+                else if (sonuc == '_') {
+                    alert("Bitiş tarihi başlangıç tarihinden büyük olmalı");
+                }
+                else if (sonuc == '/') {
+                    alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
+                }
+                else if (sonuc == 't') {
+                    alert("Girmiş olduğunuz tarihler 2000 yılından büyük olmalı");
+                }
+                else
+                    alert("Değerlerinizi kontrol ediniz.");
+            });
+        }
+    }
+
+    $("#surecAltSurecGuncelle").click(function () {
+        var veri = $("#surecAltSurecGuncelle").attr("sureckontrol");
+        if (veri == "Surec") {
+            GuncelleSurec();
+        }
+        else if (veri == "AltSurec") {
+            //alert(veri);
+            AltSurecGuncelle();
+        }
+        else {
+            alert("Güncelleme belirsiz !");
+        }
+
+    });
+    function SureceAtananKisileriCek(Id) {
+        var veri = $("#surecAltSurecGuncelle").attr("sureckontrol");
+        var data = {};
+        if (veri == "Surec") {
+            data = {
+                Id: Id,
+                surec: 1
+            };
+            alert(data);
+        }
+        else if (veri == "AltSurec") {
+            data = {
+                Id: Id,
+                surec: 2
+            };
+            alert(data);
+        }
+        $.post("/Proje/SureceAtananKisileriCek", data, function (sonuc) {
+            $("#atananKisiler").html("");
+            $.each(sonuc, function (i, item) {
+                $("#atananKisiler").append('<option>' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</option>');
+            });
+        });
+
+    }
+
+    function GuncelleSurec() {
+
+        var veri = {
+            surecAdi: $("#ytxtSurecAdi").val(),
+            aciklama: $("#ytxtSurecAciklama").val(),
+            baslangicTarihi: $("#ytxtSurecBaslamaTarih").val(),
+            bitisTarihi: $("#ytxtSurecBitisTarih").val(),
+            bitirmeOrani: $("#ytxtSurecTamamlamaOran").val(),
+            durumId: parseInt($("#ydurumlar option:selected").val()),
+            oncelikId: parseInt($("#yoncelikler option:selected").val()),
+            sId: $("#ssID").text()
+        };
+        console.log(veri);
+        $.post("/Proje/SGuncelle", veri, function (sonuc) {
+            console.log(sonuc);
+        });
+    }
+    function AltSurecGuncelle() {
+        var data = {
+            altSurecAdi: $("#ytxtSurecAdi").val(),
+            aciklama: $("#ytxtSurecAciklama").val(),
+            baslangicTarihi: $("#ytxtSurecBaslamaTarih").val(),
+            bitisTarihi: $("#ytxtSurecBitisTarih").val(),
+            bitirmeOrani: $("#ytxtSurecTamamlamaOran").val(),
+            durumId: parseInt($("#ydurumlar option:selected").val()),
+            oncelikId: parseInt($("#yoncelikler option:selected").val()),
+            aSId: $("#ssID").text()
+        };
+        if (data.bitirmeOrani.length > 3 || data.bitirmeOrani < 1 || data.bitirmeOrani > 100) {
+            alert("Bitirme oranını kontrol ediniz.");
+        }
+        $.post("/Proje/AltSurecGuncelle", data, function (sonuc) {
+            console.log(sonuc);
+        });
+    }
+    //function ProjeCalisanListe() {
+    //    $.post("/Proje/ProjeKisiListele", "", function (sonuc) {
+    //        $.each(sonuc, function (i, item) {
+    //            $("#atananKisiler").append('<option>'+item.kullaniciAdi+' '+item.kullaniciSoyadi+'</option>')
+    //        });
+    //    });
+
+    //}
+</script>
