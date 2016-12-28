@@ -245,6 +245,7 @@
     <Compile Include="Models\DataViewModel\Surec.cs" />
     <Compile Include="Models\Helper\KullaniciProjeRol.cs" />
     <Compile Include="Models\Helper\KullaniciSurec.cs" />
+    <Compile Include="Models\Helper\Logar.cs" />
     <Compile Include="Models\Helper\SureceAtananKisi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

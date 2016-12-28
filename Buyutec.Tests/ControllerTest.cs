@@ -17,7 +17,7 @@ namespace Buyutec.Tests
         void GirisKontrol(string kulMail, string kulSifre)
         {
             var giris = new Controllers.HomeController();
-            JsonResult res = giris.Giris(kulMail, kulSifre) as JsonResult;
+            JsonResult res = giris.GirisYapKullanici(kulMail, kulSifre) as JsonResult;
             Assert.AreEqual("-", res.Data.ToString());
         }
         [TestMethod]

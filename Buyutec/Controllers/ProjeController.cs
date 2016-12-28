@@ -37,6 +37,9 @@ namespace Buyutec.Controllers
         public JsonResult ProjeEkle(tblProje proje)
         {
             proje.aktifMi = true;
+            char x = TarihKontrol(Convert.ToDateTime(proje.baslangicTarihi), Convert.ToDateTime(proje.olusturmaTarihi), Convert.ToDateTime(proje.bitisTarihi));
+            if (x != '-')
+                return Json(x);
             int s = ProjeIslem.ProjeEkle(proje);
             if (s == 0)
             {
@@ -47,6 +50,7 @@ namespace Buyutec.Controllers
                     rolId = 1
                 };
                 KullaniciProjeEkle(kpr);
+                Logar lg = new Logar((int)proje.olusturanKullaniciId, " Tarihte Proje Ekledi");
                 return Json("+");
             }
             else
@@ -133,14 +137,21 @@ namespace Buyutec.Controllers
         public JsonResult SurecEkle(tblSurec veri)
         {
             veri.projeId = projeDetayId;
+            char x = TarihKontrol(Convert.ToDateTime(veri.baslangicTarihi), Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(veri.bitisTarihi));
+            if (x != '-')
+                return Json(x);
             int kullaniciId = 0;
             if (Session["kulId"] != null)
                 kullaniciId = int.Parse(Session["kulId"].ToString());
             else
                 return Json('?'); // kullanıcı giriş yapmamış
+            veri.bitirmeOrani = 0;
             var sonuc = ProjeIslem.SurecEkle(veri, kullaniciId);
             if (sonuc == 0)
+            {
+                Logar lg = new Logar(kullaniciId, " Tarihte Süreç Ekledi");
                 return Json(sonuc);
+            }
             else
                 return Json("-");
 
@@ -213,9 +224,18 @@ namespace Buyutec.Controllers
         //altsüreç ekleme
         public JsonResult AltSurecEkle(tblAltSurec alt)
         {
+            char x = TarihKontrol(Convert.ToDateTime(alt.baslangicTarihi), Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(alt.bitisTarihi));
+            if (x != '-')
+                return Json(x);
+            alt.bitirmeOrani = 0;
             var s = ProjeIslem.AltSurecEkle(alt);
             if (s == 0)
+            {
+                int id = int.Parse(Session["kulId"].ToString());
+                Logar lg = new Logar(id, " Tarihte Alt Süreç Ekledi");
                 return Json("+");
+
+            }
             else
                 return Json("-");
         }
@@ -276,6 +296,16 @@ namespace Buyutec.Controllers
                 return Json(sonuc);
             else
                 return Json("-");
+        }
+        public char TarihKontrol(DateTime dt, DateTime dto,DateTime dtb) // dt başlangıç, dto oluşturma, dtb bitiş
+        {
+            char res = '-';
+            if (dt <= dto && dt >= dtb)
+                res = '_';
+            else if (dtb <= dt && dtb <= dt)
+                res = '/';
+            return res;
+
         }
     }
 }

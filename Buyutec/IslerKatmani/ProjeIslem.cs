@@ -245,9 +245,9 @@ namespace Buyutec.IslerKatmani
             {
                 using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
-                    //var projeOlusturanmisin = (from p in db.tblProjes where p.olusturanKullaniciId == kullaniciId select p).SingleOrDefault();
-                    var projedemisin = (from p in db.tblKullaniciProjeRols where p.projeId == projeId && p.kullaniciId == kullaniciId select p).SingleOrDefault();
-                    if (projedemisin != null)
+                    var projedemisin = (from p in db.tblKullaniciProjeRols where p.projeId == projeId && p.kullaniciId == kullaniciId select p).FirstOrDefault();
+                    var projeOlusturanmisin = (from p in db.tblProjes where p.projeId == projeId && p.olusturanKullaniciId == kullaniciId select p).FirstOrDefault();
+                    if (projedemisin != null || projeOlusturanmisin !=null)
                     {
                         var p = (from pc in db.tblProjes
                                  where pc.projeId == projeId

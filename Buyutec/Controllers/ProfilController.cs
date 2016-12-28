@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Buyutec.Models.DataModel;
 using Buyutec.IslerKatmani;
+using Buyutec.Models.Helper;
+
 namespace Buyutec.Controllers
 {
     public class ProfilController : Controller
@@ -20,7 +22,7 @@ namespace Buyutec.Controllers
         public JsonResult ProfilGuncelle(tblKullanici kul)
         {
             int kId = int.Parse(Session["kulId"].ToString());
-
+            Logar lg = new Logar(kId, " Tarihte Profil Güncelledi");
             var sonuc = KullaniciIslem.ProfilGuncelle(kul,kId);
             if (sonuc == '+')
                 return Json("+");
@@ -31,6 +33,7 @@ namespace Buyutec.Controllers
         public JsonResult SifreGuncelle(string eski,string yeni)
         {
             int kId = int.Parse(Session["kulId"].ToString());
+            Logar lg = new Logar(kId, " Tarihte Şifre Güncelledi");
             var sonuc = KullaniciIslem.SifreGuncelle(eski, yeni, kId);
             return Json(sonuc);
         }

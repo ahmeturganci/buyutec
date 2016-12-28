@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Buyutec.IslerKatmani;
 using Buyutec.Models.DataModel;
+using Buyutec.Models.Helper;
+
 namespace Buyutec.Controllers
 {
     public class HomeController : Controller
@@ -33,10 +35,10 @@ namespace Buyutec.Controllers
                 Session.Add("kulId", sessionKulId.kullaniciId);
                 Session.Add("kulAd", sessionKulId.kullaniciAdi);
                 Session.Add("kulMail", sessionKulId.email);
-                tblLog logDegerler = new tblLog();
-                logDegerler.kullaniciId = sessionKulId.kullaniciId;
-                logDegerler.logBilgisi = "Kullanıcı"+DateTime.Now+"Tarihte Giriş Yaptı";
-                KullaniciIslem.HareketEkle(logDegerler);
+                //kullanıcı sisteme giriş yaptııııı
+
+                int id = int.Parse(Session["kulId"].ToString());
+                Logar lg = new Logar(id, " Tarihte Giriş Yaptı");
             }
 
 
@@ -53,14 +55,19 @@ namespace Buyutec.Controllers
         //sistem hareketleri çekmek
         public JsonResult HareketListele()
         {
-            var liste = KullaniciIslem.HareketListele();
+            int kullaniciId = int.Parse(Session["kulId"].ToString());
+            var liste = KullaniciIslem.HareketListele(kullaniciId);
             return Json(liste);
         }
         //Çıkış
         public ActionResult Cikis()
         {
+            int id = int.Parse(Session["kulId"].ToString());
+            Logar lg = new Logar(id, " Tarihte Çıkış Yaptı");
             //session çıkış
             Session.Remove("kulMail");
+            Session.Remove("kulId");
+            Session.Remove("kulAd");
             return View("Index");
         }
         //kayıt ol

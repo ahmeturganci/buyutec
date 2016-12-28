@@ -207,13 +207,13 @@ namespace Buyutec.IslerKatmani
             }
         }
         //hareketleri listelemek
-        public static List<Log> HareketListele()
+        public static List<Log> HareketListele(int kulId)
         {
             try
             {
                 using (BuyutecDBEntities db = new BuyutecDBEntities())
                 {
-                    var liste = (from l in db.tblLogs select l);
+                    var liste = (from l in db.tblLogs where l.kullaniciId==kulId orderby l.logId descending select l);
                     return Log.MapData(liste.ToList());
                 }
 

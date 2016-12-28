@@ -399,11 +399,26 @@
                 durumId: parseInt($("#durumlar option:selected").val()),
                 oncelikId: parseInt($("#oncelikler option:selected").val()),
             };
-            console.log(veri);
-            //$.post("/Proje/SurecEkle", { veri: veri, kullaniciId: kullaniciId }, function (sonuc) {
-            $.post("/Proje/SurecEkle", veri, function (sonuc) {
-                window.location.reload(true);
-            });
+            if (veri.surecAdi == null || veri.aciklama == null || veri.baslangicTarihi == null || veri.bitisTarihi==null || veri.durumId == null || veri.oncelikId==null)
+                alert("Değerleri kontrol ediniz");
+            else {
+                //console.log(veri);
+                //$.post("/Proje/SurecEkle", { veri: veri, kullaniciId: kullaniciId }, function (sonuc) {
+                $.post("/Proje/SurecEkle", veri, function (sonuc) {
+                    if (sonuc == 0) {
+                        alert("Eklendi");//css li alert
+                        window.location.reload(true);
+                    }
+                    else if (sonuc == '_') {
+                        alert("Bitiş tarihi başlangıç tarihinden büyük olmalı");
+                    }
+                    else if (sonuc == '/') {
+                        alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
+                    }
+                    else
+                        alert("Değerlerinizi kontrol ediniz.");
+                });
+            }
         }
         function KisiEkle() {
             var veri = {
@@ -588,10 +603,25 @@
                 oncelikId: parseInt($("#aoncelikler option:selected").val()),
                 surecId: $("#ssID").text()
             };
-            //console.log(data);
-            $.post("/Proje/AltSurecEkle", data, function () {
-                //console.log(sonuc);
-            });
+            if (data.altSurecAdi == null || data.aciklama == null || data.baslangicTarihi == null || data.bitisTarihi == null || data.durumId == null || data.oncelikId == null)
+                alert("Değerleri kontrol ediniz");
+            else {
+                //console.log(data);
+                $.post("/Proje/AltSurecEkle", data, function () {
+                    if (sonuc == '+') {
+                        alert("Eklendi");//css li alert
+                        window.location.reload(true);
+                    }
+                    else if (sonuc == '_') {
+                        alert("Bitiş tarihi başlangıç tarihinden büyük olmalı");
+                    }
+                    else if (sonuc == '/') {
+                        alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
+                    }
+                    else
+                        alert("Değerlerinizi kontrol ediniz.");
+                });
+            }
         }
 
         $("#surecAltSurecGuncelle").click(function () {

@@ -30,19 +30,19 @@
                     <!--proje oluşturma tarihi-->
                     <div class="form-group">
                         <label for="ProjeOlusturmaTarih">Proje Oluşturma Tarihi</label>
-                        <input type="text" class="form-control" id="txtProjeOlusturma" aria-describedby="projeOlusturmaTarih" placeholder="" disabled="" value="@DateTime.Now" required>
+                        <input type="text" class="form-control" id="txtProjeOlusturma" aria-describedby="projeOlusturmaTarih" placeholder="" disabled="" value="@DateTime.Now.ToShortDateString()" required>
                         <small id="projeAdAciklama" class="form-text text-muted" style="color:red;">Projenin oluşturulma tarihi sistem tarafından otomatik atanır.</small>
                     </div>
                     <!--başlama tarih-->
                     <div class="form-group">
                         <label for="BaslamaTarih">Proje Başlama Tarihi</label>
-                        <input type="date" min="@DateTime.Now.ToShortDateString()" class="form-control" id="txtBaslamaTarih" aria-describedby="projeBaslamaTarih" placeholder="Proje başlama tarihi giriniz." required>
+                        <input type="date" min="@DateTime.Now" class="form-control" id="txtBaslamaTarih" aria-describedby="projeBaslamaTarih" placeholder="Proje başlama tarihi giriniz." required>
                         <small id="ProjeBaslamaTarih" class="form-text text-muted">Projenin başlangıç tarihi.</small>
                     </div>
                     <!--proje bitiş-->
                     <div class="form-group">
                         <label for="BitisTarih">Proje Bitiş Tarihi</label>
-                        <input type="date" class="form-control" id="txtBitisTarih" aria-describedby="projeBitisTarih" placeholder="Proje bitiş tarihi giriniz." required>
+                        <input type="date" min="@DateTime.Now" class="form-control" id="txtBitisTarih" aria-describedby="projeBitisTarih" placeholder="Proje bitiş tarihi giriniz." required>
                         <small id="ProjeBitisTarih" class="form-text text-muted">Projenin bitiş tarihi tarihi.</small>
                     </div>
                     <!--Bütçe-->
@@ -99,8 +99,14 @@
                     alert("Eklendi");//css li alert
                     location.href="/Proje/Index";
                 }
+                else if(sonuc =='_'){
+                    alert("Bitiş tarihi başlangıç tarihinden büyük olmalı");
+                }
+                else if(sonuc =='/'){
+                    alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
+                }
                 else
-                    alert("Değerleriniz kontrol ediniz.");
+                    alert("Değerlerinizi kontrol ediniz.");
             });
         }
     }

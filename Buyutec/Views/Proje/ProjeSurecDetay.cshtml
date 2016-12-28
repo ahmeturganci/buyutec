@@ -27,7 +27,7 @@
         </div>
         <hr  />
             <div class="box-body">
-                <button id="Yazdır" class="btn btn-primary pull-right" onclick="window.print();"><i class="fa fa-print"></i> Yazdır</button>
+                <button id="Raporla" class="btn btn-primary pull-right" onclick="window.print();"><i class="fa fa-print"></i> Yazdır</button>
             </div>
         
     </div>
@@ -37,6 +37,11 @@
 <script>
     $(function () {
         $("body").load(SurecCek());
+    });
+    $("#Raporla").click(function () {
+        $(this).hide(0, function () {
+            $(this).show(500);
+        });
     });
     function AltSurecCek(surecId) {
         var data = {
