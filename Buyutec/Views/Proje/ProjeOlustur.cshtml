@@ -25,36 +25,44 @@
                     <div class="form-group">
                         <label for="ProjeAciklama">Proje Açıklama</label>
                         <textarea class="form-control" id="txtProjeAciklama" rows="4" placeholder="Proje açıklama." required></textarea>
-                        <small id="projeAciklamaKucuk" class="form-text text-muted">Projeninizi Anlaşılır şekilde açıklayınız.</small>
+                        <small id="projeAciklamaKucuk" class="form-text text-muted">Projeninizi anlaşılır şekilde açıklayınız.</small>
                     </div>
-                    <!--proje oluşturma tarihi-->
-                    <div class="form-group">
-                        <label for="ProjeOlusturmaTarih">Proje Oluşturma Tarihi</label>
-                        <input type="text" class="form-control" id="txtProjeOlusturma" aria-describedby="projeOlusturmaTarih" placeholder="" disabled="" value="@DateTime.Now.ToShortDateString()" required>
-                        <small id="projeAdAciklama" class="form-text text-muted" style="color:red;">Projenin oluşturulma tarihi sistem tarafından otomatik atanır.</small>
-                    </div>
-                    <!--başlama tarih-->
-                    <div class="form-group">
-                        <label for="BaslamaTarih">Proje Başlama Tarihi</label>
-                        <input type="date" min="@DateTime.Now" class="form-control" id="txtBaslamaTarih" aria-describedby="projeBaslamaTarih" placeholder="Proje başlama tarihi giriniz." required>
-                        <small id="ProjeBaslamaTarih" class="form-text text-muted">Projenin başlangıç tarihi.</small>
-                    </div>
-                    <!--proje bitiş-->
-                    <div class="form-group">
-                        <label for="BitisTarih">Proje Bitiş Tarihi</label>
-                        <input type="date" min="@DateTime.Now" class="form-control" id="txtBitisTarih" aria-describedby="projeBitisTarih" placeholder="Proje bitiş tarihi giriniz." required>
-                        <small id="ProjeBitisTarih" class="form-text text-muted">Projenin bitiş tarihi tarihi.</small>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!--proje oluşturma tarihi-->
+                            <div class="form-group">
+                                <label for="ProjeOlusturmaTarih">Proje Oluşturma Tarihi</label>
+                                <input type="text" class="form-control" id="txtProjeOlusturma" aria-describedby="projeOlusturmaTarih" placeholder="" disabled="" value="@DateTime.Now.ToShortDateString()" required>
+                                <small id="projeAdAciklama" class="form-text text-muted" style="color:red;">Projenin oluşturulma tarihi sistem tarafından otomatik atanır.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <!--başlama tarih-->
+                            <div class="form-group">
+                                <label for="BaslamaTarih">Proje Başlama Tarihi</label>
+                                <input type="date" min="@DateTime.Now" class="form-control" id="txtBaslamaTarih" aria-describedby="projeBaslamaTarih" placeholder="Proje başlama tarihi giriniz." required>
+                                <small id="ProjeBaslamaTarih" class="form-text text-muted">Projenin başlangıç tarihi.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <!--proje bitiş-->
+                            <div class="form-group">
+                                <label for="BitisTarih">Proje Bitiş Tarihi</label>
+                                <input type="date" min="@DateTime.Now" class="form-control" id="txtBitisTarih" aria-describedby="projeBitisTarih" placeholder="Proje bitiş tarihi giriniz." required>
+                                <small id="ProjeBitisTarih" class="form-text text-muted">Projenin bitiş tarihi tarihi.</small>
+                            </div>
+                        </div>
                     </div>
                     <!--Bütçe-->
                     <div class="form-group">
                         <label for="projeButce">Proje Bütçesi</label>
                         <input type="number" class="form-control" id="txtProjeButce" aria-describedby="projeButce" placeholder="Proje bütçesini giriniz." required>
-                        <small id="ProjeBitisTarih" class="form-text text-muted">Projenin için gerekli bütçe mikatrını giriniz.</small>
+                        <small id="ProjeBitisTarih" class="form-text text-muted">Projenin için gerekli bütçe miktarını giriniz.</small>
                     </div>
                 </form>
             </div>
             <div class="box-footer clearfix no-border">
-                <button class="btn btn-primary pull-left" onclick="ProjeEkle();"> Proje Oluştur</button>
+                <button class="btn btn-primary pull-right" onclick="ProjeEkle();"> Proje Oluştur</button>
             </div>
         </div>
     </section>

@@ -242,23 +242,35 @@
                             <label for="ProjeAciklama">Süreç Açıklama</label>
                             <textarea class="form-control" id="txtSurecAciklama" rows="4" placeholder="Süreç açıklamasını giriniz." required></textarea>
                         </div>
-                        <!--başlama tarih-->
-                        <div class="form-group">
-                            <label for="BaslamaTarih">Süreç Başlangıç Tarihi</label>
-                            <input type="date" class="form-control" id="txtSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz." required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--başlama tarih-->
+                                <div class="form-group">
+                                    <label for="BaslamaTarih">Süreç Başlangıç Tarihi</label>
+                                    <input type="date" class="form-control" id="txtSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz." required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!--süreç bitiş-->
+                                <div class="form-group">
+                                    <label for="BitisTarih">Süreç Bitiş Tarihi</label>
+                                    <input type="date" class="form-control" id="txtSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz." required>
+                                </div>
+                            </div>
                         </div>
-                        <!--proje bitiş-->
-                        <div class="form-group">
-                            <label for="BitisTarih">Süreç Bitiş Tarihi</label>
-                            <input type="date" class="form-control" id="txtSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz." required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Durum</label>
-                            <select class="form-control" id="durumlar"></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Öncelik</label>
-                            <select class="form-control" id="oncelikler"></select>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Durum</label>
+                                    <select class="form-control" id="durumlar"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Öncelik</label>
+                                    <select class="form-control" id="oncelikler"></select>
+                                </div>
+                            </div>
                         </div>
                         @*<div class="form-group">
                                 <label for="">Kişiler</label>
