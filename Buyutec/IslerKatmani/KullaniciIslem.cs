@@ -44,7 +44,7 @@ namespace Buyutec.IslerKatmani
                     return '+';
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return '?';
             }

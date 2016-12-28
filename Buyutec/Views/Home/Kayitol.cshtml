@@ -65,6 +65,11 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script>
 
+        $("#txtAd,#txtSoyad").keyup(function () {
+            if (this.value.match(/[^a-zA-Z]/g)) {
+                this.value = this.value.replace(/[^a-zA-Z]/g, '');
+            }
+        });
         function KayitOl() {
             var veri = {
                 kullaniciAdi: $("#txtAd").val(),

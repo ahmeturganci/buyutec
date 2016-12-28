@@ -300,10 +300,17 @@ namespace Buyutec.Controllers
         public char TarihKontrol(DateTime dt, DateTime dto,DateTime dtb) // dt başlangıç, dto oluşturma, dtb bitiş
         {
             char res = '-';
-            if (dt <= dto && dt >= dtb)
-                res = '_';
-            else if (dtb <= dt && dtb <= dt)
-                res = '/';
+            DateTime tarih = DateTime.ParseExact("2000-01-01 00:00:00", "yyyy-MM-dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            if (dt > tarih && dtb > tarih)
+            {
+                if (dt <= dto && dt >= dtb)
+                    res = '_';
+                else if (dtb <= dt && dtb <= dt)
+                    res = '/';
+            }
+            else
+                res = 't';
             return res;
 
         }

@@ -48,8 +48,8 @@
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!-- The user image in the navbar
-                                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSe757u2WZSxqoXpCHJVBq-0yNn6qlitPodly4uAz00ANoGTd6NZQ" class="user-image" alt="User Image">-->
+                                <!-- The user image in the navbar-->
+                                <img src="http://www.vanhemmat.com/prosessi/1225770283668564458emyller_magnifying_glass_svg_med.png" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 @if (Session["kulMail"] != null)
                                 { <span class="hidden-xs">@Session["kulAd"].ToString()</span> }
@@ -57,7 +57,7 @@
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSe757u2WZSxqoXpCHJVBq-0yNn6qlitPodly4uAz00ANoGTd6NZQ" class="img-circle" alt="User Image">
+                                    <img src="http://www.vanhemmat.com/prosessi/1225770283668564458emyller_magnifying_glass_svg_med.png" class="img-circle" alt="User Image">
                                     <p>
                                         @if (Session["kulId"] != null)
                                         { <span class="hidden-xs">@Session["kulAd"].ToString()</span> }
@@ -87,27 +87,13 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSe757u2WZSxqoXpCHJVBq-0yNn6qlitPodly4uAz00ANoGTd6NZQ" class="img-circle" alt="User Image">
+                        <img src="http://www.vanhemmat.com/prosessi/1225770283668564458emyller_magnifying_glass_svg_med.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>@if (Session["kulMail"] != null)
                         { <span class="hidden-xs" id="kulAdSoyad">@Session["kulAd"]</span> }</p>
                     </div>
                 </div>
-                <!-- search form (Optional) -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-
-
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu">
                     <li class="header">BÜYÜTEÇ.</li>

@@ -25,11 +25,11 @@
                 </table>
             </div>
         </div>
-        <hr  />
-            <div class="box-body">
-                <button id="Raporla" class="btn btn-primary pull-right" onclick="window.print();"><i class="fa fa-print"></i> Yazdır</button>
-            </div>
-        
+        <hr />
+        <div class="box-body">
+            <button id="Raporla" class="btn btn-primary pull-right" onclick="window.print();"><i class="fa fa-print"></i> Yazdır</button>
+        </div>
+
     </div>
 </div>
 
@@ -54,7 +54,7 @@
                 var sId = item.altSurecId;
                 var durumum = item.durumId;
                 var onceligim = item.oncelikId;
-                $("#tr" + surecId).after('<tr style="background-color: #222d32;color: white;"><td><i class="fa fa-arrow-down"></i>  ' + item.altSurecAdi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td> <td id="altSurectekiKullanicilar"></td> <td>' + item.aciklama + '</td> <td><p id="durumunMetininA' + sId + '"></p></td> <td><p id="oncelikMetinA'+sId+'"></td> <td> <div class="progress progress-md progress-striped active"> <div class="progress-bar progress-bar-success" style="width:' + item.bitirmeOrani + '%">' + item.bitirmeOrani + '%</div> </div> </td> </tr>')
+                $("#tr" + surecId).after('<tr style="background-color: #3c8dbc ;color: white;"><td><i class="fa fa-arrow-down"></i>  ' + item.altSurecAdi + '</td> <td>' + item.baslangicTarihi + '</td> <td>' + item.bitisTarihi + '</td> <td id="altSurectekiKullanicilar"></td> <td>' + item.aciklama + '</td> <td><p id="durumunMetininA' + sId + '"></p></td> <td><p id="oncelikMetinA' + sId + '"></td> <td> <div class="progress progress-md progress-striped active"> <div class="progress-bar progress-bar-success" style="width:' + item.bitirmeOrani + '%">' + item.bitirmeOrani + '%</div> </div> </td> </tr>')
                 if (onceligim == 1) $("#durumunMetininA" + sId).text("Düşük");
                 if (onceligim == 2) $("#durumunMetininA" + sId).text("Normal");
                 if (onceligim == 3) $("#durumunMetininA" + sId).text("Yüksek");
@@ -63,6 +63,8 @@
                 if (durumum == 1) $("#oncelikMetinA" + sId).text("Beklemede");
                 if (durumum == 2) $("#oncelikMetinA" + sId).text("Yapım Aşamasında");
                 if (durumum == 3) $("#oncelikMetinA" + sId).text("Tamamlandı");
+
+                AltSurecKisileriDoldur(sId, 'A');
             });
         });
     }
@@ -74,29 +76,67 @@
                 console.log(item.bitirmeOrani);
                 //$("#"+sId).css("width", "'" + item.bitirmeOrani + "'%");
                 var durumum = item.durumId;
-                var onceligim =item.oncelikId;
-                $("#pDetay").append('<tr id="tr' + item.surecId + '"><td>' + item.surecAdi + '</td><td>' + item.baslangicTarihi + '</td><td>' + item.bitisTarihi + '</td><td id="surectekiKullanicilar"></td><td>' + item.aciklama + '</td><td><b id="durumunMetinin' + sId + '"></b></td><td><p id="oncelikMetin'+sId+'"></p></td><td><div class="progress progress-md progress-striped active"><div class="progress-bar progress-bar-success" id="qqq' + sId + '" style="width:' + item.bitirmeOrani + '%">' + item.bitirmeOrani + '%</div></div></td></tr><br>');
+                var onceligim = item.oncelikId;
+                $("#pDetay").append('<tr id="tr' + item.surecId + '"><td>' + item.surecAdi + '</td><td>' + item.baslangicTarihi + '</td><td>' + item.bitisTarihi + '</td><td id="surectekiKullanicilar"></td><td>' + item.aciklama + '</td><td><b id="durumunMetinin' + sId + '"></b></td><td><p id="oncelikMetin' + sId + '"></p></td><td><div class="progress progress-md progress-striped active"><div class="progress-bar progress-bar-success" id="qqq' + sId + '" style="width:' + item.bitirmeOrani + '%">' + item.bitirmeOrani + '%</div></div></td></tr><br>');
                 if (onceligim == 1) $("#durumunMetinin" + sId).text("Düşük");
                 if (onceligim == 2) $("#durumunMetinin" + sId).text("Normal");
                 if (onceligim == 3) $("#durumunMetinin" + sId).text("Yüksek");
                 if (onceligim == 4) $("#durumunMetinin" + sId).text("Acil");
-                
+
                 if (durumum == 1) $("#oncelikMetin" + sId).text("Beklemede");
                 if (durumum == 2) $("#oncelikMetin" + sId).text("Yapım Aşamasında");
                 if (durumum == 3) $("#oncelikMetin" + sId).text("Tamamlandı");
-                
-                
-                
+
+
+
                 AltSurecCek(sId);
-                
+                KisileriDoldurSurec(sId, 'S');
+
 
 
             });
         });
     }
+    //atanana kişileri listeleme
+    function KisileriDoldurSurec(Id, nerden) {
+        var veri = nerden;
+        var data = {};
+        if (veri == 'S') {
+            data = {
+                Id: Id,
+                surec: 1
+            };  
+            $.post("/Proje/SureceAtananKisileriCek", data, function (sonuc) {
+                $("#atananKisiler").html("");
+                $.each(sonuc, function (i, item) {
+                    $("#surectekiKullanicilar").append('<p>' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</p><br/>');
+                });
+            });
+        }
 
-   
-    
+    }
 
-   
+    function AltSurecKisileriDoldur(Id, nerden) {
+        var veri = nerden;
+        var data = {};
+        if (veri == 'A') {
+            data = {
+                Id: Id,
+                surec: 2
+            };
+            $.post("/Proje/SureceAtananKisileriCek", data, function (sonuc) {
+                $("#atananKisiler").html("");
+                $.each(sonuc, function (i, item) {
+                    $("#altSurectekiKullanicilar").append('<p>' + item.kullaniciAdi + ' ' + item.kullaniciSoyadi + '</p><br/>');
+                });
+            });
+        }
+        else
+            alert("Kullanıcı atama gerçekleştirilmedi.");
+    }
+
+
+
+
+
 </script>

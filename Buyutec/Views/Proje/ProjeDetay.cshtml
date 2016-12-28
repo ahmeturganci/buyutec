@@ -89,7 +89,7 @@
                         <div class="col-md-4">
                             <!--başlama tarih-->
                             <div class="form-group">
-                                <label for="BaslamaTarih">Süreç Başlangıç Tarihi</label>
+                                <label for="BaslamaTarih">Başlangıç Tarihi</label>
                                 <input type="text" disabled class="form-control" id="ytxtSurecBaslamaTarih" aria-describedby="surecBaslamaTarih" placeholder="Süreç başlangıç tarihini giriniz."
                                        required>
                             </div>
@@ -97,7 +97,7 @@
                         <div class="col-md-4">
                             <!--proje bitiş-->
                             <div class="form-group">
-                                <label for="BitisTarih">Süreç Bitiş Tarihi</label>
+                                <label for="BitisTarih">Bitiş Tarihi</label>
                                 <input type="text" disabled class="form-control" id="ytxtSurecBitisTarih" aria-describedby="surecBitisTarih" placeholder="Süreç bitiş tarihi giriniz."
                                        required>
                             </div>
@@ -107,7 +107,7 @@
                             <div class="form-group">
                                 <label for="tamamlanmaOran">Tamamlanma Oranı</label>
                                 <input type="number" max="100" min="0" class="form-control" id="ytxtSurecTamamlamaOran" aria-describedby="surecAd" placeholder="0-100" required>
-                                <div class="progress-bar progress-bar-green" style="margin-top:2px;width:50%" id="oran"></div>
+                                <div class="progress-bar progress-bar-green" style="margin-top:2px;" id="oran"></div>
                             </div>
                         </div>
                     </div>
@@ -427,6 +427,9 @@
                     else if (sonuc == '/') {
                         alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
                     }
+                    else if (sonuc == 't') {
+                        alert("Girmiş olduğunuz tarihler 2000 yılından büyük olmalı");
+                    }
                     else
                         alert("Değerlerinizi kontrol ediniz.");
                 });
@@ -534,8 +537,9 @@
                     $("#ytxtSurecAdi").val(item.surecAdi);
                     $("#ytxtSurecTamamlamaOran").val(item.bitirmeOrani);
                     $("#oran").text("%" + item.bitirmeOrani);
-                    
-                    $("#oran").css("width:", "'" + item.bitirmeOrani + "'%");
+                    //$("#oran").css("width:", "'" + item.bitirmeOrani + "'%");
+                    $("#oran").css({ "width": item.bitirmeOrani+"%" });
+                    console.log(oran);
                     //$("#oran").width(item.bitirmeOrani);
                     $("#ytxtSurecBaslamaTarih").val(item.baslangicTarihi);
                     $("#ytxtSurecBitisTarih").val(item.bitisTarihi);
@@ -629,6 +633,9 @@
                     }
                     else if (sonuc == '/') {
                         alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
+                    }
+                    else if (sonuc == 't') {
+                        alert("Girmiş olduğunuz tarihler 2000 yılından büyük olmalı");
                     }
                     else
                         alert("Değerlerinizi kontrol ediniz.");

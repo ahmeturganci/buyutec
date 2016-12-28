@@ -177,7 +177,7 @@ namespace Buyutec.IslerKatmani
                 }
                 return 0;
             }
-            catch(Exception ex)
+            catch
             {
                 return 1; // işlem başarısız
             }
@@ -256,7 +256,7 @@ namespace Buyutec.IslerKatmani
                     }
                 }
             }
-            catch(Exception ex)
+            catch
             {
 
                 pp = null;
@@ -293,7 +293,7 @@ namespace Buyutec.IslerKatmani
                     return Rol.MapData(veri.ToList());
                 }
             }
-            catch (Exception ex) // ex debug modda hata içeriği için
+            catch  // ex debug modda hata içeriği için
             {
                 return null;
             }
@@ -324,7 +324,7 @@ namespace Buyutec.IslerKatmani
 
                 }
             }
-            catch (Exception ex)
+            catch 
             {
 
                 return 1;
@@ -382,7 +382,7 @@ namespace Buyutec.IslerKatmani
                     return AltSurec.MapData(altSurec.ToList());
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
                 return null;
@@ -464,7 +464,7 @@ namespace Buyutec.IslerKatmani
                        return Kullanici.MapData(kisilerim.ToList());
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 return null;
                 throw;
@@ -497,7 +497,7 @@ namespace Buyutec.IslerKatmani
                     return res;
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
                 return '?';
@@ -557,7 +557,7 @@ namespace Buyutec.IslerKatmani
                 }
                 return kullanicilar;
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
@@ -601,7 +601,7 @@ namespace Buyutec.IslerKatmani
                     }
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 result = '?';
             }

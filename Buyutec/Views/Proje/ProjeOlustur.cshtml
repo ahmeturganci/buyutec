@@ -69,14 +69,12 @@
 </div>
 
 <script>
-
-    $("#txtProjeAdi,#txtSoyad").keyup(function () {
+    $("#txtProjeAdi").keyup(function () {
         if (this.value.match(/[^a-zA-Z]/g)) {
             this.value = this.value.replace(/[^a-zA-Z]/g, '');
         }
     });//harf
     var kulId=@Session["kulId"].ToString();
-    alert(kulId);
     function ProjeEkle() {
         var veri = {
             projeAdi: $("#txtProjeAdi").val(),
@@ -87,8 +85,7 @@
             butce: $("#txtProjeButce").val(),
             olusturanKullaniciId:kulId
         };
-        console.log(veri);
-        if (veri.projeAdi == "" || veri.projeAdi==null) {
+        if (veri.projeAdi == "" || veri.projeAdi==null||veri.projeAdi == " " ) {
             alert("Proje Adı Boş Geçmeyiniz.");
         }
         else if(veri.projeAciklama == ""||veri.projeAciklama==null ){
@@ -97,6 +94,10 @@
         else if( veri.olusturmaTarihi == "" ||veri.olusturmaTarihi==null)
         {
             alert("Oluşturma tarihlerini baş geçmeyiniz.")
+        }
+        else if(veri.butce.length>7)
+        {
+            alert("bütçeyi 8 haneden aşağı giriniz");
         }
         else if(veri.baslangicTarihi == "" || veri.baslangicTarihi ==null){alert("Başlangıç tarihi boş geçilemez");}
         else if(veri.bitisTarihi == "" || veri.bitisTarihi==null){alert("Bitiş Tarihi boş geçilemez.");}
@@ -112,6 +113,9 @@
                 }
                 else if(sonuc =='/'){
                     alert("Başlangıç tarihi oluşturma tarihinden büyük olmalı");
+                }
+                else if(sonuc =='t'){
+                    alert("Girmiş olduğunuz tarihler 2000 yılından büyük olmalı");
                 }
                 else
                     alert("Değerlerinizi kontrol ediniz.");
